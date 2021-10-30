@@ -1,0 +1,35 @@
+.CalendarDay__selected_span {
+  background: var(--secondary); 
+  color: white; 
+}
+
+
+.CalendarDay__selected {
+  background: var(--tertiary);
+  color: var(--secondary);
+}
+
+.CalendarDay__selected:hover {
+  background: var(--secondary);
+  color: white;
+}
+
+.CalendarDay__hovered_span:hover,
+.CalendarDay__hovered_span {
+  background: var(--secondary);
+  color: white;
+}
+
+.CalendarMonth_table td,
+.CalendarMonth_table td:hover {
+    padding: 10px !important;
+    border: none;
+}
+
+.DayPicker.DayPicker_1.DayPicker__horizontal.DayPicker__horizontal_2.DayPicker__withBorder.DayPicker__withBorder_3 {
+    height: 365px;
+}
+
+.DayPicker_transitionContainer.DayPicker_transitionContainer_1.DayPicker_transitionContainer__horizontal.DayPicker_transitionContainer__horizontal_2 {
+    height: 365px !important;
+}

@@ -1,17 +1,50 @@
+const myCustomQueries = {
+  xxs: "(max-width: 320px)",
+  xs: "(max-width: 420px)",
+  sm: "(max-width: 767px)",
+  md: "(max-width: 1024px)",
+  l: "(max-width: 1400px)",
+  portrait: "(orientation: portrait)",
+}
+
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Default Starter`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
-    author: `@gatsbyjs`,
+    title: `Asuree`,
+    description: `Muay Thai Camp booking site`,
+    author: `@martinconde`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-image`,
     {
+      resolve: `gatsby-plugin-styled-components`,
+      options: {
+        displayName: true,
+      },
+    },
+    "gatsby-plugin-react-leaflet",
+    {
+      resolve: `gatsby-source-wordpress`,
+      options: {
+        url: `https://wordpress-332056-1932566.cloudwaysapps.com/graphql`,
+        searchAndReplaceContentUrls: {
+          sourceUrl: "https://wordpress-332056-1932566.cloudwaysapps.com",
+          replacementUrl: "http://localhost:8000",
+        },
+      },
+    },
+    `gatsby-plugin-preact`,
+    {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `images`,
         path: `${__dirname}/src/images`,
+      },
+    },
+    {
+      resolve: "gatsby-plugin-breakpoints",
+      options: {
+        queries: myCustomQueries,
       },
     },
     `gatsby-transformer-sharp`,
