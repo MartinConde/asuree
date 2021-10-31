@@ -1,5 +1,6 @@
 import * as React from "react"
-import SearchBar from "../Search/searchBar"
+import loadable from '@loadable/component'
+// import SearchBar from "../Search/searchBar"
 import styled from "styled-components"
 import { StaticImage } from "gatsby-plugin-image"
 
@@ -103,7 +104,10 @@ const IntroText = styled.p`
   }
 `
 
-const Hero = () => (
+const Hero = () => {
+  const Search = loadable(() => import("../Search/searchBar"))
+
+  return (
   <HeroWrapper>
     <HeroContent>
       <div>
@@ -119,7 +123,7 @@ const Hero = () => (
         <StaticImage src="../../images/fighta.png" alt="fighta" placeholder="blurred" loading="eager" />
       </FighterImg>
     </HeroContent>
-    <SearchBar withButton />
+    <Search withButton />
     <HeroBg>
       <StaticImage
         src="../../images/headerhuette.jpg"
@@ -129,6 +133,7 @@ const Hero = () => (
       />
     </HeroBg>
   </HeroWrapper>
-)
+  )
+  }
 
 export default Hero

@@ -1,5 +1,4 @@
 import React, { useState } from "react"
-import loadable from '@loadable/component'
 import styled from "styled-components"
 import parse from 'html-react-parser'
 import { useBreakpoint } from 'gatsby-plugin-breakpoints';
