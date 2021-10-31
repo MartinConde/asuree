@@ -20,6 +20,7 @@
     font-family: 'Oswald';
     font-style: normal;
     font-weight: 400;
+    font-display: swap;
     src: url('./oswald-v16-latin-regular.eot'); /* IE9 Compat Modes */
     src: local(''),
          url('./oswald-v16-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
@@ -34,6 +35,7 @@
     font-family: 'Oswald Bold';
     font-style: normal;
     font-weight: 700;
+    font-display: swap;
     src: url('./oswald-v16-latin-700.eot'); /* IE9 Compat Modes */
     src: local(''),
          url('./oswald-v16-latin-700.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */

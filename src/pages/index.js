@@ -56,7 +56,7 @@ export default function Home({ data }) {
       </Row>
 
       <BgRow fullWidth withPadding>
-        <InterMap />
+        <InterMap fallback={<div>Loading...</div>} />
       </BgRow>
 
 
