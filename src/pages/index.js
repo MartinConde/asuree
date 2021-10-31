@@ -1,4 +1,4 @@
-import React, {Suspense} from "react"
+import React, { Suspense } from "react"
 import loadable from '@loadable/component'
 import { graphql } from "gatsby"
 import Layout from "../components/layout"
@@ -14,8 +14,8 @@ const InterMap = React.lazy(() => import('../components/thaiMap'))
 
 
 export default function Home({ data }) {
-  
-  
+
+
   return (
     <Layout>
       <SEO title="home" />
@@ -54,9 +54,11 @@ export default function Home({ data }) {
       </Row>
 
       <BgRow fullWidth withPadding>
-        <Suspense fallback={<div>Loading..</div>}>
-        <InterMap/>
-        </Suspense>
+        {typeof window !== 'undefined' && (
+          <Suspense fallback={<div>Loading..</div>}>
+            <InterMap />
+          </Suspense>
+        )}
       </BgRow>
 
 
