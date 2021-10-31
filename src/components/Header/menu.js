@@ -261,6 +261,3 @@ const Menu = ({light}) => {
 
 export default Menu
 
-
-// {(breakpoints.l && open === true || !breakpoints.l && open === false) &&
-// }
