@@ -48,7 +48,7 @@ module.exports = {
       options: {
         // Whether replaceHydrateFunction should call ReactDOM.hydrate or ReactDOM.render
         // Defaults to ReactDOM.render on develop and ReactDOM.hydrate on build
-        useHydrate: true,
+        useHydrate: false,
       },
     },
     `gatsby-transformer-sharp`,

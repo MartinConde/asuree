@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import loadable from '@loadable/component'
 import styled from "styled-components"
 import parse from 'html-react-parser'
 import { useBreakpoint } from 'gatsby-plugin-breakpoints';
@@ -92,6 +93,7 @@ div > div {
 `
 
 const ThaiMap = () => {
+
   const breakpoints = useBreakpoint();
 
   const mapsdata = useStaticQuery(graphql`
@@ -239,11 +241,11 @@ const ThaiMap = () => {
         {location ? selectedDest.map(selected => (
           <div key={selected.title}>
             <div>
-            <p>{selected && selected.title} with {selected && selected.ACF_Destinations.gyms.length} gyms </p>
-            {parse(selected && selected.ACF_Destinations.shortDescription)}
+              <p>{selected && selected.title} with {selected && selected.ACF_Destinations.gyms.length} gyms </p>
+              {parse(selected && selected.ACF_Destinations.shortDescription)}
 
-            <Button url="/" text={`Zu allen gyms in ${selected && selected.title}`} />
-          </div>
+              <Button url="/" text={`Zu allen gyms in ${selected && selected.title}`} />
+            </div>
           </div>
         )) : <p>Wähle wat auf der Karte aus</p>}
       </DestWrapper>

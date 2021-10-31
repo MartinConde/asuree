@@ -9,21 +9,18 @@ import BgRow from '../components/Blocks/bgRow'
 import Row from "../components/Blocks/row"
 import IconBox from '../components/Blocks/iconBox'
 import FaveGyms from "../components/faveGyms"
-// import ThaiMap from "../components/thaiMap"
 
 
 
+const InterMap = loadable(() => import('../components/thaiMap'))
 export default function Home({ data }) {
 
-  const InterMap = loadable(() => import('../components/thaiMap'))
+  
   return (
     <Layout>
       <SEO title="home" />
       <Hero />
       <IntroText />
-
-
-
       <BgRow>
         <IconBox
           title="VERIFIZIERTE GYM'S"
