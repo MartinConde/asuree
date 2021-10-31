@@ -1,6 +1,4 @@
 import React, { Suspense, useEffect, useState } from "react"
-import loadable from '@loadable/component'
-import LazyHydrate from "react-lazy-hydration"
 import { graphql } from "gatsby"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
@@ -11,20 +9,20 @@ import Row from "../components/Blocks/row"
 import IconBox from '../components/Blocks/iconBox'
 import FaveGyms from "../components/faveGyms"
 
-// const InterMap = React.lazy(() => import('../components/thaiMap'))
-const InterMap = loadable(() => import('../components/thaiMap'))
+const InterMap = React.lazy(() => import('../components/thaiMap'))
+
 
 export default function Home({ data }) {
-  // const [scroll, setScroll] = useState(false)
+  const [scroll, setScroll] = useState(false)
 
-  // useEffect(() => {
-  //   window.addEventListener("scroll", () => {
-  //     setScroll(window.scrollY > 200)
-  //   })
-  //   return function cleanup() {
-  //     setScroll(true)
-  //   }
-  // }, [])
+  useEffect(() => {
+    window.addEventListener("scroll", () => {
+      setScroll(window.scrollY > 200)
+    })
+    return function cleanup() {
+      setScroll(true)
+    }
+  }, [])
 
   return (
     <Layout>
@@ -65,7 +63,7 @@ export default function Home({ data }) {
 
       
         <BgRow fullWidth withPadding>
-          {/* {typeof window !== 'undefined' && (
+          {typeof window !== 'undefined' && (
             
             <Suspense fallback={<div>Loading..</div>}>
               {scroll &&
@@ -73,11 +71,7 @@ export default function Home({ data }) {
             }
             </Suspense>
             
-          )} */}
-
-          <LazyHydrate whenVisible>
-          <InterMap />
-          </LazyHydrate>
+          )}
         </BgRow>
       
     </Layout>
