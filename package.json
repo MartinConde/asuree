@@ -49,6 +49,8 @@
     "styled-components": "^5.3.0"
   },
   "devDependencies": {
+    "gatsby-plugin-perf-budgets": "^0.0.18",
+    "gatsby-plugin-webpack-bundle-analyser-v2": "^1.1.25",
     "prettier": "2.2.1"
   },
   "keywords": [

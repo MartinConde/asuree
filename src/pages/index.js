@@ -1,4 +1,4 @@
-import React, { Suspense } from "react"
+import React, { Suspense, useEffect } from "react"
 import loadable from '@loadable/component'
 import { graphql } from "gatsby"
 import Layout from "../components/layout"
@@ -14,7 +14,16 @@ const InterMap = React.lazy(() => import('../components/thaiMap'))
 
 
 export default function Home({ data }) {
+  const [scroll, setScroll] = useState(false)
 
+  useEffect(() => {
+    window.addEventListener("scroll", () => {
+      setScroll(window.scrollY > 200)
+    })
+    return function cleanup() {
+      setScroll(true)
+    }
+  }, [])
 
   return (
     <Layout>
@@ -53,13 +62,15 @@ export default function Home({ data }) {
         <FaveGyms faves={data} />
       </Row>
 
-      <BgRow fullWidth withPadding>
-        {typeof window !== 'undefined' && (
-          <Suspense fallback={<div>Loading..</div>}>
-            <InterMap />
-          </Suspense>
-        )}
-      </BgRow>
+      {scroll &&
+        <BgRow fullWidth withPadding>
+          {typeof window !== 'undefined' && (
+            <Suspense fallback={<div>Loading..</div>}>
+              <InterMap />
+            </Suspense>
+          )}
+        </BgRow>
+      }
     </Layout>
   )
 }
