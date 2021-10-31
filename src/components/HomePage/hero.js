@@ -58,9 +58,11 @@ const FighterImg = styled.div`
   z-index: -1;
   max-width: 50vw;
   max-width: 300px;
+  display: none;
   
 
   @media(min-width: 1200px) {
+    display: block;
     padding-left: 2vw;
     max-width: 100%;
   }
@@ -132,11 +134,9 @@ const Hero = () => {
             THE ULTIMATE MUAY THAI EXPERIENCE IM LAND DES LÄCHELNS
           </IntroText>
         </div>
-        {!breakpoints.l && 
         <FighterImg>
           <StaticImage src="../../images/fighta.png" alt="fighta" placeholder="blurred" loading="eager" />
         </FighterImg>
-        }
       </HeroContent>
       <SearchBar withButton />
 
