@@ -12,9 +12,9 @@ import FaveGyms from "../components/faveGyms"
 
 
 
-const InterMap = loadable(() => import('../components/thaiMap'))
-export default function Home({ data }) {
 
+export default function Home({ data }) {
+  const InterMap = loadable(() => import('../components/thaiMap'))
   
   return (
     <Layout>
