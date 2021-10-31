@@ -21,12 +21,16 @@ const HeroContent = styled.div`
   margin: 0 auto;
   padding: 20px;
   text-align: center;
+  height: 100vh;
+  display: flex;
+    align-items: center;
+    justify-content: center;
   
   @media(min-width:1200px) {
-    display: flex;
-    align-items: center;
+    
     padding: 0;
     text-align: left;
+    height: auto;
 
     > div:first-child {
       width: 65%;
