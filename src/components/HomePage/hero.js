@@ -1,8 +1,10 @@
-import * as React from "react"
-import loadable from '@loadable/component'
+import React, { Suspense } from "react"
+// import loadable from '@loadable/component'
 // import SearchBar from "../Search/searchBar"
 import styled from "styled-components"
 import { StaticImage } from "gatsby-plugin-image"
+
+const Search = React.lazy(() => import('../Search/searchBar'))
 
 const HeroWrapper = styled.div`
   min-height: 80vh;
@@ -105,35 +107,38 @@ const IntroText = styled.p`
 `
 
 const Hero = () => {
-  const Search = loadable(() => import("../Search/searchBar"))
 
   return (
-  <HeroWrapper>
-    <HeroContent>
-      <div>
-        <MainTitle>
-          <small>MUAY THAI CAMPS</small> IN THAILAND
-        </MainTitle>
-        <IntroText>
-          ERLEBE DEN NATIONALSPORT THAILANDS IN EINEM EXKLUSIVEN GYM - <br />
-          THE ULTIMATE MUAY THAI EXPERIENCE IM LAND DES LÄCHELNS
-        </IntroText>
-      </div>
-      <FighterImg>
-        <StaticImage src="../../images/fighta.png" alt="fighta" placeholder="blurred" loading="eager" />
-      </FighterImg>
-    </HeroContent>
-    <Search withButton />
-    <HeroBg>
-      <StaticImage
-        src="../../images/headerhuette.jpg"
-        alt="jeilet camp"
-        placeholder="blurred"
-        loading="eager"
-      />
-    </HeroBg>
-  </HeroWrapper>
+    <HeroWrapper>
+      <HeroContent>
+        <div>
+          <MainTitle>
+            <small>MUAY THAI CAMPS</small> IN THAILAND
+          </MainTitle>
+          <IntroText>
+            ERLEBE DEN NATIONALSPORT THAILANDS IN EINEM EXKLUSIVEN GYM - <br />
+            THE ULTIMATE MUAY THAI EXPERIENCE IM LAND DES LÄCHELNS
+          </IntroText>
+        </div>
+        <FighterImg>
+          <StaticImage src="../../images/fighta.png" alt="fighta" placeholder="blurred" loading="eager" />
+        </FighterImg>
+      </HeroContent>
+      {typeof window !== 'undefined' && (
+        <Suspense fallback={<div>Loading..</div>}>
+          <Search withButton />
+        </Suspense>
+      )}
+      <HeroBg>
+        <StaticImage
+          src="../../images/headerhuette.jpg"
+          alt="jeilet camp"
+          placeholder="blurred"
+          loading="eager"
+        />
+      </HeroBg>
+    </HeroWrapper>
   )
-  }
+}
 
 export default Hero
