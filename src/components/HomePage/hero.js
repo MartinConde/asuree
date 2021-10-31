@@ -1,10 +1,8 @@
-import React, { Suspense } from "react"
-// import loadable from '@loadable/component'
-// import SearchBar from "../Search/searchBar"
+import React from "react"
+import SearchBar from "../Search/searchBar"
 import styled from "styled-components"
 import { StaticImage } from "gatsby-plugin-image"
 
-const Search = React.lazy(() => import('../Search/searchBar'))
 
 const HeroWrapper = styled.div`
   min-height: 80vh;
@@ -124,11 +122,7 @@ const Hero = () => {
           <StaticImage src="../../images/fighta.png" alt="fighta" placeholder="blurred" loading="eager" />
         </FighterImg>
       </HeroContent>
-      {typeof window !== 'undefined' && (
-        <Suspense fallback={<div>Loading..</div>}>
-          <Search withButton />
-        </Suspense>
-      )}
+          <SearchBar withButton />
       <HeroBg>
         <StaticImage
           src="../../images/headerhuette.jpg"

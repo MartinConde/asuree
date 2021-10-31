@@ -60,11 +60,6 @@ export default function Home({ data }) {
           </Suspense>
         )}
       </BgRow>
-
-
-
-
-
     </Layout>
   )
 }
