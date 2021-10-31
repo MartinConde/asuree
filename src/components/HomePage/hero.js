@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react"
 import SearchBar from "../Search/searchBar"
 import styled from "styled-components"
 import { StaticImage } from "gatsby-plugin-image"
-// import { useBreakpoint } from 'gatsby-plugin-breakpoints';
+import { useBreakpoint } from 'gatsby-plugin-breakpoints';
 
 
 const HeroWrapper = styled.div`
@@ -118,7 +118,7 @@ const Hero = () => {
   //   }
   // }, [])
 
-  // const breakpoints = useBreakpoint();
+  const breakpoints = useBreakpoint();
 
   return (
     <HeroWrapper>
@@ -132,9 +132,11 @@ const Hero = () => {
             THE ULTIMATE MUAY THAI EXPERIENCE IM LAND DES LÄCHELNS
           </IntroText>
         </div>
+        {!breakpoints.l && 
         <FighterImg>
           <StaticImage src="../../images/fighta.png" alt="fighta" placeholder="blurred" loading="eager" />
         </FighterImg>
+        }
       </HeroContent>
       <SearchBar withButton />
 
