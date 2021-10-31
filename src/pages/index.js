@@ -1,5 +1,5 @@
 import React from "react"
-import loadable from '@loadable/component'
+// import loadable from '@loadable/component'
 import { graphql } from "gatsby"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
@@ -9,8 +9,9 @@ import BgRow from '../components/Blocks/bgRow'
 import Row from "../components/Blocks/row"
 import IconBox from '../components/Blocks/iconBox'
 import FaveGyms from "../components/faveGyms"
+import ThaiMap from "../components/thaiMap"
 
-const InterMap = loadable(() => import('../components/thaiMap'))
+// const InterMap = loadable(() => import('../components/thaiMap'))
 
 export default function Home({ data }) {
 
@@ -56,7 +57,11 @@ export default function Home({ data }) {
       </Row>
 
       <BgRow fullWidth withPadding>
-        <InterMap fallback={<div>Loading...</div>} />
+        {typeof window !== 'undefined' && (
+          <React.Suspense fallback={<div>Loading...</div>}>
+            <ThaiMap />
+          </React.Suspense>
+        )}
       </BgRow>
 
 
