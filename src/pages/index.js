@@ -63,7 +63,7 @@ export default function Home({ data }) {
       </Row>
 
       
-        {/* <BgRow fullWidth withPadding>
+        <BgRow fullWidth withPadding>
           {typeof window !== 'undefined' && (
             
             <Suspense fallback={<div>Loading..</div>}>
@@ -73,7 +73,7 @@ export default function Home({ data }) {
             </Suspense>
             
           )}
-        </BgRow> */}
+        </BgRow>
       
     </Layout>
   )
