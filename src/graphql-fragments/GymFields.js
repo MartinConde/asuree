@@ -14,6 +14,15 @@ export const GymFragment = graphql`
         }
       }
     }
+    previewImage: featuredImage {
+      node {
+        localFile {
+          childImageSharp {
+            gatsbyImageData(layout: FIXED, width: 300, height: 300 )
+          }
+        }
+      }
+    }
     ACF_Gyms {
       description
       level

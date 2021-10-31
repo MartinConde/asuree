@@ -1,14 +1,16 @@
 import React from "react"
+import loadable from '@loadable/component'
 import { graphql } from "gatsby"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import Hero from '../components/HomePage/hero'
-import ThaiMap from '../components/thaiMap'
 import IntroText from '../components/HomePage/introText'
 import BgRow from '../components/Blocks/bgRow'
 import Row from "../components/Blocks/row"
 import IconBox from '../components/Blocks/iconBox'
 import FaveGyms from "../components/faveGyms"
+
+const InterMap = loadable(() => import('../components/thaiMap'))
 
 export default function Home({ data }) {
 
@@ -54,7 +56,7 @@ export default function Home({ data }) {
       </Row>
 
       <BgRow fullWidth withPadding>
-        <ThaiMap />
+        <InterMap />
       </BgRow>
 
 

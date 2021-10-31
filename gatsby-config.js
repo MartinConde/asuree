@@ -22,15 +22,11 @@ module.exports = {
         displayName: true,
       },
     },
-    "gatsby-plugin-react-leaflet",
+    // "gatsby-plugin-react-leaflet",
     {
       resolve: `gatsby-source-wordpress`,
       options: {
         url: `https://wordpress-332056-1932566.cloudwaysapps.com/graphql`,
-        searchAndReplaceContentUrls: {
-          sourceUrl: "https://wordpress-332056-1932566.cloudwaysapps.com",
-          replacementUrl: "http://localhost:8000",
-        },
       },
     },
     `gatsby-plugin-preact`,

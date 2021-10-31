@@ -1,5 +1,4 @@
 import React from "react"
-import { Link } from 'gatsby'
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import parse from "html-react-parser"
 import styled from "styled-components"
@@ -18,6 +17,15 @@ const Card = styled.div`
   a {
     width: 100%;
     text-transform: uppercase;
+  }
+
+  .gatsby-image-wrapper {
+    width: 100% !important;
+  }
+  img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
   }
 `
 
@@ -43,7 +51,7 @@ export default function GymCard({ gym, thirds }) {
   return (
     <Card key={gym.title} thirds={thirds}>
       <GatsbyImage
-        image={getImage(gym.featuredImage.node.localFile)}
+        image={getImage(gym.previewImage.node.localFile)}
         alt={gym.title}
       />
       <CardContent>
