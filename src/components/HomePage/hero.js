@@ -1,7 +1,8 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import SearchBar from "../Search/searchBar"
 import styled from "styled-components"
 import { StaticImage } from "gatsby-plugin-image"
+import { useBreakpoint } from 'gatsby-plugin-breakpoints';
 
 
 const HeroWrapper = styled.div`
@@ -106,6 +107,19 @@ const IntroText = styled.p`
 
 const Hero = () => {
 
+  const [scroll, setScroll] = useState(false)
+
+  useEffect(() => {
+    window.addEventListener("scroll", () => {
+      setScroll(window.scrollY > 50)
+    })
+    return function cleanup() {
+      setScroll(true)
+    }
+  }, [])
+
+  const breakpoints = useBreakpoint();
+
   return (
     <HeroWrapper>
       <HeroContent>
@@ -122,7 +136,8 @@ const Hero = () => {
           <StaticImage src="../../images/fighta.png" alt="fighta" placeholder="blurred" loading="eager" />
         </FighterImg>
       </HeroContent>
-          <SearchBar withButton />
+      {breakpoints.xs && scroll ? <SearchBar withButton /> : <SearchBar withButton />}
+
       <HeroBg>
         <StaticImage
           src="../../images/headerhuette.jpg"
