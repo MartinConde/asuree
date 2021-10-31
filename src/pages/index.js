@@ -1,4 +1,4 @@
-import React from "react"
+import React, {Suspense} from "react"
 import loadable from '@loadable/component'
 import { graphql } from "gatsby"
 import Layout from "../components/layout"
@@ -10,11 +10,11 @@ import Row from "../components/Blocks/row"
 import IconBox from '../components/Blocks/iconBox'
 import FaveGyms from "../components/faveGyms"
 
-
+const InterMap = React.lazy(() => import('../components/thaiMap'))
 
 
 export default function Home({ data }) {
-  const InterMap = loadable(() => import('../components/thaiMap'))
+  
   
   return (
     <Layout>
@@ -54,7 +54,9 @@ export default function Home({ data }) {
       </Row>
 
       <BgRow fullWidth withPadding>
+        <Suspense fallback={<div>Loading..</div>}>
         <InterMap/>
+        </Suspense>
       </BgRow>
 
 
