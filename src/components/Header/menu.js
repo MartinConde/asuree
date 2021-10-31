@@ -104,7 +104,9 @@ svg .fighter {
     transform: translateX(0);
 }
 
-
+@media(min-width:1200px) {
+    display: none;
+}
 
 `
 

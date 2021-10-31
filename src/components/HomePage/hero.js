@@ -109,17 +109,6 @@ const IntroText = styled.p`
 
 const Hero = () => {
 
-  // const [scroll, setScroll] = useState(false)
-
-  // useEffect(() => {
-  //   window.addEventListener("scroll", () => {
-  //     setScroll(window.scrollY > 50)
-  //   })
-  //   return function cleanup() {
-  //     setScroll(true)
-  //   }
-  // }, [])
-
   const breakpoints = useBreakpoint();
 
   return (
