@@ -62,15 +62,17 @@ export default function Home({ data }) {
         <FaveGyms faves={data} />
       </Row>
 
-      {scroll &&
+      
         <BgRow fullWidth withPadding>
           {typeof window !== 'undefined' && (
+            scroll &&
             <Suspense fallback={<div>Loading..</div>}>
               <InterMap />
             </Suspense>
+            
           )}
         </BgRow>
-      }
+      
     </Layout>
   )
 }
