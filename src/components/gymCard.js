@@ -6,9 +6,13 @@ import Button from "./Blocks/button"
 
 const Card = styled.div`
   background: #eee;
-  width: calc(50% - 20px);
+  width: 100%;
   margin: 10px;
   color: var(--secondary);
+
+  @media (min-width: 768px) {
+    width: calc(50% - 20px);
+  }
 
   @media(min-width: 1200px) {
     width: ${props => props.thirds ? "calc(33.3% - 20px)" : "calc(50% - 20px)"};

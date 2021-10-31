@@ -1,5 +1,5 @@
 const myCustomQueries = {
-  xxs: "(max-width: 320px)",
+  xxs: "(max-width: 380px)",
   xs: "(max-width: 420px)",
   sm: "(max-width: 767px)",
   md: "(max-width: 1024px)",

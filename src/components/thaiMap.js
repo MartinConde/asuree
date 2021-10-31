@@ -16,6 +16,7 @@ import Button from './Blocks/button'
 
 const Container = styled.div`
 width: 100%;
+position: relative;
 
 @media(min-width:1200px) {
   display: flex;
@@ -24,7 +25,20 @@ width: 100%;
 `
 
 const MapWrapper = styled.div`
-margin: -17vh 0;
+
+position: absolute;
+width: 100%;
+height: 100%;
+z-index: -1;
+display: flex;
+align-items: center;
+justifiy-content: center;
+opacity: .5;
+
+@media (min-width: 1200px) {
+  margin: -17vh 0;
+  position: relative;
+}
 
   path {
     outline: none;
@@ -65,18 +79,20 @@ display: flex;
 flex: 1;
 flex-direction: column;
 width: 100%;
-padding: 20px;
+padding: 75px 20px;
 
 @media(min-width: 1200px) {
   height: calc(100% + 25vmin);
   max-height: 130%;
+  padding: 20px;
 }
 
 h2 {
-  color: var(--secondary);
+  color: #fff;
 
   @media(min-width: 1200px) {
     margin-left: -11vw;
+    color: var(--secondary);
   }
 }
 
@@ -155,9 +171,9 @@ const ThaiMap = () => {
           }}
           // width={breakpoints.l ? 250 : 200}
           // height={breakpoints.l ? 1125 : 900}
-          width={(breakpoints.xs && 450) || (breakpoints.l && 250) || (!breakpoints.l && 200)}
-          height={(breakpoints.xs && 1100) || (breakpoints.l && 1125) || (!breakpoints.l && 900)}
-          style={{ width: (breakpoints.xs && "400") || (!breakpoints.l && "600px"), height: "auto", maxHeight: "1200px" }}
+          width={(breakpoints.xxs && 450) || (breakpoints.xs && 450) || (breakpoints.l && 250) || (!breakpoints.l && 200)}
+          height={(breakpoints.xxs && 800) || (breakpoints.xs && 1100) || (breakpoints.l && 1125) || (!breakpoints.l && 900)}
+          style={{ width: (breakpoints.xxs && "300") || (breakpoints.xs && "400") || (!breakpoints.l && "600px"), height: "auto", maxHeight: "1200px" }}
         >
           <ZoomableGroup
             center={[0, 0]}
@@ -201,7 +217,8 @@ const ThaiMap = () => {
                 ))
               }
             </Geographies>
-            {bigCities.map(gymMarker => (
+            {!breakpoints.l && 
+            bigCities.map(gymMarker => (
               <Annotation
                 onClick={() => {
                   setLocation(gymMarker.ACF_Destinations.location.state)
@@ -230,7 +247,8 @@ const ThaiMap = () => {
                   {gymMarker.ACF_Destinations.location.state}
                 </text>
               </Annotation>
-            ))}
+            ))
+          }
           </ZoomableGroup>
         </ComposableMap>
       </MapWrapper>

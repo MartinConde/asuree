@@ -10,6 +10,7 @@ const FooterWrapper = styled.footer`
 
 const FooterContent = styled.div`
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: flex-start;
   width: 100%;
