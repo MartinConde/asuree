@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect } from "react"
+import React, { Suspense, useEffect, useState } from "react"
 import loadable from '@loadable/component'
 import { graphql } from "gatsby"
 import Layout from "../components/layout"
