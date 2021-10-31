@@ -31,7 +31,6 @@ module.exports = {
         url: `https://wordpress-332056-1932566.cloudwaysapps.com/graphql`,
       },
     },
-    `gatsby-plugin-preact`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {
