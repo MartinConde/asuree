@@ -65,9 +65,11 @@ export default function Home({ data }) {
       
         <BgRow fullWidth withPadding>
           {typeof window !== 'undefined' && (
-            scroll &&
+            
             <Suspense fallback={<div>Loading..</div>}>
+              {scroll &&
               <InterMap />
+            }
             </Suspense>
             
           )}
