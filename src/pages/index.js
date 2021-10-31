@@ -1,8 +1,7 @@
 import React from "react"
-import { Link, graphql } from "gatsby"
+import { graphql } from "gatsby"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import DestinationFragment from '../graphql-fragments/DestinationFields'
 import Hero from '../components/HomePage/hero'
 import ThaiMap from '../components/thaiMap'
 import IntroText from '../components/HomePage/introText'

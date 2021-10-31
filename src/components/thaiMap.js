@@ -10,7 +10,7 @@ import {
   Marker,
   Annotation,
 } from "react-simple-maps"
-import { useStaticQuery, graphql, Link } from "gatsby"
+import { useStaticQuery, graphql } from "gatsby"
 import ThaiPro from "../static/thailand-provinces.json"
 import Button from './Blocks/button'
 
@@ -154,9 +154,9 @@ const ThaiMap = () => {
           }}
           // width={breakpoints.l ? 250 : 200}
           // height={breakpoints.l ? 1125 : 900}
-          width={breakpoints.xs && 450 || breakpoints.l && 250 || !breakpoints.l && 200}
-          height={breakpoints.xs && 1100 || breakpoints.l && 1125 || !breakpoints.l && 900}
-          style={{ width: breakpoints.xs && "400" || !breakpoints.l && "600px", height: "auto", maxHeight: "1200px" }}
+          width={(breakpoints.xs && 450) || (breakpoints.l && 250) || (!breakpoints.l && 200)}
+          height={(breakpoints.xs && 1100) || (breakpoints.l && 1125) || (!breakpoints.l && 900)}
+          style={{ width: (breakpoints.xs && "400") || (!breakpoints.l && "600px"), height: "auto", maxHeight: "1200px" }}
         >
           <ZoomableGroup
             center={[0, 0]}

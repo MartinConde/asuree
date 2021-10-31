@@ -2,7 +2,6 @@ import * as React from "react"
 import SearchBar from "../Search/searchBar"
 import styled from "styled-components"
 import { StaticImage } from "gatsby-plugin-image"
-import { Link } from "gatsby"
 
 const HeroWrapper = styled.div`
   min-height: 80vh;
@@ -117,7 +116,7 @@ const Hero = () => (
         </IntroText>
       </div>
       <FighterImg>
-        <StaticImage src="../../images/fighta.png" alt="fighta" />
+        <StaticImage src="../../images/fighta.png" alt="fighta" placeholder="blurred" loading="eager" />
       </FighterImg>
     </HeroContent>
     <SearchBar withButton />
@@ -126,6 +125,7 @@ const Hero = () => (
         src="../../images/headerhuette.jpg"
         alt="jeilet camp"
         placeholder="blurred"
+        loading="eager"
       />
     </HeroBg>
   </HeroWrapper>

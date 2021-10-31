@@ -1,22 +1,18 @@
 import React, { useState, useEffect } from "react"
+import loadable from '@loadable/component'
 import styled from "styled-components"
 import parse from "html-react-parser"
 import FsLightbox from "fslightbox-react"
-import { GoogleMap, useJsApiLoader } from "@react-google-maps/api"
 
 import { Link, graphql } from "gatsby"
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import Hero from "../components/DetailPages/hero"
-import GMap from "../components/DetailPages/gmap"
-
-import Map from "../components/DetailPages/map"
-import TabContent from "../components/DetailPages/Tabs/tabContent"
-import Tabs from "../components/DetailPages/Tabs/tabsButtons"
-import AttributeBar from "../components/DetailPages/attributeBar"
-import Gallery from "../components/DetailPages/gallery"
+// import GMap from "../components/DetailPages/gmap"
 import AcomCard from "../components/DetailPages/acomCard"
+
+const GymMap = loadable(() => import('../components/DetailPages/gmap'))
 
 const MainContentWrapper = styled.div`
   width: 100%;
@@ -156,7 +152,7 @@ export default function GymTemplate({ data }) {
           <Section>
             <h2>Location</h2>
             {gym.ACF_Gyms.location.streetAddress}
-            <GMap
+            <GymMap
               latitude={gym.ACF_Gyms.location.latitude}
               longitude={gym.ACF_Gyms.location.longitude}
             />
