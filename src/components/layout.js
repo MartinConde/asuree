@@ -1,12 +1,23 @@
-import * as React from "react"
+import React, { Suspense, useEffect, useState } from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
 
 import Header from "./Header/header"
-import Footer from "./Footer/footer"
 import "./layout.css"
 
+const LazyFooter = React.lazy(() => import('./Footer/footer'))
+
 const Layout = ({ children, light }) => {
+  const [scroll, setScroll] = useState(false)
+
+  useEffect(() => {
+    window.addEventListener("pointermove", () => {
+      setScroll(window.scrollY > 200)
+    })
+    return function cleanup() {
+      setScroll(true)
+    }
+  }, [])
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
@@ -22,7 +33,15 @@ const Layout = ({ children, light }) => {
       <Header light={light} siteTitle={data.site.siteMetadata?.title || `Title`} />
       <div>
         <main>{children}</main>
-        <Footer/>
+        {typeof window !== 'undefined' && (
+            
+            <Suspense fallback={<div>Loading..</div>}>
+              {scroll &&
+              <LazyFooter />
+            }
+            </Suspense>
+            
+          )}
       </div>
     </>
   )

@@ -16,7 +16,7 @@ export default function Home({ data }) {
   const [scroll, setScroll] = useState(false)
 
   useEffect(() => {
-    window.addEventListener("scroll", () => {
+    window.addEventListener("pointermove", () => {
       setScroll(window.scrollY > 200)
     })
     return function cleanup() {
