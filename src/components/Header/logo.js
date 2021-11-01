@@ -5,14 +5,14 @@ const LogoWrapper = styled.div`
 margin-right: 50px;
 padding: 5px 15px 2px 25px;
 svg {
-    height: 70px;
+    height: 50px;
     transition: .3s all ease-out;
 }
 
 @media(min-width: 1200px) {
   padding: 5px;
   svg {
-    height: 150px;
+    height: 80px;
   }
 }
 `

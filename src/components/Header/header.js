@@ -19,7 +19,7 @@ const HeaderWrapper = styled.header`
 
   @media (min-width: 1200px) {
     &.scrolled-nav svg {
-      height: 100px;
+      height: 60px;
     }
   }
 `
