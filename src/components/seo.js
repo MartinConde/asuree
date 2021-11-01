@@ -9,6 +9,8 @@ import * as React from "react"
 import PropTypes from "prop-types"
 import { Helmet } from "react-helmet"
 import { useStaticQuery, graphql } from "gatsby"
+import FontUrl1 from '../static/fonts/FIGHTER BRUSH.woff'
+import FontUrl2 from '../static/fonts/oswald-v16-latin-700.woff2'
 
 function Seo({ description, lang, meta, title }) {
   const { site } = useStaticQuery(
@@ -69,7 +71,19 @@ function Seo({ description, lang, meta, title }) {
           content: metaDescription,
         },
       ].concat(meta)}
-    />
+    >
+      <link rel="preload"
+        as="font"
+        href={FontUrl1}
+        type="font/woff2"
+        crossOrigin="anonymous" />
+         <link rel="preload"
+        as="font"
+        href={FontUrl2}
+        type="font/woff2"
+        crossOrigin="anonymous" />
+
+    </Helmet>
   )
 }
 
