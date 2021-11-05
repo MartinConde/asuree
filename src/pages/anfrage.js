@@ -153,6 +153,7 @@ const AnfrageFormular = ({ data }) => {
                   setIsSubmitting(false)
                   setMessageSent(true)
                   setIsSuccessMessage(true)
+                  console.log(response)
                 })
                 .catch(error => {
                   // actions taken when submission goes wrong
