@@ -283,7 +283,7 @@ const ThaiMap = () => {
                 {parse(selected && selected.ACF_Destinations.shortDescription)}
 
                 <Button
-                  url="/"
+                  url={`/destination/${selected.slug}#gyms`}
                   text={`Zu allen gyms in ${selected && selected.title}`}
                 />
               </div>

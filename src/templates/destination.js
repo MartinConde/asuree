@@ -138,7 +138,7 @@ export default function DestinationTemplate({ data }) {
           </Section>
 
           <Section>
-            <h2>Gyms</h2>
+            <h2 id="gyms">Gyms</h2>
             <CardsWrapper>
               {dest.ACF_Destinations.gyms.map(gym => {
                 return (
