@@ -8,6 +8,9 @@ const myCustomQueries = {
 }
 
 module.exports = {
+  flags: {
+    PARALLEL_QUERY_RUNNING: true
+  },
   siteMetadata: {
     title: `Asuree`,
     description: `Muay Thai Camp booking site`,
