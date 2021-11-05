@@ -117,7 +117,7 @@ const AnfrageFormular = ({ data }) => {
           <button onClick={() => setStep(3)}>Step 3</button>
           <Formik
             initialValues={{
-              package: "",
+              // package: "",
               start: "",
               end: "",
               dauer: "",
@@ -135,7 +135,7 @@ const AnfrageFormular = ({ data }) => {
               bodyFormData.set("lastName", values.lastName)
               bodyFormData.set("email", values.email)
               bodyFormData.set("toggle", values.toggle)
-              bodyFormData.set("package", values.package)
+              // bodyFormData.set("package", values.package)
               bodyFormData.set("start", values.start)
               bodyFormData.set("end", values.end)
               bodyFormData.set("dauer", values.dauer)
@@ -177,7 +177,7 @@ const AnfrageFormular = ({ data }) => {
                 {step === 1 && (
                   <StepOne>
                     <StepHeader>
-                      <div id="my-radio-group">package</div>
+                      {/* <div id="my-radio-group">package</div> */}
                     </StepHeader>
 
                     <Field
