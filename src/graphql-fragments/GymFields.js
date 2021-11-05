@@ -4,7 +4,6 @@ export const GymFragment = graphql`
   fragment GymFragment on WpGym {
     title
     slug
-    id
     featuredImage {
       node {
         localFile {
