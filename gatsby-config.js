@@ -9,7 +9,7 @@ const myCustomQueries = {
 
 module.exports = {
   flags: {
-    PARALLEL_QUERY_RUNNING: true
+    PARALLEL_QUERY_RUNNING: false
   },
   siteMetadata: {
     title: `Asuree`,

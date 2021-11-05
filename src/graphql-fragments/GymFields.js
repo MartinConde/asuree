@@ -3,6 +3,7 @@ import { graphql } from "gatsby"
 export const GymFragment = graphql`
   fragment GymFragment on WpGym {
     title
+    id
     slug
     featuredImage {
       node {

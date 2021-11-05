@@ -28,16 +28,14 @@ export const AccommodationFragment = graphql`
       preis
       destinations {
         ... on WpDestination {
-          slug
-          title
+          ...DestinationFragment
         }
       }
-      gyms {
-        ... on WpGym {
-          slug
-          title
-        }
-      }
+      # gyms {
+      #   ... on WpGym {
+      #     ...GymFragment
+      #   }
+      # }
     }
   }
 `

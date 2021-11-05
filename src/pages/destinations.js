@@ -28,7 +28,7 @@ export default function Destinations({ data }) {
     return e.ACF_Destinations.gyms
   })
 
-  console.log(bigCities)
+  
   return (
     <Layout>
       <SEO title="home" />

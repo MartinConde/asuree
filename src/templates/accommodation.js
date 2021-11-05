@@ -5,7 +5,7 @@ import SEO from "../components/seo"
 
 export default function AccommodationTemplate({ data }) {
   const page = data.allWpAccommodation.edges[0].node
-console.log(data)
+
   return (
     <Layout>
       <SEO title="home" />

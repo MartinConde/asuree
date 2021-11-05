@@ -134,7 +134,7 @@ const Footer = () => {
   `)
 
 
-    console.log(provinces)
+    
 
     return (
         <FooterWrapper>

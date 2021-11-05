@@ -208,7 +208,7 @@ export default function SearchBar({ withButton, noBtn }) {
     context.setGymResults(results)
   }, [context.destination, context.level])
 
-  console.log(context.destination)
+  
 
   return (
     <myContext.Consumer>

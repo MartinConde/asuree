@@ -81,7 +81,7 @@ const CardsWrapper = styled.div`
 
 export default function DestinationTemplate({ data }) {
   const dest = data.allWpDestination.edges[0].node
-  console.log(data)
+  
 
   const [lightboxController, setLightboxController] = useState({
     toggler: false,

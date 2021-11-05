@@ -103,7 +103,7 @@ const GalleryItem = styled.div`
 export default function GymTemplate({ data }) {
   const gym = data.allWpGym.edges[0].node
 
-  console.log(gym)
+ 
   const [lightboxController, setLightboxController] = useState({
     toggler: false,
     slide: 1,
