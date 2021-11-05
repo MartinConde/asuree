@@ -25,7 +25,7 @@
     "gatsby-plugin-sharp": "^4.1.0",
     "gatsby-plugin-styled-components": "^5.0.0",
     "gatsby-source-filesystem": "^4.0.0",
-    "gatsby-source-wordpress": "5.12.0-alpha-wordpress.27",
+    "gatsby-source-wordpress": "^6.1.0",
     "gatsby-transformer-sharp": "^4.1.0",
     "html-react-parser": "^1.2.6",
     "lmdb-store": "^1.6.12",
