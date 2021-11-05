@@ -186,6 +186,26 @@ const AnfrageFormular = ({ data }) => {
                       required
                     />
 
+                    
+                  </StepOne>
+                )}
+                {step === 2 && (
+                  <StepTwo>
+                    {/* <AcomWrapper>
+                      {gymData.ACF_Gyms.accommodations.map(acom => {
+                        return (
+                          <AcomCard
+                            key={acom.title}
+                            title={acom.title}
+                            preis={acom.ACF_Accommodations.preis}
+                            image={acom.featuredImage.node.localFile}
+                            description={acom.ACF_Accommodations.description}
+                            amenities={acom.ACF_Accommodations.amenities}
+                            sterne={acom.ACF_Accommodations.sterne}
+                          />
+                        )
+                      })}
+                    </AcomWrapper> */}
                     <AcomWrapper role="group" aria-labelledby="my-radio-group">
                       {gymData.ACF_Gyms.accommodations.map(acom => {
                         return (
@@ -207,25 +227,11 @@ const AnfrageFormular = ({ data }) => {
                         )
                       })}
                     </AcomWrapper>
-                  </StepOne>
+                    
+                  </StepTwo>
                 )}
-                {step === 2 && (
-                  <StepTwo>
-                    <AcomWrapper>
-                      {gymData.ACF_Gyms.accommodations.map(acom => {
-                        return (
-                          <AcomCard
-                            key={acom.title}
-                            title={acom.title}
-                            preis={acom.ACF_Accommodations.preis}
-                            image={acom.featuredImage.node.localFile}
-                            description={acom.ACF_Accommodations.description}
-                            amenities={acom.ACF_Accommodations.amenities}
-                            sterne={acom.ACF_Accommodations.sterne}
-                          />
-                        )
-                      })}
-                    </AcomWrapper>
+                {step === 3 && (
+                  <StepThree>
                     <label htmlFor="firstName">First Name</label>
                     <Field id="firstName" name="firstName" placeholder="Jane" />
 
@@ -239,10 +245,6 @@ const AnfrageFormular = ({ data }) => {
                       placeholder="jane@acme.com"
                       type="email"
                     />
-                  </StepTwo>
-                )}
-                {step === 3 && (
-                  <StepThree>
                     <button type="submit">Submit</button>
                   </StepThree>
                 )}
