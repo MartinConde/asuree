@@ -47,7 +47,15 @@ export const GymFragment = graphql`
         id
         localFile {
           childImageSharp {
-            gatsbyImageData(layout: CONSTRAINED, width: 600, height: 400)
+            gatsbyImageData(layout: FULL_WIDTH)
+          }
+        }
+      }
+      galpreview: gallery {
+        id
+        localFile {
+          childImageSharp {
+            gatsbyImageData(layout: CONSTRAINED, width: 200, height: 200)
           }
         }
       }

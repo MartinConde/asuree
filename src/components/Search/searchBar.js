@@ -13,6 +13,8 @@ const SearchWrapper = styled.div`
   max-width: 1200px;
   margin: 0 auto;
   box-shadow: 0 0 12px rgba(0,0,0,.15);
+  z-index: 10;
+  position: relative;
 
   .searchSelect {
     display: block;
@@ -26,7 +28,7 @@ const SearchWrapper = styled.div`
   @media(min-width:1024px) {
     .searchSelect {
       display: block;
-      width: 33.3%;
+      width: ${props => props.noBtn ? "calc(50% - 1px)" : "33.3%"};
     }
   
     &.directSearch select {
@@ -140,17 +142,17 @@ const IconSingleValue = props => (
   </SingleValue>
 )
 
-export default function SearchBar({ withButton }) {
+export default function SearchBar({ withButton, noBtn }) {
   const searchdata = useStaticQuery(graphql`
     query SearchQuery {
-      allWpDestination {
+      allWpDestination(sort: {order: ASC, fields: title}) {
         edges {
           node {
             ...DestinationFragment
           }
         }
       }
-      allWpGym {
+      allWpGym(sort: {order: ASC, fields: title}) {
         edges {
           node {
             ...GymFragment
@@ -213,10 +215,12 @@ export default function SearchBar({ withButton }) {
       {context => (
         <SearchWrapper
           withButton={withButton}
+          noBtn={noBtn}
           className={withButton ? "fullSearch" : "directSearch"}
         >
           <Select
            className="searchSelect"
+
             options={destinationOptions}
             isClearable
             placeholder="Alle Provinzen"
@@ -273,7 +277,7 @@ export default function SearchBar({ withButton }) {
 
           {withButton && (
             <SearchButton
-              to="/camps"
+              to="/camps#camps"
               className={context.isGymResult.length === 0 && "disabled"}
             >
               <span>

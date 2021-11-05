@@ -1,12 +1,16 @@
 import React, { useState, useEffect, useContext } from "react"
 import { Formik, Field, Form } from "formik"
+import axios from "axios"
 import DatePickerWithFormik from "../components/Form/datepicker"
 import styled from "styled-components"
 import { Link, graphql } from "gatsby"
+import Row from "../components/Blocks/row"
 import AcomCard from "../components/DetailPages/acomCard"
+import GymCard from "../components/gymCard"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { format } from "date-fns"
+import ImageHeader from "../components/ImageHeader"
 import { de } from "date-fns/locale"
 
 const StepOne = styled.div`
@@ -55,25 +59,59 @@ const AcomWrapper = styled.div`
   }
 `
 
-const AnfrageFormular = () => {
+const CardsWrapper = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+`
+
+const AnfrageFormular = ({ data }) => {
   const [gymData, setGymData] = useState()
   const [dataLoaded, setDataLoaded] = useState(false)
+  const [gymChosen, setGymChosen] = useState(false)
   const [step, setStep] = useState(1)
 
-  console.log(gymData)
+  const [token, setToken] = useState("") // store token
+  const [isSuccessMessage, setIsSuccessMessage] = useState(false) // manage is success message state
+  const [messageSent, setMessageSent] = useState(false) // manage sent message state
+  const [isSubmitting, setIsSubmitting] = useState(false)
+
+
 
   useEffect(() => {
     if (localStorage.getItem("gymData")) {
       setGymData(JSON.parse(localStorage.getItem("gymData")))
       setDataLoaded(true)
     }
+  }, [gymChosen])
+
+  useEffect(() => {
+    axios({
+      method: "post",
+      url: `https://wordpress-332056-1932566.cloudwaysapps.com/wp-json/jwt-auth/v1/token`,
+      data: {
+        username: "admin@homepagelabor.ch", // provide a user credential with subscriber role
+        password: "mUTZ9Nyhgv",
+      },
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then(response => {
+        setToken(response.data.token)
+      })
+      .catch(error => console.error("Error", error))
   }, [])
 
   return (
     <Layout>
+      <ImageHeader
+        image={data.wpPage.featuredImage.node.localFile}
+        imagealt={data.wpPage.featuredImage.node.altText}
+        title={`${dataLoaded ? "Anfrage " + gymData.title : "Anfrage stellen"}`}
+      />
       {dataLoaded ? (
         <>
-          <h1>Anfrage für {gymData.title}</h1>
           <button onClick={() => setStep(1)}>Step 1</button>
           <button onClick={() => setStep(2)}>Step 2</button>
           <button onClick={() => setStep(3)}>Step 3</button>
@@ -89,20 +127,52 @@ const AnfrageFormular = () => {
               toggle: "",
             }}
             onSubmit={async values => {
-              await new Promise(r => setTimeout(r, 500))
-              alert(JSON.stringify(values, null, 2))
+              // await new Promise(r => setTimeout(r, 500))
+              // alert(JSON.stringify(values.firstName, null, 2))
+              setIsSubmitting(true)
+              const bodyFormData = new FormData()
+              bodyFormData.set("firstName", values.firstName)
+              bodyFormData.set("lastName", values.lastName)
+              bodyFormData.set("email", values.email)
+              bodyFormData.set("toggle", values.toggle)
+              bodyFormData.set("package", values.package)
+              bodyFormData.set("start", values.start)
+              bodyFormData.set("end", values.end)
+              bodyFormData.set("dauer", values.dauer)
+              axios({
+                method: "post",
+                url: `https://wordpress-332056-1932566.cloudwaysapps.com/wp-json/contact-form-7/v1/contact-forms/418/feedback`,
+                data: bodyFormData,
+                headers: {
+                  Authorization: `Bearer ${token}`,
+                  "Content-Type": "multipart/form-data",
+                },
+              })
+                .then(response => {
+                  // actions taken when submission goes OK
+                  setIsSubmitting(false)
+                  setMessageSent(true)
+                  setIsSuccessMessage(true)
+                })
+                .catch(error => {
+                  // actions taken when submission goes wrong
+                  setIsSubmitting(false)
+                  setMessageSent(true)
+                  setIsSuccessMessage(false)
+                  console.log(error)
+                })
             }}
           >
             {({ setFieldValue, setFieldTouched, values, errors, touched }) => (
               <Form>
                 {values.start &&
-                  format(new Date(values.start), "dd MMMM yyyy", {
+                  format(new Date(values.start), "dd MMMM yyyy ", {
                     locale: de,
                   })}
+                -
                 {values.end &&
-                  format(new Date(values.end), "dd MMMM yyyy", { locale: de })}
+                  format(new Date(values.end), " dd MMMM yyyy", { locale: de })}
                 {values.dauer > 30 ? <span>Ohhh Visa</span> : null}
-
                 {step === 1 && (
                   <StepOne>
                     <StepHeader>
@@ -138,7 +208,6 @@ const AnfrageFormular = () => {
                     </AcomWrapper>
                   </StepOne>
                 )}
-
                 {step === 2 && (
                   <StepTwo>
                     <AcomWrapper>
@@ -171,7 +240,6 @@ const AnfrageFormular = () => {
                     />
                   </StepTwo>
                 )}
-
                 {step === 3 && (
                   <StepThree>
                     <button type="submit">Submit</button>
@@ -182,7 +250,22 @@ const AnfrageFormular = () => {
           </Formik>
         </>
       ) : (
-        <span>Loading</span>
+        <Row>
+          <CardsWrapper>
+            {data.allWpGym.edges.map(({ node }) => (
+              <GymCard
+                key={node.title}
+                gym={node}
+                thirds
+                isAnfrage
+                clicker={() => {
+                  localStorage.setItem("gymData", JSON.stringify(node))
+                  setGymChosen(!gymChosen)
+                }}
+              />
+            ))}
+          </CardsWrapper>
+        </Row>
       )}
     </Layout>
   )
@@ -192,6 +275,20 @@ export default AnfrageFormular
 
 export const pageQuery = graphql`
   query {
+    wpPage(slug: { eq: "anfrage" }) {
+      id
+      title
+      featuredImage {
+        node {
+          altText
+          localFile {
+            childImageSharp {
+              gatsbyImageData(layout: FULL_WIDTH)
+            }
+          }
+        }
+      }
+    }
     allWpDestination {
       edges {
         node {

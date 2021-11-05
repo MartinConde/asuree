@@ -627,8 +627,8 @@ main {
   position: relative;
 }
 
-@media all and (max-width: 1199px) {
+/* @media all and (max-width: 1199px) {
   main {
     padding-top: 75px;
   }
-}
+} */

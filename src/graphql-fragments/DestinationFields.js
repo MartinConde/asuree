@@ -4,6 +4,17 @@ export const DestinationFragment = graphql`
   fragment DestinationFragment on WpDestination {
     title
     slug
+    featuredImage {
+      node {
+        id
+        altText
+        localFile {
+          childImageSharp {
+            gatsbyImageData(layout: FULL_WIDTH)
+          }
+        }
+      }
+    }
     ACF_Destinations {
       location {
         city
@@ -22,18 +33,25 @@ export const DestinationFragment = graphql`
       }
       description
       shortDescription
+      galpreview: gallery {
+        id
+        localFile {
+          childImageSharp {
+            gatsbyImageData(layout: CONSTRAINED, width: 200, height: 200)
+          }
+        }
+      }
+      gallery {
+        id
+        localFile {
+          childImageSharp {
+            gatsbyImageData(layout: FULL_WIDTH)
+          }
+        }
+      }
       gyms {
         ... on WpGym {
-          title
-          slug
-          ACF_Gyms {
-            accommodations {
-              ... on WpAccommodation {
-                title
-                slug
-              }
-            }
-          }
+          ...GymFragment
         }
       }
     }

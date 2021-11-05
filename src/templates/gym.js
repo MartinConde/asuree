@@ -38,12 +38,12 @@ const Main = styled.div`
 `
 
 const Section = styled.div`
-  margin-top: 30px;
+  margin-top: ${props => props.firstSec ? "0" : "30px"};
   padding: 20px 20px 65px 20px;
   border-bottom: 1px solid #ddd7d7;
 
   @media (min-width: 1300px) {
-    margin-top: 105px;
+    margin-top: ${props => props.firstSec ? "0" : "105px"};
     padding: 20px 20px 125px 20px;
   }
 `
@@ -80,24 +80,30 @@ const AcomWrapper = styled.div`
 const GalleryWrapper = styled.div`
   display: flex;
   align-items: center;
-  background: #eee;
+  justify-content: flex-start;
+  /* background: #eee; */
   flex-wrap: wrap;
   gap: 12px;
 `
 
 const GalleryItem = styled.div`
   display: flex;
-  width: calc(50% - 9px);
+  max-width: calc(50% - 9px);
   height: 200px;
 
   @media (min-width: 768px) {
-    width: calc(25% - 9px);
+    max-width: calc(25% - 9px);
+  }
+
+  &:hover {
+    cursor: pointer;
   }
 `
 
 export default function GymTemplate({ data }) {
   const gym = data.allWpGym.edges[0].node
 
+  console.log(gym)
   const [lightboxController, setLightboxController] = useState({
     toggler: false,
     slide: 1,
@@ -134,11 +140,11 @@ export default function GymTemplate({ data }) {
 
       <MainContentWrapper>
         <Main>
-          <Section>
+          <Section firstSec>
             <h1>{gym.title}</h1>
             {parse(gym.ACF_Gyms.description)}
             <GalleryWrapper>
-              {gym.ACF_Gyms.gallery.slice(0, 5).map((gym, i) => (
+              {gym.ACF_Gyms.galpreview.slice(0, 5).map((gym, i) => (
                 <GalleryItem
                   key={`gym-${i}`}
                   onClick={() => openLightboxOnSlide(i + 1)}
@@ -156,6 +162,7 @@ export default function GymTemplate({ data }) {
               latitude={gym.ACF_Gyms.location.latitude}
               longitude={gym.ACF_Gyms.location.longitude}
             />
+            <Link to={`/destination/${gym.ACF_Gyms.destinations[0].slug}`}>Alle Gyms dieser Provinz anschauen</Link>
           </Section>
           <Section>
             <h2>Unterkünfte</h2>
@@ -186,7 +193,7 @@ export default function GymTemplate({ data }) {
             <h3>
               Ab CHF 420<small>pro Woche</small>
             </h3>
-            <Link to={`/anfrage`}>
+            <Link to='/anfrage'>
               Jetzt buchen
             </Link>
             <p>sfsfgdfgfdgdfgdgf</p>
@@ -197,8 +204,8 @@ export default function GymTemplate({ data }) {
       <FsLightbox
         toggler={lightboxController.toggler}
         sources={gym.ACF_Gyms.gallery.map((gym, i) => (
-          <div className="galFull" key={i}>
-            <GatsbyImage image={getImage(gym.localFile)} alt="dsdfsfd" />
+          <div className="galFull" key={i} style={{ width: '100vw', height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <GatsbyImage image={getImage(gym.localFile)} alt="dsdfsfd" style={{ width: '100%'}}/>
           </div>
         ))}
         slide={lightboxController.slide}

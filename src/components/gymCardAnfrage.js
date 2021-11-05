@@ -55,13 +55,9 @@ const Excerpt = styled.p`
   margin-top: 15px;
 `
 
-export default function GymCard({ gym, thirds, isAnfrage, clicker }) {
+export default function GymCardAnfrage({ gym, thirds, clicker }) {
   return (
-    <Card
-      key={gym.title}
-      thirds={thirds}
-      isAnfrage={isAnfrage}
-    >
+    <Card key={gym.title} thirds={thirds}>
       <GatsbyImage
         image={getImage(gym.previewImage.node.localFile)}
         alt={gym.title}
@@ -76,15 +72,7 @@ export default function GymCard({ gym, thirds, isAnfrage, clicker }) {
           {parse(gym.ACF_Gyms.description.substring(0, 250) + " ...")}
         </Excerpt>
       </CardContent>
-      {isAnfrage ? (
-        <button
-          onClick={clicker}
-        >
-          Auswählen
-        </button>
-      ) : (
-        <Button url={`/gym/${gym.slug}`} text="Jetzt informieren und buchen" />
-      )}
+      <button onClick={clicker}>Auswählen</button>
     </Card>
   )
 }

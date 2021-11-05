@@ -7,8 +7,7 @@ import GymCard from './gymCard'
 const CardsWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
 `
 
 

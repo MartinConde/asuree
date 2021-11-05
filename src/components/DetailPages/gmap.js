@@ -220,7 +220,7 @@ const test =[
     }
 ]
 
-function GMap({ latitude, longitude }) {
+function GMap({ latitude, longitude, zoom }) {
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: "AIzaSyD4XVCuSAeEathZN0B84lSp3b3PQ0FKL7Q",
@@ -244,7 +244,7 @@ function GMap({ latitude, longitude }) {
       mapContainerStyle={containerStyle}
       options={{styles: test}}
       center={{ lat: latitude, lng: longitude }}
-      zoom={18}
+      zoom={zoom ? zoom : 18}
     //   onLoad={onLoad}
       onUnmount={onUnmount}
     >

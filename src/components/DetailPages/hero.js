@@ -8,6 +8,7 @@ const Wrapper = styled.div`
   width: 100%;
   height: 75vh;
   box-shadow: 0 0 25px rgba(0, 0, 51, 1);
+  margin-bottom: var( --row-mgbtm);
 
   .gatsby-image-wrapper {
     width: 100%;

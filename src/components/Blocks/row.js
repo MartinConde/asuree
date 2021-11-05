@@ -10,18 +10,18 @@ const RowWrapper = styled.div`
 const RowContent = styled.div`
 max-width: ${props => props.fullWidth ? "1920px" : "1200px"};
 margin: 0 auto;
-padding-top: ${props => props.withPadding ? "0" : " var(--row-pd)"};
-padding-bottom: ${props => props.withPadding ? "0" : " var(--row-pd)"};
-display: flex;
+padding-top: ${props => props.pTop ? "var(--row-pd)" : "0"};
+padding-bottom: ${props => props.pBtm ? "var(--row-pd)" : "0"};
+display: ${props => props.flex ? "flex" : "block"};
 position: relative;
 z-index: 9;
 `
 
-export default function Row({ children, fullWidth, withPadding }) {
+export default function Row({ children, fullWidth, pTop, pBtm, flex, id }) {
     return (
-        <RowWrapper>
+        <RowWrapper id={id}>
 
-            <RowContent fullWidth={fullWidth} withPadding={withPadding}>{children}</RowContent>
+            <RowContent fullWidth={fullWidth} pTop={pTop} pBtm={pBtm} flex={flex}>{children}</RowContent>
 
         </RowWrapper>
     )

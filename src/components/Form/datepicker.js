@@ -143,8 +143,8 @@ const DatePickerWithFormik = ({
     setFieldValue("dauer", Difference_In_Days)
   }, [begin, weg])
 
-  console.log(begin)
-  console.log(weg)
+  // console.log(begin)
+  // console.log(weg)
 
   return (
     <CalWrapper>

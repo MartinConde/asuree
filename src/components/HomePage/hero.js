@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react"
 import SearchBar from "../Search/searchBar"
 import styled from "styled-components"
-import { StaticImage } from "gatsby-plugin-image"
+import { graphql, useStaticQuery } from "gatsby"
+import { StaticImage, GatsbyImage, getImage } from "gatsby-plugin-image"
 import { useBreakpoint } from 'gatsby-plugin-breakpoints';
+import parse from 'html-react-parser'
 
 
 const HeroWrapper = styled.div`
@@ -42,6 +44,8 @@ const HeroBg = styled.div`
   position: absolute;
   top: 0;
   right: 0;
+  width: 100%;
+  height: 100%;
   z-index: -5;
 
   .gatsby-image-wrapper {
@@ -112,6 +116,31 @@ const IntroText = styled.p`
 `
 
 const Hero = () => {
+  const herodata = useStaticQuery(graphql`
+  query HeroQuery {
+    wpPage( slug: {eq: "home"}) {
+    ACF_Home {
+      heroH1Large
+      heroH1Small
+      heroText
+      heroBackground {
+        localFile {
+          childImageSharp {
+            gatsbyImageData(layout: FULL_WIDTH)
+          }
+        }
+      }
+      heroFighter {
+        localFile {
+          childImageSharp {
+            gatsbyImageData(layout: CONSTRAINED)
+          }
+        }
+      }
+    }
+  }
+  }
+`)
 
   const breakpoints = useBreakpoint();
 
@@ -120,26 +149,20 @@ const Hero = () => {
       <HeroContent>
         <div>
           <MainTitle>
-            <small>MUAY THAI CAMPS</small> IN THAILAND
+            <small>{herodata.wpPage.ACF_Home.heroH1Small}</small> {herodata.wpPage.ACF_Home.heroH1Large}
           </MainTitle>
           <IntroText>
-            ERLEBE DEN NATIONALSPORT THAILANDS IN EINEM EXKLUSIVEN GYM - <br />
-            THE ULTIMATE MUAY THAI EXPERIENCE IM LAND DES LÄCHELNS
+            {parse(herodata.wpPage.ACF_Home.heroText)}
           </IntroText>
         </div>
         <FighterImg>
-          <StaticImage src="../../images/fighta.png" alt="fighta" placeholder="blurred" loading="eager" />
+        <GatsbyImage image={getImage(herodata.wpPage.ACF_Home.heroFighter.localFile)} alt="dsdfsfd" />
         </FighterImg>
       </HeroContent>
       <SearchBar withButton />
 
       <HeroBg>
-        <StaticImage
-          src="../../images/headerhuette.jpg"
-          alt="jeilet camp"
-          placeholder="blurred"
-          loading="eager"
-        />
+      <GatsbyImage image={getImage(herodata.wpPage.ACF_Home.heroBackground.localFile)} alt="dsdfsfd" />
       </HeroBg>
     </HeroWrapper>
   )
