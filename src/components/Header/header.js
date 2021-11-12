@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react"
 import PropTypes from "prop-types"
-import styled from 'styled-components'
+import styled from "styled-components"
 import { Link } from "gatsby"
-import Menu from './menu'
+import Menu from "./menu"
 import Logo from "./logo"
 
 const HeaderWrapper = styled.header`
@@ -14,30 +14,66 @@ const HeaderWrapper = styled.header`
 
   &.scrolled-nav {
     background: #fff;
-    box-shadow: 8px 0 50px rgba(0,0,51,0.5);
+    box-shadow: 8px 0 50px rgba(0, 0, 51, 0.5);
+  }
+
+  svg {
+    height: 50px;
   }
 
   @media (min-width: 1200px) {
-    &.scrolled-nav svg {
-      height: 60px;
+    svg {
+      height: 65px;
+    }
+
+    a {
+      will-change: transform;
+      transform: scale(1);
+      transition: 0.3s all ease-out;
+    }
+
+    &.scrolled-nav a {
+      transform: scale(0.8);
+    }
+
+    &.scrolled-nav a {
+      color: var(--secondary);
+      text-shadow: none;
+    }
+    &.scrolled-nav a:hover,
+    &.scrolled-nav a.active {
+      color: var(--primary);
     }
   }
 `
 
 const HeaderContent = styled.div`
-  display: flex;
-  align-items: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   justify-content: space-between;
+  align-items: center;
+  justify-items: center;
   width: 100%;
-  max-width: 1200px;
   margin: 0 auto;
 
-  @media(min-width: 1200px) {
-    justify-content: flex-start;
+  a {
+    justify-self: start;
+    margin-left: 20px;
+    margin-bottom: -8px;
+  }
+
+  @media (min-width: 1200px) {
+    grid-template-columns: 1fr 3fr 1fr;
+
+    a {
+      margin-left: 20px;
+      margin-bottom: 0;
+      padding: 10px 20px 5px 20px;
+    }
   }
 `
 
-const Header = ({light}) => {
+const Header = ({ light }) => {
   const [scroll, setScroll] = useState(false)
 
   useEffect(() => {
@@ -53,9 +89,9 @@ const Header = ({light}) => {
     <HeaderWrapper className={`${scroll ? "scrolled-nav" : "not-scrolled"}`}>
       <HeaderContent>
         <Link to="/">
-          <Logo />
+          <Logo scrolled={scroll} />
         </Link>
-        <Menu light={light}/>
+        <Menu light={light} />
       </HeaderContent>
     </HeaderWrapper>
   )

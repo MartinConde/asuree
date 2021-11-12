@@ -45,7 +45,7 @@ const Icon = styled.div`
 
 const IconBoxTitle = styled.h3``
 
-const IconBoxContent = styled.p``
+const IconBoxContent = styled.div``
 
 export default function IconBox({ title, content, children }) {
   return (

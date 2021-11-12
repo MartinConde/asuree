@@ -90,5 +90,8 @@ export const GymFragment = graphql`
         }
       }
     }
+    ACF_Global {
+        lightHeader
+      }
   }
 `

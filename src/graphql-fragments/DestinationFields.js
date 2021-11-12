@@ -55,5 +55,8 @@ export const DestinationFragment = graphql`
         }
       }
     }
+    ACF_Global {
+        lightHeader
+      }
   }
 `

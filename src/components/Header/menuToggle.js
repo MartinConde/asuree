@@ -4,7 +4,8 @@ import styled from 'styled-components'
 const Toggle = styled.div`
 position: relative;
 z-index: 999;
-padding: 5px 25px 2px 15px;
+padding: 5px 20px 10px 20px;
+margin-bottom: -15px;
 @media(min-width: 1200px) {
     display: none;
 }

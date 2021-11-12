@@ -1,7 +1,6 @@
-import React, { useState, useEffect, useContext } from "react"
+import React, { useState, useEffect } from "react"
 import { Formik, Field, Form } from "formik"
 import axios from "axios"
-import DatePickerWithFormik from "../components/Form/datepicker"
 import styled from "styled-components"
 import { Link, graphql } from "gatsby"
 import Row from "../components/Blocks/row"
@@ -9,9 +8,17 @@ import AcomCard from "../components/DetailPages/acomCard"
 import GymCard from "../components/gymCard"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import { format } from "date-fns"
 import ImageHeader from "../components/ImageHeader"
 import { de } from "date-fns/locale"
+import StepBtn from "../components/Anfrage/stepBtn"
+import InputField from "../components/Anfrage/inputField"
+import DateField from "../components/Anfrage/dateField"
+import { addDays, format } from "date-fns"
+import ImgRadio from "../components/Anfrage/imgRadio"
+import SingleDateField from "../components/Anfrage/singleDateField"
+import Summary from "../components/Anfrage/summary"
+import SelectField from "../components/Anfrage/selectField"
+import TestField from "../components/Anfrage/Select/TestField"
 
 const StepOne = styled.div`
   height: 100vh;
@@ -30,28 +37,6 @@ const StepFields = styled.div`
   justify-content: center;
 `
 
-const CustomRadio = styled.label`
-  margin: 20px;
-
-  [type="radio"] {
-    position: absolute;
-    opacity: 0;
-    width: 0;
-    height: 0;
-  }
-
-  /* IMAGE STYLES */
-  [type="radio"] + div {
-    cursor: pointer;
-  }
-
-  /* CHECKED STYLES */
-  [type="radio"]:checked + div {
-    outline: none;
-    background: var(--primary);
-  }
-`
-
 const AcomWrapper = styled.div`
   @media (min-width: 768px) {
     display: flex;
@@ -65,18 +50,68 @@ const CardsWrapper = styled.div`
   justify-content: flex-start;
 `
 
+const PersonalFields = styled.div`
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+`
+
+const PersonalFieldsRow = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 50px;
+
+  &.triple > div {
+    width: 50%;
+  }
+`
+
+function validateEmail(value) {
+  let error
+  if (!value) {
+    error = "Brooch ick"
+  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)) {
+    error = "Watn dit für ne mail"
+  }
+  return error
+}
+
+function validateName(value) {
+  let error
+  if (!value) {
+    error = "Brooch ick"
+  }
+  return error
+}
+
+function validateCountry(value) {
+  let error
+  if (!value) {
+    error = "Brooch ick"
+  }
+  return error
+}
+
+const options = [
+  { value: "foo", label: "Foo" },
+  { value: "bar", label: "Bar" },
+]
+
 const AnfrageFormular = ({ data }) => {
   const [gymData, setGymData] = useState()
   const [dataLoaded, setDataLoaded] = useState(false)
   const [gymChosen, setGymChosen] = useState(false)
   const [step, setStep] = useState(1)
 
+  const [country, setCountry] = useState()
+  const [region, setRegion] = useState()
+
   const [token, setToken] = useState("") // store token
   const [isSuccessMessage, setIsSuccessMessage] = useState(false) // manage is success message state
   const [messageSent, setMessageSent] = useState(false) // manage sent message state
   const [isSubmitting, setIsSubmitting] = useState(false)
-
-
 
   useEffect(() => {
     if (localStorage.getItem("gymData")) {
@@ -104,41 +139,49 @@ const AnfrageFormular = ({ data }) => {
   }, [])
 
   return (
-    <Layout>
+    <Layout light={data.wpPage.ACF_Global.lightHeader}>
       <ImageHeader
         image={data.wpPage.featuredImage.node.localFile}
         imagealt={data.wpPage.featuredImage.node.altText}
         title={`${dataLoaded ? "Anfrage " + gymData.title : "Anfrage stellen"}`}
+        light={data.wpPage.ACF_Global.lightHeader}
       />
       {dataLoaded ? (
         <>
-          <button onClick={() => setStep(1)}>Step 1</button>
-          <button onClick={() => setStep(2)}>Step 2</button>
-          <button onClick={() => setStep(3)}>Step 3</button>
           <Formik
+            validateOnChange
             initialValues={{
-              // package: "",
+              dates: "",
               start: "",
               end: "",
               dauer: "",
-              firstName: "",
-              lastName: "",
+              hotel: "",
+              name: "",
+              country: "",
               email: "",
               toggle: "",
+              geburtstag: "",
+              tag: "",
+              monat: "",
+              jahr: "",
+              test: ""
             }}
             onSubmit={async values => {
-              // await new Promise(r => setTimeout(r, 500))
-              // alert(JSON.stringify(values.firstName, null, 2))
               setIsSubmitting(true)
               const bodyFormData = new FormData()
-              bodyFormData.set("firstName", values.firstName)
-              bodyFormData.set("lastName", values.lastName)
+              bodyFormData.set("name", values.name)
               bodyFormData.set("email", values.email)
               bodyFormData.set("toggle", values.toggle)
-              // bodyFormData.set("package", values.package)
-              bodyFormData.set("start", values.start)
+              bodyFormData.set("dates", values.dates)
+              bodyFormData.set("hotel", values.hotel)
               bodyFormData.set("end", values.end)
               bodyFormData.set("dauer", values.dauer)
+              bodyFormData.set("country", values.country)
+              bodyFormData.set("tag", values.tag)
+              bodyFormData.set("monat", values.monat)
+              bodyFormData.set("jahr", values.jahr)
+              bodyFormData.set("plzort", values.plzort)
+              bodyFormData.set("test", values.test)
               axios({
                 method: "post",
                 url: `https://wordpress-332056-1932566.cloudwaysapps.com/wp-json/contact-form-7/v1/contact-forms/418/feedback`,
@@ -165,90 +208,136 @@ const AnfrageFormular = ({ data }) => {
             }}
           >
             {({ setFieldValue, setFieldTouched, values, errors, touched }) => (
-              <Form>
-                {values.start &&
-                  format(new Date(values.start), "dd MMMM yyyy ", {
-                    locale: de,
-                  })}
-                -
-                {values.end &&
-                  format(new Date(values.end), " dd MMMM yyyy", { locale: de })}
-                {values.dauer > 30 ? <span>Ohhh Visa</span> : null}
-                {step === 1 && (
-                  <StepOne>
-                    <StepHeader>
-                      {/* <div id="my-radio-group">package</div> */}
-                    </StepHeader>
-
-                    <Field
-                      component={DatePickerWithFormik}
-                      // name="DatePickerWithFormik"
-                      required
+              console.log(values),
+              (
+                <Form>
+                  <StepFields>
+                    <StepBtn
+                      clicker={() => setStep(1)}
+                      text="Reisedauer"
+                      complete={
+                        JSON.stringify(values.dates.startDate) !=
+                        JSON.stringify(values.dates.endDate)
+                      }
                     />
+                    <StepBtn
+                      clicker={() => setStep(2)}
+                      text="Unterkunft"
+                      complete={values.hotel}
+                    />
+                    <StepBtn
+                      clicker={() => setStep(3)}
+                      text="Persönliche Daten"
+                    />
+                  </StepFields>
+                  <Summary
+                    startdatum={values.dates.startDate}
+                    enddatum={
+                      JSON.stringify(values.dates.startDate) !=
+                        JSON.stringify(values.dates.endDate) &&
+                      values.dates.endDate
+                    }
+                    dauer={values.dauer}
+                    visum={values.toggle}
+                    unterkunft={values.hotel}
+                    name={values.name}
+                    email={values.email}
+                    land={values.country}
+                    stadt={values.plzort}
+                    bdayTag={values.tag}
+                    bdayMonat={values.monat}
+                    bdayJahr={values.jahr}
+                  />
 
-                    
-                  </StepOne>
-                )}
-                {step === 2 && (
-                  <StepTwo>
-                    {/* <AcomWrapper>
-                      {gymData.ACF_Gyms.accommodations.map(acom => {
-                        return (
-                          <AcomCard
-                            key={acom.title}
-                            title={acom.title}
-                            preis={acom.ACF_Accommodations.preis}
-                            image={acom.featuredImage.node.localFile}
-                            description={acom.ACF_Accommodations.description}
-                            amenities={acom.ACF_Accommodations.amenities}
-                            sterne={acom.ACF_Accommodations.sterne}
+                  {step === 1 && (
+                    <StepOne>
+                      <StepHeader></StepHeader>
+
+                      <DateField name="dates" label="datum" />
+                    </StepOne>
+                  )}
+                  {step === 2 && (
+                    <StepTwo>
+                      <AcomWrapper
+                        role="group"
+                        aria-labelledby="my-radio-group"
+                      >
+                        {gymData.ACF_Gyms.accommodations.map(acom => {
+                          return (
+                            <ImgRadio name="hotel" value={acom.title}>
+                              <AcomCard
+                                minimal
+                                key={acom.title}
+                                title={acom.title}
+                                preis={acom.ACF_Accommodations.preis}
+                                image={acom.featuredImage.node.localFile}
+                                sterne={acom.ACF_Accommodations.sterne}
+                              />
+                            </ImgRadio>
+                          )
+                        })}
+                      </AcomWrapper>
+                    </StepTwo>
+                  )}
+                  {step === 3 && (
+                    <StepThree>
+                      <PersonalFields>
+                        {/* <TestField
+                        name="test"
+                          validator={validateName}
+                          valid={touched.name && !errors.name}
+                          error={touched.name && errors.name}
+                        /> */}
+                        <PersonalFieldsRow className="triple">
+                          <InputField
+                            name="name"
+                            label="Name"
+                            type="text"
+                            placeholder="Hans Dampf"
+                            validator={validateName}
+                            valid={touched.name && !errors.name}
+                            error={touched.name && errors.name}
                           />
-                        )
-                      })}
-                    </AcomWrapper> */}
-                    <AcomWrapper role="group" aria-labelledby="my-radio-group">
-                      {gymData.ACF_Gyms.accommodations.map(acom => {
-                        return (
-                          <CustomRadio>
-                            <Field
-                              type="radio"
-                              name="hotel"
-                              value={acom.title}
-                            />
-                            <AcomCard
-                              minimal
-                              key={acom.title}
-                              title={acom.title}
-                              preis={acom.ACF_Accommodations.preis}
-                              image={acom.featuredImage.node.localFile}
-                              sterne={acom.ACF_Accommodations.sterne}
-                            />
-                          </CustomRadio>
-                        )
-                      })}
-                    </AcomWrapper>
-                    
-                  </StepTwo>
-                )}
-                {step === 3 && (
-                  <StepThree>
-                    <label htmlFor="firstName">First Name</label>
-                    <Field id="firstName" name="firstName" placeholder="Jane" />
 
-                    <label htmlFor="lastName">Last Name</label>
-                    <Field id="lastName" name="lastName" placeholder="Doe" />
+                          <InputField
+                            name="email"
+                            label="E-Mail"
+                            type="email"
+                            placeholder="hans@dampf.ch"
+                            validator={validateEmail}
+                            valid={touched.email && !errors.email}
+                            error={touched.email && errors.email}
+                          />
+                        </PersonalFieldsRow>
 
-                    <label htmlFor="email">Email</label>
-                    <Field
-                      id="email"
-                      name="email"
-                      placeholder="jane@acme.com"
-                      type="email"
-                    />
-                    <button type="submit">Submit</button>
-                  </StepThree>
-                )}
-              </Form>
+                        <PersonalFieldsRow>
+                          <SingleDateField />
+                        </PersonalFieldsRow>
+                        <PersonalFieldsRow className="triple">
+                          <SelectField
+                            name="country"
+                            validator={validateCountry}
+                            valid={touched.country && !errors.country}
+                            error={touched.country && errors.country}
+                          />
+
+                          <InputField
+                            name="plzort"
+                            label="PLZ / Ort"
+                            type="text"
+                            placeholder="Zug"
+                            validator={validateName}
+                            valid={touched.name && !errors.name}
+                            error={touched.name && errors.name}
+                          />
+                        </PersonalFieldsRow>
+                      </PersonalFields>
+
+                      <button type="submit">Submit</button>
+                    </StepThree>
+                  )}
+                </Form>
+              )
             )}
           </Formik>
         </>
@@ -290,6 +379,9 @@ export const pageQuery = graphql`
             }
           }
         }
+      }
+      ACF_Global {
+        lightHeader
       }
     }
     allWpDestination {

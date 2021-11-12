@@ -9,6 +9,9 @@ const Wrapper = styled.div`
   height: 75vh;
   box-shadow: 0 0 25px rgba(0, 0, 51, 1);
   margin-bottom: var( --row-mgbtm);
+  display: flex;
+  justify-content: ${props => props.galBtn ? 'space-between' : 'center'};
+  align-items: ${props => props.galBtn ? 'flex-end' : 'center'};
 
   .gatsby-image-wrapper {
     width: 100%;
@@ -77,29 +80,41 @@ const GalerieBtn = styled.button`
 
 const Content = styled.div`
   position: absolute;
-  left: 0;
-  bottom: 5px;
-  padding: 15px;
+  height: 100%;
   width: 100%;
   max-width: 1200px;
   z-index: 9;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 0;
   display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
+  justify-content: ${props => (props.galBtn && !props.noTitle && 'space-between') || (props.galBtn && props.noTitle && 'flex-end') || (!props.galBtn && !props.noTitle && 'center')};
+  align-items: ${props => props.galBtn ? 'flex-end' : 'center'};
+  padding: 15px;
 
   path {
     fill: #fff;
   }
 
   @media (min-width: 1300px) {
-    bottom: 25px;
-    left: 50%;
-    transform: translateX(-50%);
-    align-items: center;
-    padding: 0;
+
   }
 `
-const Title = styled.h1``
+const Title = styled.h1`
+margin-bottom: 0;
+color: ${props => props.light ? '#fff' : 'var(--secondary)'};
+text-shadow:  ${props => props.light ? '4px 4px 1px var(--secondary)' : '2px 2px 1px #fff'};
+font-size: 70px;
+text-align: center;
+
+@media(min-width: 768px) {
+  font-size: 100px;
+}
+
+@media(min-width: 1300px) {
+  font-size: 110px;
+}
+`
 
 
 export default function ImageHeader({
@@ -107,15 +122,18 @@ export default function ImageHeader({
   imageAlt,
   title,
   galBtn,
-  openGal
+  openGal,
+  light,
+  noTitle
 }) {
   const breakpoints = useBreakpoint()
   return (
-    <Wrapper galBtn={galBtn}>
+    <Wrapper galBtn={galBtn} noTitle={noTitle}>
       <GatsbyImage image={getImage(image)} alt={imageAlt} />
 
-      <Content>
-       <Title>{title}</Title>
+      <Content galBtn={galBtn} noTitle={noTitle}>
+        {!noTitle && <Title light={light}>{title}</Title>}
+       
        {galBtn && <GalerieBtn onClick={openGal}>
             <span>Alle Bilder anschauen </span>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 21">

@@ -25,7 +25,7 @@ export default function Home({ data }) {
   }, [])
 
   return (
-    <Layout>
+    <Layout light={data.wpPage.ACF_Global.lightHeader}>
       <SEO title="home" />
       <Hero />
       <Row>
@@ -93,6 +93,7 @@ export default function Home({ data }) {
         withPadding
         bgImage={data.wpPage.ACF_Home.mapRowBg.localFile}
         bgImageAlt="dsfsdfsdf"
+        overlay
       >
         {typeof window !== "undefined" && (
           <Suspense fallback={<div>Loading..</div>}>
@@ -143,6 +144,9 @@ export const pageQuery = graphql`
             }
           }
         }
+      }
+      ACF_Global {
+        lightHeader
       }
     }
     allWpDestination {

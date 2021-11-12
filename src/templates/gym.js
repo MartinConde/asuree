@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import loadable from '@loadable/component'
+import loadable from "@loadable/component"
 import styled from "styled-components"
 import parse from "html-react-parser"
 import FsLightbox from "fslightbox-react"
@@ -11,8 +11,9 @@ import SEO from "../components/seo"
 import Hero from "../components/DetailPages/hero"
 // import GMap from "../components/DetailPages/gmap"
 import AcomCard from "../components/DetailPages/acomCard"
+import Button from "../components/Blocks/button"
 
-const GymMap = loadable(() => import('../components/DetailPages/gmap'))
+const GymMap = loadable(() => import("../components/DetailPages/gmap"))
 
 const MainContentWrapper = styled.div`
   width: 100%;
@@ -38,13 +39,13 @@ const Main = styled.div`
 `
 
 const Section = styled.div`
-  margin-top: ${props => props.firstSec ? "0" : "30px"};
+  margin-top: ${props => (props.firstSec ? "0" : "30px")};
   padding: 20px 20px 65px 20px;
   border-bottom: 1px solid #ddd7d7;
 
   @media (min-width: 1300px) {
-    margin-top: ${props => props.firstSec ? "0" : "105px"};
-    padding: 20px 20px 125px 20px;
+    margin-top: ${props => (props.firstSec ? "0" : "50px")};
+    padding: 20px 20px 75px 20px;
   }
 `
 
@@ -53,8 +54,8 @@ const SideBar = styled.div`
     width: 28%;
     position: -webkit-sticky;
     position: sticky;
-    top: 100px;
-    margin-top: 105px;
+    top: 125px;
+    margin-top: 40px;
     left: 0;
     height: 100%;
     padding-left: 80px;
@@ -64,8 +65,22 @@ const SideBar = styled.div`
 const SideBarContent = styled.div`
   width: 100%;
   border: 1px solid #6f6f6f;
-  padding: 20px;
   text-align: center;
+
+  h3 {
+    padding: 20px;
+    margin: 0;
+  }
+
+  p {
+    padding: 0 20px 25px 20px;
+    margin: 0;
+  }
+
+  a {
+    width: 100%;
+    text-transform: uppercase;
+  }
 `
 
 const AcomWrapper = styled.div`
@@ -103,7 +118,6 @@ const GalleryItem = styled.div`
 export default function GymTemplate({ data }) {
   const gym = data.allWpGym.edges[0].node
 
- 
   const [lightboxController, setLightboxController] = useState({
     toggler: false,
     slide: 1,
@@ -117,14 +131,11 @@ export default function GymTemplate({ data }) {
   }
 
   useEffect(() => {
-    localStorage.setItem(
-      "gymData",
-      JSON.stringify(gym)
-    )
+    localStorage.setItem("gymData", JSON.stringify(gym))
   }, [data])
 
   return (
-    <Layout light>
+    <Layout light={gym.ACF_Global.lightHeader}>
       <SEO title="home" />
 
       <Hero
@@ -162,7 +173,9 @@ export default function GymTemplate({ data }) {
               latitude={gym.ACF_Gyms.location.latitude}
               longitude={gym.ACF_Gyms.location.longitude}
             />
-            <Link to={`/destination/${gym.ACF_Gyms.destinations[0].slug}`}>Alle Gyms dieser Provinz anschauen</Link>
+            <Link to={`/destination/${gym.ACF_Gyms.destinations[0].slug}`}>
+              Alle Gyms dieser Provinz anschauen
+            </Link>
           </Section>
           <Section>
             <h2>Unterkünfte</h2>
@@ -191,21 +204,35 @@ export default function GymTemplate({ data }) {
         <SideBar>
           <SideBarContent>
             <h3>
-              Ab CHF 420<small>pro Woche</small>
+              Ab CHF 420 <small>pro Woche</small>
             </h3>
-            <Link to='/anfrage'>
-              Jetzt buchen
-            </Link>
-            <p>sfsfgdfgfdgdfgdgf</p>
-            <p>sfsfgdfgfdgdfgdgf</p>
+            <p>
+              We are created to serve a singular purpose, for which we will go
+              to any lengths to fulfill!
+            </p>
+            <Button url="/anfrage" text="Jetzt buchen" />
           </SideBarContent>
         </SideBar>
       </MainContentWrapper>
       <FsLightbox
         toggler={lightboxController.toggler}
         sources={gym.ACF_Gyms.gallery.map((gym, i) => (
-          <div className="galFull" key={i} style={{ width: '100vw', height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <GatsbyImage image={getImage(gym.localFile)} alt="dsdfsfd" style={{ width: '100%'}}/>
+          <div
+            className="galFull"
+            key={i}
+            style={{
+              width: "100vw",
+              height: "100vh",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <GatsbyImage
+              image={getImage(gym.localFile)}
+              alt="dsdfsfd"
+              style={{ width: "100%" }}
+            />
           </div>
         ))}
         slide={lightboxController.slide}

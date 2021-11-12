@@ -16,7 +16,7 @@ const IntroWrapper = styled.div`
 
 const IntroTitle = styled.h2``
 
-const IntroContent = styled.p``
+const IntroContent = styled.div``
 
 export default function IntroText({title, content}) {
   return (

@@ -30,12 +30,13 @@ export default function Destinations({ data }) {
 
   
   return (
-    <Layout>
+    <Layout light={data.wpPage.ACF_Global.lightHeader}>
       <SEO title="home" />
       <ImageHeader
         image={data.wpPage.featuredImage.node.localFile}
         imagealt={data.wpPage.featuredImage.node.altText}
         title={data.wpPage.title}
+        light={data.wpPage.ACF_Global.lightHeader}
       />
 
       <Row>
@@ -75,6 +76,9 @@ export const pageQuery = graphql`
       ACF_DestPage {
         introTitle
         introContent
+      }
+      ACF_Global {
+        lightHeader
       }
     }
     allWpDestination(sort: {order: ASC, fields: title}) {

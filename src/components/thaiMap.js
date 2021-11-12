@@ -1,6 +1,9 @@
-import React, { useState } from "react"
+import React, { useState, useEffect, useRef } from "react"
 import styled from "styled-components"
 import parse from "html-react-parser"
+import { Splide, SplideSlide } from "@splidejs/react-splide"
+import "@splidejs/splide/dist/css/splide.min.css"
+import { URLHash } from "@splidejs/splide-extension-url-hash"
 import { useBreakpoint } from "gatsby-plugin-breakpoints"
 import {
   ComposableMap,
@@ -34,13 +37,21 @@ const MapWrapper = styled.div`
   justify-content: center;
   opacity: 0.5;
 
-  @media (min-width: 1200px) {
-    margin: -17vh 0;
+  @media(min-width: 1200px) {
+    margin: -16vh 0;
     position: relative;
     width: auto;
     height: auto;
     opacity: 1;
     z-index: 9;
+  }
+
+   @media(min-width: 1500px) {
+    margin: -28vh 0;
+  }
+
+  @media (min-width: 2200px) {
+    margin: -21vh 0;
   }
 
   path {
@@ -51,7 +62,20 @@ const MapWrapper = styled.div`
 
   .rsm-annotation path {
     fill: none;
+    stroke: var(--primary) !important;
+  }
+
+  .rsm-annotation text {
+    fill: var(--primary) !important;
+  }
+
+  .current.rsm-annotation path {
+    fill: none;
     stroke: var(--tertiary) !important;
+  }
+
+  .current.rsm-annotation text {
+    fill: var(--tertiary) !important;
   }
 
   .rsm-annotation:hover {
@@ -74,6 +98,8 @@ const MapWrapper = styled.div`
   .current {
     fill: var(--tertiary) !important;
   }
+
+  
 `
 
 const DestWrapper = styled.div`
@@ -93,9 +119,19 @@ const DestWrapper = styled.div`
   h2 {
     color: #fff;
 
-    @media (min-width: 1200px) {
-      margin-left: -11vw;
+    @media(min-width: 1200px) {
+      margin-left: -13vw;
+      margin-top: -6vh;
       color: var(--secondary);
+    }
+
+    @media (min-width: 1500px) {
+      margin-top: -7vh;
+      margin-top: -3vh;
+    }
+
+    @media (min-width: 2200px) {
+      margin-left: -10vw;
     }
   }
 
@@ -134,15 +170,6 @@ const ThaiMap = () => {
 
   const [location, setLocation] = useState("Bangkok")
 
-  // const GymMarkers = mapsdata.allWpGym.edges.map(
-  //   ({ node }) => node.ACF_Gyms.location
-  // )
-
-  // const filteredGymMarkers = Array.from(
-  //   GymMarkers.reduce((m, o) => m.set(o.state, o), new Map()).values()
-  // )
-
-  // Get all destinations and filter out the ones that have gyms
   const destins = mapsdata.allWpDestination.edges.map(({ node }) => node)
 
   const bigCities = destins.filter(function (e) {
@@ -156,9 +183,57 @@ const ThaiMap = () => {
     return e.title === location
   })
 
+  const ref = useRef(null)
+
+  useEffect(() => {
+    if (ref.current) {
+      const current = ref.current.splide.Components.Slides.filter(
+        `[data-splide-hash="${selectedDest[0].slug}"]`
+      )
+      ref.current.splide.on("mounted", function () {
+        ref.current.splide.go(current[0].index)
+      })
+    }
+  }, [])
+
+  useEffect(() => {
+    if (ref.current) {
+      const current = ref.current.splide.Components.Slides.filter(
+        `[data-splide-hash="${selectedDest[0].slug}"]`
+      )
+      ref.current.splide.go(current[0].index)
+    }
+  }, [location])
+
+  // const GymMarkers = mapsdata.allWpGym.edges.map(
+  //   ({ node }) => node.ACF_Gyms.location
+  // )
+
+  // const filteredGymMarkers = Array.from(
+  //   GymMarkers.reduce((m, o) => m.set(o.state, o), new Map()).values()
+  // )
+
+  // Get all destinations and filter out the ones that have gyms
+
+  console.log(location)
+
+  function clikertest(e) {
+    if (ref.current) {
+      ref.current.splide.go(">")
+    }
+  }
+
   return (
     <Container>
       <MapWrapper>
+        {/* <div>
+        {
+          (breakpoints.xxs && 'xxs') ||
+          (breakpoints.xs && 'xs') ||
+          (breakpoints.l && 'l') ||
+          (!breakpoints.l && 'not l')
+        }
+        </div> */}
         <ComposableMap
           projection="geoAlbers"
           projectionConfig={{
@@ -170,19 +245,20 @@ const ThaiMap = () => {
           width={
             (breakpoints.xxs && 450) ||
             (breakpoints.xs && 450) ||
-            (breakpoints.l && 250) ||
-            (!breakpoints.l && 200)
+            (breakpoints.l && 500) ||
+            (!breakpoints.l && 100)
           }
           height={
             (breakpoints.xxs && 800) ||
             (breakpoints.xs && 1100) ||
-            (breakpoints.l && 1125) ||
-            (!breakpoints.l && 900)
+            (breakpoints.l && 825) ||
+            (!breakpoints.l && 1100)
           }
           style={{
             width:
-              (breakpoints.xxs && "300") ||
-              (breakpoints.xs && "400") ||
+              (breakpoints.xxs && "300px") ||
+              (breakpoints.xs && "400px") ||
+              (breakpoints.l && "400px") ||
               (!breakpoints.l && "600px"),
             height: "auto",
             maxHeight: "1200px",
@@ -238,6 +314,9 @@ const ThaiMap = () => {
             {!breakpoints.l &&
               bigCities.map(gymMarker => (
                 <Annotation
+                className={
+                  gymMarker.ACF_Destinations.location.state === location && "current"
+                }
                   onClick={() => {
                     setLocation(gymMarker.ACF_Destinations.location.state)
                   }}
@@ -249,7 +328,7 @@ const ThaiMap = () => {
                   dy={10}
                   curve={-0.2}
                   connectorProps={{
-                    stroke: "#FF5533",
+                    stroke: "var(--primary)",
                     strokeWidth: 3,
                     strokeLinecap: "round",
                     fill: "rgba(0,0,0,0) !important",
@@ -260,7 +339,7 @@ const ThaiMap = () => {
                     x="8"
                     textAnchor="start"
                     alignmentBaseline="middle"
-                    fill="#F53"
+                    fill="var(--primary)"
                   >
                     {gymMarker.ACF_Destinations.location.state}
                   </text>
@@ -272,7 +351,7 @@ const ThaiMap = () => {
 
       <DestWrapper>
         <h2>Provinzen</h2>
-        {location ? (
+        {/* {location ? (
           selectedDest.map(selected => (
             <div key={selected.title}>
               <div>
@@ -291,7 +370,38 @@ const ThaiMap = () => {
           ))
         ) : (
           <p>Wähle wat auf der Karte aus</p>
-        )}
+        )} */}
+
+        <Splide
+          ref={ref}
+          Extensions={{ URLHash }}
+          options={{
+            type: "fade",
+            speed: 1000,
+            width: 800,
+            arrows: false,
+            pagination: false,
+          }}
+        >
+          {bigCities.map(destination => {
+            return (
+              <SplideSlide
+                key={destination.title}
+                data-splide-hash={destination.slug}
+              >
+                <h3>
+                  {destination.title}
+                  {/* <small>{destination.ACF_Destinations.gyms.length} gyms</small> */}
+                </h3>
+                {parse(destination.ACF_Destinations.shortDescription)}
+                <Button
+                  url={`/destination/${destination.slug}#gyms`}
+                  text={`Zu allen gyms in ${destination.title}`}
+                />
+              </SplideSlide>
+            )
+          })}
+        </Splide>
       </DestWrapper>
     </Container>
   )

@@ -51,7 +51,7 @@ const Info = styled.p`
   font-weight: bold;
 `
 
-const Excerpt = styled.p`
+const Excerpt = styled.div`
   margin-top: 15px;
 `
 

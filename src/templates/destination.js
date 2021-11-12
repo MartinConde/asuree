@@ -45,8 +45,8 @@ const Section = styled.div`
   border-bottom: 1px solid #ddd7d7;
 
   @media (min-width: 1300px) {
-    margin-top: ${props => (props.firstSec ? "0" : "105px")};
-    padding: 20px 20px 125px 20px;
+    margin-top: ${props => (props.firstSec ? "0" : "50px")};
+    padding: 20px 20px 75px 20px;
   }
 `
 
@@ -96,7 +96,7 @@ export default function DestinationTemplate({ data }) {
   }
 
   return (
-    <Layout light>
+    <Layout light={dest.ACF_Global.lightHeader}>
       <SEO title="home" />
       <ImageHeader
         image={dest.featuredImage.node.localFile}
@@ -104,6 +104,8 @@ export default function DestinationTemplate({ data }) {
         title={dest.title}
         galBtn
         openGal={() => openLightboxOnSlide(1)}
+        light={dest.ACF_Global.lightHeader}
+        noTitle
       />
       <MainContentWrapper>
         <Main>

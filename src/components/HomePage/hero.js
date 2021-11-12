@@ -94,7 +94,7 @@ const MainTitle = styled.h1`
     }
   }
 `
-const IntroText = styled.p`
+const IntroText = styled.div`
   font-size: 18px;
   font-family: "Oswald Bold";
   line-height: 1.5;

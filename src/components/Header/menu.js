@@ -5,7 +5,11 @@ import { useBreakpoint } from 'gatsby-plugin-breakpoints';
 import MenuToggle from "./menuToggle"
 
 const MenuContainer = styled.div`
+justify-self: end;
 
+@media(min-width:1200px) {
+    justify-self: center;
+}
 `
 
 const MenuWrapper = styled.nav`
@@ -203,6 +207,8 @@ const MenuLink = styled(Link)`
     @media(min-width: 1200px) {
         font-size: 22px;
         color:  ${props => props.light ? "#fff" : "var(--secondary)"};
+        text-shadow:  ${props => props.light ? '2px 2px 1px var(--secondary)' : '1px 1px 1px #fff'};
+        text-transform: uppercase;
     }
 `
 

@@ -16,6 +16,17 @@ const BgRowBg = styled.div`
   height: 100%;
   z-index: -1;
 
+  &::after {
+    content: ${props => props.overlay ? "''" : "none"};
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--secondary);
+    opacity: .65;
+  }
+
   .gatsby-image-wrapper {
     width: 100%;
     height: 100%;
@@ -54,6 +65,7 @@ export default function BgRow({
   overShoot,
   bgImage,
   bgImageAlt,
+  overlay
 }) {
   return (
     <BgRowWrapper overShoot={overShoot}>
@@ -68,7 +80,7 @@ export default function BgRow({
       <BgRowContent fullWidth={fullWidth} withPadding={withPadding}>
         {children}
       </BgRowContent>
-      <BgRowBg>
+      <BgRowBg overlay={overlay}>
         <GatsbyImage image={getImage(bgImage)} alt={bgImageAlt} />
       </BgRowBg>
       <BgSepBtm>
