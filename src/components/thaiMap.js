@@ -215,25 +215,13 @@ const ThaiMap = () => {
 
   // Get all destinations and filter out the ones that have gyms
 
-  console.log(location)
-
-  function clikertest(e) {
-    if (ref.current) {
-      ref.current.splide.go(">")
-    }
-  }
+  const handleFilter = ({ constructor: { name } }) => {
+    return name !== "MouseEvent";
+  };
 
   return (
     <Container>
       <MapWrapper>
-        {/* <div>
-        {
-          (breakpoints.xxs && 'xxs') ||
-          (breakpoints.xs && 'xs') ||
-          (breakpoints.l && 'l') ||
-          (!breakpoints.l && 'not l')
-        }
-        </div> */}
         <ComposableMap
           projection="geoAlbers"
           projectionConfig={{
@@ -265,6 +253,7 @@ const ThaiMap = () => {
           }}
         >
           <ZoomableGroup
+          filterZoomEvent={handleFilter}
             center={[0, 0]}
             // translateExtent={[
             //   [0, -0],
