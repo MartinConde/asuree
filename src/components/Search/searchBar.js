@@ -66,6 +66,7 @@ const SearchButton = styled(Link)`
   &:hover {
     /* background: var(--primary); */
     background-position: 258%;
+    color: #fff;
   }
 
   &:hover svg {

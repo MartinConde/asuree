@@ -29,6 +29,7 @@ export const GymFragment = graphql`
       level
       owner
       starred
+      price
       location {
         city
         country

@@ -56,7 +56,7 @@ const CardTitle = styled.div`
   }
 
   h3 {
-    margin-bottom: 0;
+    margin-bottom: 0; 
     margin-right: 10px;
   }
 

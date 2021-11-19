@@ -54,7 +54,7 @@ const BgSepBtm = styled.div`
   transform: scaleY(-1);
   .gatsby-image-wrapper {
     width: 100vw;
-    margin-top: -1px;
+    margin-bottom: -2px;
   }
 `
 

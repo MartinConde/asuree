@@ -5,7 +5,7 @@ const IconBoxWrapper = styled.div`
   text-align: center;
   width: 50%;
   color: #fff;
-  padding: 20px;
+  padding: 10px;
 
   @media(min-width:1200px) {
     width: 25%;
@@ -34,6 +34,7 @@ const Icon = styled.div`
 
   svg {
     height: 35px;
+    fill: var(--secondary);
   }
 
   @media(min-width:1200px) {
@@ -45,7 +46,10 @@ const Icon = styled.div`
   }
 `
 
-const IconBoxTitle = styled.h3``
+const IconBoxTitle = styled.h3`
+margin-top: 15px;
+margin-bottom: 10px;
+`
 
 const IconBoxContent = styled.div``
 

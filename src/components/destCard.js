@@ -99,7 +99,7 @@ export default function DestCard({ dest, thirds }) {
       </CardContent>
       <Button
         url={`/destination/${dest.slug}`}
-        text="Jetzt informieren und buchen"
+        text="Weitere Infos zu dieser Region"
       />
     </Card>
   )

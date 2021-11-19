@@ -65,10 +65,10 @@ const SideBar = styled.div`
 const SideBarContent = styled.div`
   width: 100%;
   border: 1px solid #6f6f6f;
-  text-align: center;
+  text-align: left;
 
   h3 {
-    padding: 20px;
+    padding: 20px 20px 0 20px;
     margin: 0;
   }
 
@@ -77,9 +77,17 @@ const SideBarContent = styled.div`
     margin: 0;
   }
 
-  a {
+ > a {
     width: 100%;
     text-transform: uppercase;
+  }
+
+  .priceInfo {
+    display: block;
+    /* padding: 0 20px 20px 20px; */
+    color: var(--light-text);
+    font-size: 15px;
+    text-align: left;
   }
 `
 
@@ -139,8 +147,8 @@ export default function GymTemplate({ data }) {
       <SEO title="home" />
 
       <Hero
-      light={gym.ACF_Global.lightHeader}
-      title={gym.title}
+        light={gym.ACF_Global.lightHeader}
+        title={gym.title}
         image={gym.featuredImage.node.localFile}
         imageAlt={gym.title}
         location={gym.ACF_Gyms.destinations.map(
@@ -206,12 +214,21 @@ export default function GymTemplate({ data }) {
         <SideBar>
           <SideBarContent>
             <h3>
-              Ab CHF 420 <small>pro Woche</small>
+              Ab CHF{" "}
+              {Number(gym.ACF_Gyms.price) +
+                Number(
+                  gym.ACF_Gyms.accommodations[0].ACF_Accommodations.preis
+                )}{" "}
+              <small>pro Woche</small>
             </h3>
-            <p>
-              We are created to serve a singular purpose, for which we will go
-              to any lengths to fulfill!
-            </p>
+            <div className="priceInfo">
+              <p>Inklusive Unterkunft</p>
+              <p>
+                Preise sind halt richtwerte je nach Saison und so. Ausserdem
+                wirds natürlich n ticken günstiger je nachdem wie lange du
+                bleibst. Wie sich die Kosten zusammensetzen siehste hier in der <Link to="#">Preistabelle</Link>.
+              </p>
+            </div>
             <Button url="/anfrage" text="Jetzt buchen" />
           </SideBarContent>
         </SideBar>
