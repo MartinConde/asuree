@@ -6,7 +6,7 @@ import { useBreakpoint } from "gatsby-plugin-breakpoints"
 const Wrapper = styled.div`
   position: relative;
   width: 100%;
-  height: 75vh;
+  height: 55vh;
   box-shadow: 0 0 25px rgba(0, 0, 51, 1);
   margin-bottom: var( --row-mgbtm);
   display: flex;
@@ -15,7 +15,7 @@ const Wrapper = styled.div`
 
   .gatsby-image-wrapper {
     width: 100%;
-    height: 75vh;
+    height: 55vh;
   }
 
   &::after {

@@ -239,7 +239,7 @@ const Menu = ({light}) => {
 
     return (
         <MenuContainer>
-            {breakpoints.l && <MenuToggle clickHandler={() => setOpen(!open)} open={open} />}
+            {breakpoints.l && <MenuToggle clickHandler={() => setOpen(!open)} open={open} light={light}/>}
             
                 <MenuWrapper className={`${breakpoints.l && open === true ? "mob-nav-open" : "mob-nav-closed"}`} role="navigation">
                     {breakpoints.l && open &&
