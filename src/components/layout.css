@@ -3,6 +3,7 @@
 :root {
   --primary: #0CB2F7;
   --secondary: #000033;
+  --secondary-trans: rgba(0, 0, 51, 0.4);
   --tertiary: yellow;
   --row-mgbtm: 40px;
   --row-pd: 100px;

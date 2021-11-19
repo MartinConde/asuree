@@ -38,7 +38,9 @@ const Icon = styled.div`
 
   @media(min-width:1200px) {
     svg {
-      height: 50px;
+      height: 80px;
+      max-width: 80px;
+      max-height: 70px;
     }
   }
 `

@@ -84,10 +84,13 @@ const CardAmneties = styled.div`
   div {
     width: 50%;
     margin-top: 10px;
+    display: flex;
   }
   svg {
     height: 20px;
+    min-width: 20px;
     margin-right: 5px;
+    margin-top: 3px;
   }
 
   @media(min-width: 1024px) {

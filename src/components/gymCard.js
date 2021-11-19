@@ -5,12 +5,13 @@ import styled from "styled-components"
 import Button from "./Blocks/button"
 
 const Card = styled.div`
-  background: #eee;
+  background: #fff;
   width: 100%;
   margin: 10px;
   color: var(--secondary);
   display: flex;
   flex-direction: column;
+  box-shadow: 0 5px 15px var(--secondary-trans);
 
   @media (min-width: 768px) {
     width: calc(50% - 20px);
@@ -29,16 +30,31 @@ const Card = styled.div`
 
   .gatsby-image-wrapper {
     width: 100% !important;
+    height: 250px !important;
+  }
+
+  .gatsby-image-wrapper::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(180deg, rgba(255,255,255,0) 65%, rgba(255,255,255,1) 100%);
   }
   img {
     width: 100%;
-    height: 300px;
+    height: 250px;
     object-fit: cover;
   }
 `
 
 const CardContent = styled.div`
-  padding: 15px;
+  padding: 15px 20px;
+
+  @media(min-width: 1200px) {
+    padding: 15px 30px;
+  }
 `
 
 const Title = styled.h3`

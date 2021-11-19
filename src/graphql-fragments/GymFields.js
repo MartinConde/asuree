@@ -18,7 +18,7 @@ export const GymFragment = graphql`
       node {
         localFile {
           childImageSharp {
-            gatsbyImageData(layout: FIXED, width: 300, height: 300 )
+            gatsbyImageData(layout: FIXED, width: 300, height: 225 )
           }
         }
       }

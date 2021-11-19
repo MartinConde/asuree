@@ -38,7 +38,10 @@ const SearchWrapper = styled.div`
 `
 
 const SearchButton = styled(Link)`
-  background: var(--secondary);
+  /* background: var(--secondary); */
+  background-image: linear-gradient(to right, var(--secondary) 30%, var(--primary)  71%, var(--secondary)  100%);
+  background-size: 200% auto;
+  box-shadow: 0 2px 10px var(--secondary);
   color: #fff;
   height: 70px;
   display: flex;
@@ -61,7 +64,8 @@ const SearchButton = styled(Link)`
   }
 
   &:hover {
-    background: var(--primary);
+    /* background: var(--primary); */
+    background-position: 258%;
   }
 
   &:hover svg {

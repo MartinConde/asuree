@@ -4,7 +4,10 @@ import { Link } from "gatsby"
 
 
 const IconButton = styled(Link)`
-  background: var(--secondary);
+  /* background: var(--secondary); */
+  background-image: linear-gradient(to right, var(--secondary) 30%, var(--primary)  71%, var(--secondary)  100%);
+  background-size: 200% auto;
+  box-shadow: 0 2px 10px var(--secondary);
   color: #fff;
   height: 70px;
   display: inline-flex;
@@ -13,7 +16,7 @@ const IconButton = styled(Link)`
   padding: 15px 30px;
   text-align: center;
   width: auto;
-  transition: .3s all ease-out;
+  transition: .5s all ease-out;
 
   > div {
     display: flex;
@@ -27,7 +30,8 @@ const IconButton = styled(Link)`
   }
 
   &:hover {
-    background: var(--primary);
+    /* background: var(--primary); */
+    background-position: 258%;
   }
 
   &:hover svg {
@@ -57,3 +61,24 @@ export default function Button({ text, url }) {
         </IconButton>
     )
 }
+
+
+// .btn-grad {}
+// .btn-grad {
+//    margin: 10px;
+//    padding: 15px 45px;
+//    text-align: center;
+//    text-transform: uppercase;
+//    transition: 0.5s;
+//    background-size: 200% auto;
+//    color: white;            
+//    box-shadow: 0 0 20px #eee;
+//    border-radius: 10px;
+//    display: block;
+//  }
+
+//  .btn-grad:hover {
+//    background-position: right center; /* change the direction of the change here */
+//    color: #fff;
+//    text-decoration: none;
+//  }
