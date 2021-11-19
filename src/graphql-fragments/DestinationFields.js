@@ -31,6 +31,8 @@ export const DestinationFragment = graphql`
         streetNumber
         zoom
       }
+      slogan
+      sloganMain
       description
       shortDescription
       galpreview: gallery {

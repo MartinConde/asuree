@@ -110,7 +110,7 @@ export default function DestinationTemplate({ data }) {
       <MainContentWrapper>
         <Main>
           <Section firstSec>
-            <h1>{dest.title}</h1>
+            <h1>{dest.title} - {dest.ACF_Destinations.sloganMain}</h1>
             {parse(dest.ACF_Destinations.description)}
             <GalleryWrapper>
               {dest.ACF_Destinations.galpreview

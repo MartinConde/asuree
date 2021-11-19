@@ -278,6 +278,7 @@ textarea {
   box-sizing: inherit;
 }
 h2 {
+  text-transform: uppercase;
   margin-left: 0;
   margin-right: 0;
   margin-top: 0;

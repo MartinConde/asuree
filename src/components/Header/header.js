@@ -17,12 +17,12 @@ const HeaderWrapper = styled.header`
     box-shadow: 8px 0 50px rgba(0, 0, 51, 0.5);
   }
 
-  svg {
+  a svg {
     height: 50px;
   }
 
   @media (min-width: 1200px) {
-    svg {
+    a svg {
       height: 65px;
     }
 

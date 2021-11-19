@@ -139,6 +139,8 @@ export default function GymTemplate({ data }) {
       <SEO title="home" />
 
       <Hero
+      light={gym.ACF_Global.lightHeader}
+      title={gym.title}
         image={gym.featuredImage.node.localFile}
         imageAlt={gym.title}
         location={gym.ACF_Gyms.destinations.map(
@@ -152,7 +154,7 @@ export default function GymTemplate({ data }) {
       <MainContentWrapper>
         <Main>
           <Section firstSec>
-            <h1>{gym.title}</h1>
+            <h2>{gym.ACF_Gyms.name}</h2>
             {parse(gym.ACF_Gyms.description)}
             <GalleryWrapper>
               {gym.ACF_Gyms.galpreview.slice(0, 5).map((gym, i) => (
@@ -167,7 +169,7 @@ export default function GymTemplate({ data }) {
           </Section>
 
           <Section>
-            <h2>Location</h2>
+            <h3>Location</h3>
             {gym.ACF_Gyms.location.streetAddress}
             <GymMap
               latitude={gym.ACF_Gyms.location.latitude}
@@ -178,7 +180,7 @@ export default function GymTemplate({ data }) {
             </Link>
           </Section>
           <Section>
-            <h2>Unterkünfte</h2>
+            <h3>Unterkünfte</h3>
             <AcomWrapper>
               {gym.ACF_Gyms.accommodations.map(acom => {
                 return (
@@ -196,9 +198,9 @@ export default function GymTemplate({ data }) {
             </AcomWrapper>
           </Section>
 
-          <h1>Training</h1>
+          <h3>Training</h3>
 
-          <h1>Reviews</h1>
+          <h3>Reviews</h3>
         </Main>
 
         <SideBar>

@@ -8,7 +8,7 @@ const Wrapper = styled.div`
   width: 100%;
   height: 75vh;
   box-shadow: 0 0 25px rgba(0, 0, 51, 1);
-  margin-bottom: var( --row-mgbtm);
+  margin-bottom: var(--row-mgbtm);
 
   .gatsby-image-wrapper {
     width: 100%;
@@ -115,13 +115,33 @@ const GalerieBtn = styled.button`
     background: rgba(12, 178, 247, 1);
   }
 
-  @media(min-width: 1300px) {
+  @media (min-width: 1300px) {
     padding: 8px 26px;
 
     svg {
       margin-left: 15px;
     }
   }
+`
+
+const Title = styled.h1`
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%,-50%);
+margin-bottom: 0;
+color: ${props => props.light ? '#fff' : 'var(--secondary)'};
+text-shadow:  ${props => props.light ? '4px 4px 1px var(--secondary)' : '2px 2px 1px #fff'};
+font-size: 70px;
+text-align: center;
+
+@media(min-width: 768px) {
+  font-size: 100px;
+}
+
+@media(min-width: 1300px) {
+  font-size: 110px;
+}
 `
 
 export default function Hero({
@@ -131,13 +151,16 @@ export default function Hero({
   level,
   owner,
   openGal,
+  title,
+  light
 }) {
   const breakpoints = useBreakpoint()
   return (
     <Wrapper>
       <GatsbyImage image={getImage(image)} alt={imageAlt} />
-
+      <Title light={light}>{title}</Title>
       <Content>
+      
         <Bar>
           <BarItem>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
