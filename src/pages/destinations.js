@@ -14,6 +14,10 @@ const CardsWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
+  @media(min-width: 1200px) {
+    margin-left: -8px;
+    margin-right: -12px;
+  }
 `
 
 const NoResults = styled.div`

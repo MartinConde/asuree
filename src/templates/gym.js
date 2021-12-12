@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react"
-import loadable from "@loadable/component"
 import styled from "styled-components"
 import parse from "html-react-parser"
 import FsLightbox from "fslightbox-react"
@@ -8,12 +7,16 @@ import { Link, graphql } from "gatsby"
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import Hero from "../components/DetailPages/hero"
-// import GMap from "../components/DetailPages/gmap"
+import GMap from "../components/DetailPages/gmap"
 import AcomCard from "../components/DetailPages/acomCard"
 import Button from "../components/Blocks/button"
-
-const GymMap = loadable(() => import("../components/DetailPages/gmap"))
+import {
+  Link as SmoothLink,
+  animateScroll as scroll,
+  scrollSpy,
+  scroller,
+} from "react-scroll"
+import ImageHeader from "../components/ImageHeader"
 
 const MainContentWrapper = styled.div`
   width: 100%;
@@ -54,11 +57,41 @@ const SideBar = styled.div`
     width: 28%;
     position: -webkit-sticky;
     position: sticky;
-    top: 125px;
+    top: 150px;
     margin-top: 40px;
     left: 0;
     height: 100%;
     padding-left: 80px;
+  }
+
+  @media (max-width: 1299px) {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #fff;
+    z-index: 9;
+    transition: 0.3s all ease-out;
+
+    &.closed {
+      transform: translateY(75px);
+
+      a {
+        height: 48px;
+      }
+
+      .priceDetails {
+        opacity: 0;
+      }
+    }
+
+    &.open {
+      transform: translateY(0);
+    }
+
+    .smallMap {
+      display: none;
+    }
   }
 `
 
@@ -67,19 +100,16 @@ const SideBarContent = styled.div`
   border: 1px solid #6f6f6f;
   text-align: left;
 
-  h3 {
-    padding: 20px 20px 0 20px;
-    margin: 0;
-  }
-
-  p {
+  .priceInfo p {
     padding: 0 20px 25px 20px;
     margin: 0;
   }
 
- > a {
+  > a {
     width: 100%;
     text-transform: uppercase;
+    transform-origin: center center;
+    transition: 0.3s all ease-out;
   }
 
   .priceInfo {
@@ -88,6 +118,48 @@ const SideBarContent = styled.div`
     color: var(--light-text);
     font-size: 15px;
     text-align: left;
+  }
+
+  @media (max-width: 1299px) {
+    display: flex;
+    align-items: flex-start;
+    width: 100%;
+    border: none;
+    border-top: 1px solid var(--secondary);
+
+    a {
+      width: 40%;
+      height: 122px;
+
+      svg {
+        display: none;
+      }
+    }
+    .priceInfo {
+      display: none;
+    }
+  }
+`
+
+const SideBarTop = styled.div`
+  padding: 15px;
+  h3 {
+    margin: 0;
+  }
+
+  .priceDetails {
+    color: var(--light-text);
+    font-size: 15px;
+    text-align: left;
+
+    p {
+      margin-bottom: 5px;
+    }
+  }
+
+  @media (max-width: 1299px) {
+    width: 60%;
+    padding: 10px;
   }
 `
 
@@ -104,7 +176,6 @@ const GalleryWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  /* background: #eee; */
   flex-wrap: wrap;
   gap: 12px;
 `
@@ -123,8 +194,46 @@ const GalleryItem = styled.div`
   }
 `
 
+const HashWrapper = styled.div`
+  background: var(--secondary);
+  display: flex;
+  justify-content: center;
+  margin-top: -40px;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 102px;
+  z-index: 9;
+  margin-bottom: 50px;
+  border-top: 1px solid #fff;
+
+  @media (min-width: 1200px) {
+    margin-top: -100px;
+    top: 85px;
+  }
+`
+
+const StyledHashLink = styled(SmoothLink)`
+  padding: 5px 10px;
+  margin: 2px 5px;
+  text-transform: uppercase;
+  font-size: 17px;
+  color: #fff;
+
+  &.active,
+  &:hover {
+    color: var(--primary);
+    cursor: pointer;
+  }
+
+  @media (min-width: 1200px) {
+    font-size: 22px;
+  }
+`
+
 export default function GymTemplate({ data }) {
   const gym = data.allWpGym.edges[0].node
+
+  const [open, setOpen] = useState(false)
 
   const [lightboxController, setLightboxController] = useState({
     toggler: false,
@@ -146,26 +255,62 @@ export default function GymTemplate({ data }) {
     <Layout light={gym.ACF_Global.lightHeader}>
       <SEO title="home" />
 
-      <Hero
-        light={gym.ACF_Global.lightHeader}
-        title={gym.title}
+      <ImageHeader
         image={gym.featuredImage.node.localFile}
-        imageAlt={gym.title}
+        imagealt={gym.title}
+        title={gym.title}
+        galBtn
+        openGal={() => openLightboxOnSlide(1)}
+        light={gym.ACF_Global.lightHeader}
+        showIcons
+        showGalBtn
         location={gym.ACF_Gyms.destinations.map(
           destination => destination.title
         )}
         level={gym.ACF_Gyms.level.map(level => level).join(", ")}
         owner={gym.ACF_Gyms.owner}
-        openGal={() => openLightboxOnSlide(1)}
       />
+
+      <HashWrapper>
+        <StyledHashLink
+          activeClass="active"
+          to="info"
+          spy={true}
+          smooth={true}
+          offset={-200}
+          duration={500}
+        >
+          Info
+        </StyledHashLink>
+        <StyledHashLink
+          activeClass="active"
+          to="location"
+          spy={true}
+          smooth={true}
+          offset={-150}
+          duration={500}
+        >
+          location
+        </StyledHashLink>
+        <StyledHashLink
+          activeClass="active"
+          to="unterkuenfte"
+          spy={true}
+          smooth={true}
+          offset={-175}
+          duration={500}
+        >
+          unterkuenfte
+        </StyledHashLink>
+      </HashWrapper>
 
       <MainContentWrapper>
         <Main>
-          <Section firstSec>
-            <h2>{gym.ACF_Gyms.name}</h2>
+          <Section firstSec name="info">
+            <h1>{gym.ACF_Gyms.untertitel}</h1>
             {parse(gym.ACF_Gyms.description)}
             <GalleryWrapper>
-              {gym.ACF_Gyms.galpreview.slice(0, 5).map((gym, i) => (
+              {gym.ACF_Gyms.galpreview.slice(0, 4).map((gym, i) => (
                 <GalleryItem
                   key={`gym-${i}`}
                   onClick={() => openLightboxOnSlide(i + 1)}
@@ -176,18 +321,23 @@ export default function GymTemplate({ data }) {
             </GalleryWrapper>
           </Section>
 
-          <Section>
+          <Section name="location">
             <h3>Location</h3>
             {gym.ACF_Gyms.location.streetAddress}
-            <GymMap
+            <GMap
               latitude={gym.ACF_Gyms.location.latitude}
               longitude={gym.ACF_Gyms.location.longitude}
+              height="400px"
+              iconWidth={120}
+              iconHeight={70}
+              showMarker
+              circRadius={15}
             />
             <Link to={`/destination/${gym.ACF_Gyms.destinations[0].slug}`}>
               Alle Gyms dieser Provinz anschauen
             </Link>
           </Section>
-          <Section>
+          <Section name="unterkuenfte">
             <h3>Unterkünfte</h3>
             <AcomWrapper>
               {gym.ACF_Gyms.accommodations.map(acom => {
@@ -205,34 +355,42 @@ export default function GymTemplate({ data }) {
               })}
             </AcomWrapper>
           </Section>
-
-          <h3>Training</h3>
-
-          <h3>Reviews</h3>
         </Main>
 
-        <SideBar>
+        <SideBar
+          onClick={() => setOpen(!open)}
+          className={open ? "open" : "closed"}
+        >
           <SideBarContent>
-            <h3>
-              Ab CHF{" "}
-              {Number(gym.ACF_Gyms.price) +
-                Number(
-                  gym.ACF_Gyms.accommodations[0].ACF_Accommodations.preis
-                )}{" "}
-              <small>pro Woche</small>
-            </h3>
-            <div className="priceInfo">
-              <p>Inklusive Unterkunft</p>
-              <p>
-                Preise sind halt richtwerte je nach Saison und so. Ausserdem
-                wirds natürlich n ticken günstiger je nachdem wie lange du
-                bleibst. Wie sich die Kosten zusammensetzen siehste hier in der <Link to="#">Preistabelle</Link>.
-              </p>
-            </div>
+            <SideBarTop>
+              <h3>
+                Ab CHF{" "}
+                {Number(gym.ACF_Gyms.price) +
+                  Number(
+                    gym.ACF_Gyms.accommodations[0].ACF_Accommodations.preis
+                  )}{" "}
+                <small>pro Woche *</small>
+              </h3>
+              <div className="priceDetails">
+                <p>Inklusive günstiger Unterkunft</p>
+                <p>Exklusive Administrationsaufwand von 990 CHF und Flügen</p>
+              </div>
+            </SideBarTop>
             <Button url="/anfrage" text="Jetzt buchen" />
+            <div className="smallMap">
+              <GMap
+                latitude={gym.ACF_Gyms.location.latitude}
+                longitude={gym.ACF_Gyms.location.longitude}
+                height="300px"
+                zoom={5}
+                circRadius={50000}
+                uioptions={{ disableDefaultUI: true }}
+              />
+            </div>
           </SideBarContent>
         </SideBar>
       </MainContentWrapper>
+
       <FsLightbox
         toggler={lightboxController.toggler}
         sources={gym.ACF_Gyms.gallery.map((gym, i) => (

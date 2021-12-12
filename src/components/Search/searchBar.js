@@ -25,6 +25,18 @@ const SearchWrapper = styled.div`
     width: 100%;
   }
 
+  @media(max-width: 1199px) {
+  .react-select__menu {
+    background: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding-top: 125px;
+  }
+}
+
   @media(min-width:1024px) {
     .searchSelect {
       display: block;
@@ -35,6 +47,8 @@ const SearchWrapper = styled.div`
       width: 50%;
     }
   }
+
+
 `
 
 const SearchButton = styled(Link)`
@@ -147,6 +161,7 @@ const IconSingleValue = props => (
   </SingleValue>
 )
 
+
 export default function SearchBar({ withButton, noBtn }) {
   const searchdata = useStaticQuery(graphql`
     query SearchQuery {
@@ -166,6 +181,8 @@ export default function SearchBar({ withButton, noBtn }) {
       }
     }
   `)
+
+  const [selectOpen, setSelectOpen] = useState(false)
 
   const context = useContext(myContext)
   const gyms = searchdata.allWpGym.edges
@@ -225,7 +242,7 @@ export default function SearchBar({ withButton, noBtn }) {
         >
           <Select
            className="searchSelect"
-
+           classNamePrefix="react-select"
             options={destinationOptions}
             isClearable
             placeholder="Alle Provinzen"
@@ -241,6 +258,7 @@ export default function SearchBar({ withButton, noBtn }) {
 
           <Select
           className="searchSelect"
+          classNamePrefix="react-select"
             options={levelOptions}
             isClearable
             components={{ Option: IconOption, SingleValue: IconSingleValue }}

@@ -11,6 +11,7 @@ const HeaderWrapper = styled.header`
   left: 0;
   width: 100%;
   z-index: 999;
+  max-width: 100vw;
 
   &.scrolled-nav {
     background: #fff;
@@ -91,7 +92,7 @@ const Header = ({ light }) => {
         <Link to="/">
           <Logo scrolled={scroll} />
         </Link>
-        <Menu light={light} />
+        <Menu light={light} scrolled={scroll} />
       </HeaderContent>
     </HeaderWrapper>
   )

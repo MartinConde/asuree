@@ -1,20 +1,20 @@
 import React, { useState, useEffect } from "react"
-import loadable from "@loadable/component"
 import styled from "styled-components"
 import parse from "html-react-parser"
 import FsLightbox from "fslightbox-react"
-
-import { Link, graphql } from "gatsby"
+import { graphql } from "gatsby"
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import Hero from "../components/DetailPages/hero"
-// import GMap from "../components/DetailPages/gmap"
-import AcomCard from "../components/DetailPages/acomCard"
+import GMap from "../components/DetailPages/gmap"
 import ImageHeader from "../components/ImageHeader"
 import GymCard from "../components/gymCard"
-
-const GymMap = loadable(() => import("../components/DetailPages/gmap"))
+import {
+  Link as SmoothLink,
+  animateScroll as scroll,
+  scrollSpy,
+  scroller,
+} from "react-scroll"
 
 const MainContentWrapper = styled.div`
   width: 100%;
@@ -77,11 +77,51 @@ const CardsWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
+
+  @media(min-width: 1200px) {
+    margin-left: -8px;
+    margin-right: -8px;
+  }
+`
+
+const HashWrapper = styled.div`
+  background: var(--secondary);
+  display: flex;
+  justify-content: center;
+  margin-top: -40px;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 102px;
+  z-index: 9;
+  margin-bottom: 50px;
+  border-top: 1px solid #fff;
+
+  @media (min-width: 1200px) {
+    margin-top: -100px;
+    top: 85px;
+  }
+`
+
+const StyledHashLink = styled(SmoothLink)`
+  padding: 5px 10px;
+  margin: 2px 5px;
+  text-transform: uppercase;
+  font-size: 17px;
+  color: #fff;
+
+  &.active,
+  &:hover {
+    color: var(--primary);
+    cursor: pointer;
+  }
+
+  @media (min-width: 1200px) {
+    font-size: 22px;
+  }
 `
 
 export default function DestinationTemplate({ data }) {
   const dest = data.allWpDestination.edges[0].node
-  
 
   const [lightboxController, setLightboxController] = useState({
     toggler: false,
@@ -102,15 +142,48 @@ export default function DestinationTemplate({ data }) {
         image={dest.featuredImage.node.localFile}
         imagealt="sdfdsf"
         title={dest.title}
-        galBtn
+        showGalBtn
         openGal={() => openLightboxOnSlide(1)}
         light={dest.ACF_Global.lightHeader}
-        noTitle
       />
+      <HashWrapper>
+        <StyledHashLink
+          activeClass="active"
+          to="info"
+          spy={true}
+          smooth={true}
+          offset={-175}
+          duration={500}
+        >
+          Info
+        </StyledHashLink>
+        <StyledHashLink
+          activeClass="active"
+          to="location"
+          spy={true}
+          smooth={true}
+          offset={-150}
+          duration={500}
+        >
+          Location
+        </StyledHashLink>
+        <StyledHashLink
+          activeClass="active"
+          to="gyms"
+          spy={true}
+          smooth={true}
+          offset={-150}
+          duration={500}
+        >
+          Gyms
+        </StyledHashLink>
+      </HashWrapper>
       <MainContentWrapper>
         <Main>
-          <Section firstSec>
-            <h1>{dest.title} - {dest.ACF_Destinations.sloganMain}</h1>
+          <Section firstSec name="info">
+            <h1>
+              {dest.title} - {dest.ACF_Destinations.sloganMain}
+            </h1>
             {parse(dest.ACF_Destinations.description)}
             <GalleryWrapper>
               {dest.ACF_Destinations.galpreview
@@ -129,23 +202,26 @@ export default function DestinationTemplate({ data }) {
             </GalleryWrapper>
           </Section>
 
-          <Section>
+          <Section name="location">
             <h2>Location</h2>
             {dest.ACF_Destinations.location.streetAddress}
-            <GymMap
+            <GMap
               latitude={dest.ACF_Destinations.location.latitude}
               longitude={dest.ACF_Destinations.location.longitude}
-              zoom={6}
+              zoom={8}
+              height="500px"
+              iconWidth={120}
+              iconHeight={70}
+              showMarker
+              circRadius={15}
             />
           </Section>
 
-          <Section>
+          <Section name="gyms">
             <h2 id="gyms">Gyms</h2>
             <CardsWrapper>
               {dest.ACF_Destinations.gyms.map(gym => {
-                return (
-                  <GymCard gym={gym} thirds />
-                )
+                return <GymCard gym={gym} thirds key={gym.title} />
               })}
             </CardsWrapper>
           </Section>

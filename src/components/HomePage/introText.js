@@ -9,6 +9,10 @@ const IntroWrapper = styled.div`
   text-align: center;
   padding: 20px;
 
+  p {
+    margin-bottom: 0;
+  }
+
   @media(min-width: 1200px) {
     padding: 0;
   }

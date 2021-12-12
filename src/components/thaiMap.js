@@ -45,6 +45,7 @@ const MapWrapper = styled.div`
 
   @media (min-width: 768px) {
     justify-content: flex-end;
+    margin-top: 20px;
   }
 
   @media (min-width: 1200px) {
@@ -466,7 +467,6 @@ const ThaiMap = () => {
 
         <Splide
           onArrowsMounted={(splide, prev, next) => {
-            console.log(prev, next)
           }}
           ref={ref}
           options={{

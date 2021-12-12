@@ -100,6 +100,7 @@ export default function DestCard({ dest, thirds }) {
       <Button
         url={`/destination/${dest.slug}`}
         text="Weitere Infos zu dieser Region"
+        tuk
       />
     </Card>
   )

@@ -5,6 +5,8 @@ import { useStaticQuery, graphql } from "gatsby"
 import Header from "./Header/header"
 import "./layout.css"
 
+
+
 const LazyFooter = React.lazy(() => import('./Footer/footer'))
 
 const Layout = ({ children, light }) => {

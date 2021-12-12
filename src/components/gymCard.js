@@ -3,6 +3,7 @@ import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import parse from "html-react-parser"
 import styled from "styled-components"
 import Button from "./Blocks/button"
+import ClickerButton from "./Blocks/clickerButton"
 
 const Card = styled.div`
   background: #fff;
@@ -93,11 +94,7 @@ export default function GymCard({ gym, thirds, isAnfrage, clicker }) {
         </Excerpt>
       </CardContent>
       {isAnfrage ? (
-        <button
-          onClick={clicker}
-        >
-          Auswählen
-        </button>
+        <ClickerButton clicker={clicker} text="Auswählen" />
       ) : (
         <Button url={`/gym/${gym.slug}`} text="Jetzt informieren und buchen" />
       )}

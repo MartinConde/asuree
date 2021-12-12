@@ -5,6 +5,7 @@
   "version": "0.1.0",
   "author": "Martin Conde <martin@martinconde.com>",
   "dependencies": {
+    "@hookform/error-message": "^2.0.0",
     "@loadable/component": "^5.15.0",
     "@reach/router": "^1.3.4",
     "@react-google-maps/api": "^2.2.0",
@@ -38,6 +39,9 @@
     "react-dates": "^21.8.0",
     "react-dom": "^17.0.1",
     "react-helmet": "^6.1.0",
+    "react-hook-form": "^7.20.0",
+    "react-input-date-mask": "^2.0.0",
+    "react-scroll": "^1.8.4",
     "react-select": "^4.3.1",
     "react-select-me": "^1.3.1",
     "react-select-search": "^3.0.7",

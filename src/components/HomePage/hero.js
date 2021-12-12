@@ -3,9 +3,8 @@ import SearchBar from "../Search/searchBar"
 import styled from "styled-components"
 import { graphql, useStaticQuery } from "gatsby"
 import { StaticImage, GatsbyImage, getImage } from "gatsby-plugin-image"
-import { useBreakpoint } from 'gatsby-plugin-breakpoints';
-import parse from 'html-react-parser'
-
+import { useBreakpoint } from "gatsby-plugin-breakpoints"
+import parse from "html-react-parser"
 
 const HeroWrapper = styled.div`
   min-height: 80vh;
@@ -14,49 +13,97 @@ const HeroWrapper = styled.div`
   align-items: center;
   justify-content: flex-end;
   position: relative;
-  margin-bottom: var( --row-mgbtm);
+  margin-bottom: var(--row-mgbtm);
+  overflow: hidden;
+
+  @media(min-height: 736px) and (max-width: 767px) {
+    height: 100vh;
+  }
+
+  @media(min-width: 768px) {
+    height: 60vh;
+    min-height: 60vh;
+  }
+
+  @media(min-width: 1200px) {
+    overflow: visible;
+    min-height: 90vh;
+  }
+
+  @media(min-width: 1600px) {
+    min-height: 80vh;
+  }
+
+  @media(min-width: 2200px) {
+    min-height: 60vh;
+  }
 `
 
 const HeroContent = styled.div`
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 120px 20px 20px 20px;
   text-align: center;
-  height: 100vh;
+  /* height: 100vh; */
   display: flex;
-    align-items: center;
-    justify-content: center;
-  
-  @media(min-width:1200px) {
-    
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  @media(min-width: 768px) {
+    flex-direction: row;
+  }
+
+  @media (min-width: 1200px) {
     padding: 0;
     text-align: left;
     height: auto;
 
     > div:first-child {
       width: 65%;
-  }
+    }
   }
 `
 
 const HeroBg = styled.div`
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -5;
+  /* display: none; */
 
-  .gatsby-image-wrapper {
-    height: 80vh;
-  }
+  display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -5;
+    opacity: .3;
 
-  .gatsby-image-wrapper img {
+    .gatsby-image-wrapper {
+      height: 80vh;
+    }
+
+    .gatsby-image-wrapper img {
       object-position: bottom;
+    }
+
+
+  @media (min-width: 768px) {
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -5;
+
+    .gatsby-image-wrapper {
+      height: 80vh;
+    }
+
+    .gatsby-image-wrapper img {
+      object-position: bottom;
+    }
   }
-
-
 `
 
 const FighterImg = styled.div`
@@ -65,12 +112,14 @@ const FighterImg = styled.div`
   position: relative;
   z-index: -1;
   max-width: 50vw;
-  max-width: 300px;
-  display: none;
-  
+  max-width: 200px;
 
-  @media(min-width: 1200px) {
-    display: block;
+  @media (min-width: 1200px) {
+    padding-left: 2vw;
+    max-width: 30vw;
+  }
+
+  @media (min-width: 1600px) {
     padding-left: 2vw;
     max-width: 100%;
   }
@@ -86,7 +135,7 @@ const MainTitle = styled.h1`
     font-size: 30px;
   }
 
-  @media(min-width:1200px) {
+  @media (min-width: 1200px) {
     font-size: 127px;
 
     small {
@@ -105,7 +154,7 @@ const IntroText = styled.div`
     display: none;
   }
 
-  @media(min-width:1200px) {
+  @media (min-width: 1200px) {
     font-size: 24px;
     max-width: 100%;
 
@@ -117,52 +166,57 @@ const IntroText = styled.div`
 
 const Hero = () => {
   const herodata = useStaticQuery(graphql`
-  query HeroQuery {
-    wpPage( slug: {eq: "home"}) {
-    ACF_Home {
-      heroH1Large
-      heroH1Small
-      heroText
-      heroBackground {
-        localFile {
-          childImageSharp {
-            gatsbyImageData(layout: FULL_WIDTH)
+    query HeroQuery {
+      wpPage(slug: { eq: "home" }) {
+        ACF_Home {
+          heroH1Large
+          heroH1Small
+          heroText
+          heroBackground {
+            localFile {
+              childImageSharp {
+                gatsbyImageData(layout: FULL_WIDTH)
+              }
+            }
           }
-        }
-      }
-      heroFighter {
-        localFile {
-          childImageSharp {
-            gatsbyImageData(layout: CONSTRAINED)
+          heroFighter {
+            localFile {
+              childImageSharp {
+                gatsbyImageData(layout: CONSTRAINED)
+              }
+            }
           }
         }
       }
     }
-  }
-  }
-`)
+  `)
 
-  const breakpoints = useBreakpoint();
+  const breakpoints = useBreakpoint()
 
   return (
     <HeroWrapper>
       <HeroContent>
         <div>
           <MainTitle>
-            <small>{herodata.wpPage.ACF_Home.heroH1Small}</small> {herodata.wpPage.ACF_Home.heroH1Large}
+            <small>{herodata.wpPage.ACF_Home.heroH1Small}</small>{" "}
+            {herodata.wpPage.ACF_Home.heroH1Large}
           </MainTitle>
-          <IntroText>
-            {parse(herodata.wpPage.ACF_Home.heroText)}
-          </IntroText>
+          <IntroText>{parse(herodata.wpPage.ACF_Home.heroText)}</IntroText>
         </div>
         <FighterImg>
-        <GatsbyImage image={getImage(herodata.wpPage.ACF_Home.heroFighter.localFile)} alt="dsdfsfd" />
+          <GatsbyImage
+            image={getImage(herodata.wpPage.ACF_Home.heroFighter.localFile)}
+            alt="dsdfsfd"
+          />
         </FighterImg>
       </HeroContent>
       <SearchBar withButton />
 
       <HeroBg>
-      <GatsbyImage image={getImage(herodata.wpPage.ACF_Home.heroBackground.localFile)} alt="dsdfsfd" />
+        <GatsbyImage
+          image={getImage(herodata.wpPage.ACF_Home.heroBackground.localFile)}
+          alt="dsdfsfd"
+        />
       </HeroBg>
     </HeroWrapper>
   )

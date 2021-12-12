@@ -7,6 +7,10 @@ const BgRowWrapper = styled.div`
   margin-bottom: var(--row-mgbtm);
   position: relative;
   margin-top: ${props => (props.overShoot ? "25vh" : "0")};
+
+  @media(max-width:767px) {
+    background: ${props => props.hideMob ? "var(--secondary)" : "rgba(255,255,255,0)"};
+  }
 `
 const BgRowBg = styled.div`
   position: absolute;
@@ -15,6 +19,7 @@ const BgRowBg = styled.div`
   width: 100%;
   height: 100%;
   z-index: -1;
+  
 
   &::after {
     content: ${props => props.overlay ? "''" : "none"};
@@ -30,6 +35,10 @@ const BgRowBg = styled.div`
   .gatsby-image-wrapper {
     width: 100%;
     height: 100%;
+  }
+
+  @media(max-width:767px) {
+    display: ${props => props.hideMob ? "none" : "block"};
   }
 `
 
@@ -65,10 +74,11 @@ export default function BgRow({
   overShoot,
   bgImage,
   bgImageAlt,
-  overlay
+  overlay,
+  hideMob
 }) {
   return (
-    <BgRowWrapper overShoot={overShoot}>
+    <BgRowWrapper overShoot={overShoot} hideMob={hideMob}>
       <BgSepTop>
         <StaticImage
           src="../../images/grunge-border.png"
@@ -80,7 +90,7 @@ export default function BgRow({
       <BgRowContent fullWidth={fullWidth} withPadding={withPadding}>
         {children}
       </BgRowContent>
-      <BgRowBg overlay={overlay}>
+      <BgRowBg overlay={overlay} hideMob={hideMob}>
         <GatsbyImage image={getImage(bgImage)} alt={bgImageAlt} />
       </BgRowBg>
       <BgSepBtm>

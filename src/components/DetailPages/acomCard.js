@@ -4,13 +4,25 @@ import parse from "html-react-parser"
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
 
 const Card = styled.div`
-  margin-bottom: 35px;
+  margin-bottom: ${props => !props.anfrage &&  "35px"};;
   align-items: center;
+  color: var(--secondary);
+  box-shadow: ${props => props.anfrage &&  "0 5px 15px var(--secondary-trans)"};
+  display: flex;
+  flex-direction: column;
+  transition: .3s all ease-out;
 
   @media (min-width: 768px) {
     display: flex;
-    flex-direction: ${props => props.minimal && "column"};
+    flex-direction: ${props => props.minimal ? "column" : "row"};
   }
+
+  @media(min-width: 1200px) {
+    &:hover {
+      box-shadow: ${props => props.anfrage &&  "0 0px 5px var(--secondary-trans)"};
+    }
+  }
+ 
 `
 
 const CardImage = styled.div`
@@ -18,8 +30,30 @@ const CardImage = styled.div`
   height: 100%;
 
   .gatsby-image-wrapper {
-    height: 100%;
+    width: 100% !important;
+    height: 100% !important;
   }
+
+  &.AcomAnfrage .gatsby-image-wrapper {
+    width: 100% !important;
+    height: 200px !important;
+  }
+
+  &.AcomAnfrage .gatsby-image-wrapper::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(180deg, rgba(255,255,255,0) 65%, rgba(255,255,255,1) 100%);
+  }
+  &.AcomAnfrage img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+  
 
   @media(min-width: 768px) {
     width: ${props => props.minimal ? "100%" : "45%"};
@@ -28,7 +62,7 @@ const CardImage = styled.div`
 
 const CardContent = styled.div`
   width: 100%;
-  padding: 15px 0;
+  padding: 15px 20px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -38,9 +72,10 @@ const CardContent = styled.div`
     margin-bottom: 0;
   }
 
+
   @media(min-width: 768px) {
     width: ${props => props.minimal ? "100%" : "55%"};
-    padding: 15px 0 15px 25px;
+    padding: 15px 30px;
   }
 `
 
@@ -107,11 +142,12 @@ export default function AcomCard({
   description,
   amenities,
   sterne,
-  minimal
+  minimal,
+  anfrage
 }) {
   return (
-    <Card minimal={minimal}>
-      <CardImage minimal={minimal}>
+    <Card minimal={minimal} anfrage={anfrage}>
+      <CardImage minimal={minimal} className={anfrage && "AcomAnfrage"}>
         <GatsbyImage image={getImage(image)} alt="test" />
       </CardImage>
 

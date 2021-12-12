@@ -24,6 +24,8 @@ export default function Home({ data }) {
     }
   }, [])
 
+  console.log(data.wpPage)
+
   return (
     <Layout light={data.wpPage.ACF_Global.lightHeader}>
       <SEO title="home" />
@@ -79,6 +81,7 @@ export default function Home({ data }) {
         bgImage={data.wpPage.ACF_Home.mapRowBg.localFile}
         bgImageAlt="dsfsdfsdf"
         overlay
+        hideMob
       >
         {typeof window !== "undefined" && (
           <Suspense fallback={<div>Loading..</div>}>

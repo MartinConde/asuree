@@ -24,7 +24,7 @@ export const GymFragment = graphql`
       }
     }
     ACF_Gyms {
-      name
+      untertitel
       description
       level
       owner

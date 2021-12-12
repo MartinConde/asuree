@@ -40,31 +40,31 @@ const InputWrapper = styled.div`
 // }
 
 const DateField = ({ name, label, placeholder, ...props }) => {
-  const [begin, setBegin] = useState(new Date())
-  const [weg, setWeg] = useState(new Date())
+  // const [begin, setBegin] = useState(new Date())
+  // const [weg, setWeg] = useState(new Date())
 
-  const Difference_In_Time =
-    addDays(new Date(weg), 1).getTime() - begin.getTime()
+  // const Difference_In_Time =
+  //   addDays(new Date(weg), 1).getTime() - begin.getTime()
 
-  const Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24)
+  // const Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24)
 
-  const [state, setState] = useState([
-    {
-      startDate: new Date(),
-      endDate: new Date(),
-      key: "selection",
-    },
-  ])
+  // const [state, setState] = useState([
+  //   {
+  //     startDate: new Date(),
+  //     endDate: new Date(),
+  //     key: "selection",
+  //   },
+  // ])
 
-  const [focusedInput, setFocusedInput] = useState(null)
+  // const [focusedInput, setFocusedInput] = useState(null)
 
-  const [field, meta, helpers] = useField(name)
-  const { value } = meta
-  const { setValue, setTouched } = helpers
+  // const [field, meta, helpers] = useField(name)
+  // const { value } = meta
+  // const { setValue, setTouched } = helpers
 
   return (
     <InputWrapper>
-      <DateRange
+      {/* <DateRange
         id={name}
         name={name}
         value={state}
@@ -98,7 +98,7 @@ const DateField = ({ name, label, placeholder, ...props }) => {
         <span className="hidden--visually">{label}</span>
       </label>
       <ErrorMessage name={name}>{msg => <div>{msg}</div>}</ErrorMessage>
-      <Visa days={Difference_In_Days} />
+      <Visa days={Difference_In_Days} /> */}
     </InputWrapper>
   )
 }

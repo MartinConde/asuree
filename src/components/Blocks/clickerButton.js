@@ -1,8 +1,7 @@
 import React from "react"
 import styled from "styled-components"
-import { Link } from "gatsby"
 
-const IconButton = styled(Link)`
+const IconButton = styled.button`
   /* background: var(--secondary); */
   background-image: linear-gradient(
     to right,
@@ -21,6 +20,8 @@ const IconButton = styled(Link)`
   text-align: center;
   width: auto;
   transition: 0.5s all ease-out;
+  border: none;
+  margin-top: auto;
 
   > div {
     display: flex;
@@ -37,6 +38,7 @@ const IconButton = styled(Link)`
     /* background: var(--primary); */
     background-position: 258%;
     color: #fff;
+    cursor: pointer;
   }
 
   &:hover svg {
@@ -53,9 +55,9 @@ const IconButton = styled(Link)`
   }
 `
 
-export default function Button({ text, url, tuk }) {
+export default function ClickerButton({ text, clicker, tuk }) {
   return (
-    <IconButton to={url} tuk={tuk}>
+    <IconButton onClick={clicker} tuk={tuk}>
       <div>
         <span>{text}</span>
         {tuk ? (
