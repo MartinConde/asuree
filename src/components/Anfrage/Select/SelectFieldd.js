@@ -10,7 +10,6 @@ const Error = styled.div`
 `
 
 const SelectFieldd = ({ options, field, form ,setFieldValue, setFieldTouched, ...props }) => {
-  console.log(form)
   return (
     <>
     <Select

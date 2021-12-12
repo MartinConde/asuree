@@ -225,15 +225,11 @@ const AnfrageFormularNeu = ({ data }) => {
   const [focusedInput, setFocusedInput] = useState("startDate")
   const [acomPreis, setAcomPreis] = useState()
 
-
-
   const [country, setCountry] = useState()
 
   const countryList = countries.map(function (e) {
     return { value: e.name, label: e.name, code: e.alpha_2 }
   })
-
-
 
   const breakpoints = useBreakpoint()
 
@@ -391,8 +387,7 @@ const AnfrageFormularNeu = ({ data }) => {
       />
       {dataLoaded ? (
         !messageSent ? (
-        <>
-          
+          <>
             <FormWrapper onSubmit={handleSubmit(onSubmit)}>
               <SectionWrapper>
                 <SectionTitle>Wähle deine Reisedaten</SectionTitle>
@@ -458,7 +453,17 @@ const AnfrageFormularNeu = ({ data }) => {
                           numberOfMonths={breakpoints.md ? 1 : 2}
                           hideKeyboardShortcutsPanel
                           daySize={
-                            breakpoints.xxs ? 38 : breakpoints.xs ? 46 : breakpoints.sm ? 50 : breakpoints.mobBreak ? 65 : breakpoints.l ? 65 : 76
+                            breakpoints.xxs
+                              ? 38
+                              : breakpoints.xs
+                              ? 46
+                              : breakpoints.sm
+                              ? 50
+                              : breakpoints.mobBreak
+                              ? 65
+                              : breakpoints.l
+                              ? 65
+                              : 76
                           }
                           // showClearDates
                           reopenPickerOnClearDates
@@ -522,7 +527,9 @@ const AnfrageFormularNeu = ({ data }) => {
                             name="Unterkunft"
                             value={acom.title}
                             id={acom.slug}
-                            onClick={() => setAcomPreis(acom.ACF_Accommodations.preis)}
+                            onClick={() =>
+                              setAcomPreis(acom.ACF_Accommodations.preis)
+                            }
                           />
                           <AcomCard
                             anfrage
@@ -598,7 +605,7 @@ const AnfrageFormularNeu = ({ data }) => {
                           required: "Ne mail brooch ick schon..",
                           pattern: {
                             value: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
-                            message: "Dit is keine gueltige mail du holz", // JS only: <p>error message</p> TS only support string
+                            message: "Dit is keine gueltige mail du holz",
                           },
                         })}
                       />
@@ -620,21 +627,23 @@ const AnfrageFormularNeu = ({ data }) => {
                       rules={{ required: "Jeburtstach brooch ick schon.." }}
                       render={({ field: { onChange, onBlur, ref } }) => (
                         <InputFieldNew>
-                          <ReactInputDateMask
-                            onBlur={onBlur}
-                            onChange={onChange}
-                            inputRef={ref}
-                            showMaskOnFocus={true}
-                            mask="dd.mm.yyyy"
-                            id="birthday"
-                            name="birthday"
-                            type="text"
-                            className={`floating__input bday__input ${
-                              formBday &&
-                              formBday !== "dd.mm.yyyy" &&
-                              "has-value"
-                            }`}
-                          />
+                          {typeof window !== `undefined` && (
+                            <ReactInputDateMask
+                              onBlur={onBlur}
+                              onChange={onChange}
+                              inputRef={ref}
+                              showMaskOnFocus={true}
+                              mask="dd.mm.yyyy"
+                              id="birthday"
+                              name="birthday"
+                              type="text"
+                              className={`floating__input bday__input ${
+                                formBday &&
+                                formBday !== "dd.mm.yyyy" &&
+                                "has-value"
+                              }`}
+                            />
+                          )}
                           <label
                             htmlFor="birthday"
                             className="floating__label"
@@ -663,7 +672,6 @@ const AnfrageFormularNeu = ({ data }) => {
                         <div>
                           <Select
                             classNamePrefix="react-select"
-                            // menuIsOpen={true}
                             placeholder="Land"
                             styles={{
                               indicatorSeparator: () => {},
@@ -715,19 +723,23 @@ const AnfrageFormularNeu = ({ data }) => {
               </SectionWrapper>
 
               <SectionWrapper>
-                <SubmitButton text="Anfrage Abschicken"/>
+                <SubmitButton text="Anfrage Abschicken" />
               </SectionWrapper>
             </FormWrapper>
-          
-          <Summary
-            startdatum={formDaten && formDaten.Ankunft}
-            enddatum={formDaten && formDaten.Abreise}
-            dauer={JSON.stringify(startDate && startDate.diff(endDate, "days"))}
-            gym={gymData.title}
-            unterkunft={formUnterkunft}
-            preis={acomPreis && Number(acomPreis) + Number(gymData.ACF_Gyms.price)}
-          />
-        </>
+
+            <Summary
+              startdatum={formDaten && formDaten.Ankunft}
+              enddatum={formDaten && formDaten.Abreise}
+              dauer={JSON.stringify(
+                startDate && startDate.diff(endDate, "days")
+              )}
+              gym={gymData.title}
+              unterkunft={formUnterkunft}
+              preis={
+                acomPreis && Number(acomPreis) + Number(gymData.ACF_Gyms.price)
+              }
+            />
+          </>
         ) : (
           <div>jesendet</div>
         )

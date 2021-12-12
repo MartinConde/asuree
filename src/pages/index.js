@@ -24,8 +24,6 @@ export default function Home({ data }) {
     }
   }, [])
 
-  console.log(data.wpPage)
-
   return (
     <Layout light={data.wpPage.ACF_Global.lightHeader}>
       <SEO title="home" />

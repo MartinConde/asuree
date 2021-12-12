@@ -1,10 +1,22 @@
 const path = require(`path`)
-
 const LoadablePlugin = require('@loadable/webpack-plugin')
-exports.onCreateWebpackConfig = ({ actions, plugins }) => {
+
+exports.onCreateWebpackConfig = ({ actions, plugins, stage, loaders }) => {
   actions.setWebpackConfig({
     plugins: [new LoadablePlugin()]
   })
+  if (stage === "build-html" || stage === "develop-html") {
+    actions.setWebpackConfig({
+      module: {
+        rules: [
+          {
+            test: /react-input-date-mask/,
+            use: loaders.null(),
+          },
+        ],
+      },
+    })
+  }
 }
 
 exports.createPages = ({ graphql, actions }) => {

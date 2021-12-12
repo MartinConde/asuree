@@ -75,7 +75,6 @@ svg path {
 `
 
 const MenuToggle = ({ clickHandler, open, light, scrolled }) => {
-    console.log(scrolled)
 
     return (
         <Toggle onClick={clickHandler} className={`${open ? "mob-nav-open" : "mob-nav-closed"}`} light={light} scrolled={scrolled}>
