@@ -14,6 +14,10 @@ const InputWrapper = styled.div`
     width: 100%;
   }
 
+  &:hover .floating__input {
+    border-color: var(--primary);
+  }
+
   .floating__input::-moz-placeholder {
     color: rgba(0, 0, 0, 0);
   }
@@ -48,6 +52,7 @@ const InputWrapper = styled.div`
 
   .floating__input:focus-visible {
     outline: none;
+    border-color: var(--primary);
   }
 
   .floating__input:focus + .floating__label::after {

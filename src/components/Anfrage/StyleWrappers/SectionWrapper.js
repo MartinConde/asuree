@@ -24,7 +24,7 @@ box-shadow: 0 5px 10px rgba(0, 0, 51, 0.2);
 
   @media(min-width: 1200px) {
     padding: 35px;
-  }
+  }  
 `
 
 

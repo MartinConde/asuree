@@ -90,20 +90,26 @@ const PersonalFieldsRow = styled.div`
   @media (max-width: 1199px) {
     .react-select__control--menu-is-open .react-select__value-container {
       position: fixed;
-      top: 125px;
+      top: 15px;
       left: 0;
       width: 100%;
-      z-index: 999;
+      z-index: 9999;
     }
-    .react-select__menu {
+    .react-select__control--menu-is-open + .react-select__menu {
       background: #fff;
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      padding-top: 185px;
+      padding-top: 60px;
+      z-index: 999;
+      margin: 0;
     }
+  }
+
+  .react-select__control {
+    border-width: 0px 0px 2px;
   }
 `
 
@@ -315,6 +321,10 @@ const AnfrageFormularNeu = ({ data }) => {
       color: "var(--secondary)",
       paddingLeft: "15px",
     }),
+    menuList: styles => ({
+        ...styles,
+        maxHeight: breakpoints.mobBreak ? 636 : 300
+    })
   }
 
   useEffect(() => {
