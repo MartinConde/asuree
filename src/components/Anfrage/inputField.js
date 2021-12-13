@@ -1,6 +1,5 @@
 import React from "react"
 import styled from "styled-components"
-import { Field, ErrorMessage } from "formik"
 
 const InputWrapper = styled.div`
   position: relative;
@@ -68,12 +67,17 @@ const InputWrapper = styled.div`
     transform: translate3d(0, -2.2rem, 0) scale3d(1, 1, 1);
   }
 
+  .floating__input.bday__input {
+    text-transform: uppercase;
+  }
+
   .floating__input.bday__input + .floating__label::before {
-    transform: translate3d(0, -2.2rem, 0) scale3d(2, 2, 2);
+    transform: translate3d(0, -2.2rem, 0) scale3d(1,1,1);
   }
 
   .floating__label::before,
-  .floating__input:focus + .floating__label::before {
+  .floating__input:focus + .floating__label::before,
+  .floating__input.bday__input.has-value + .floating__label::before {
     transform: translate3d(0, -3.12rem, 0) scale3d(0.82, 0.82, 1);
   }
 
@@ -82,42 +86,12 @@ const InputWrapper = styled.div`
   }
 `
 
-const Error = styled.div`
-  position: absolute;
-  left: 25px;
-  color: red;
-`
 
-function InputField({
-  name,
-  label,
-  placeholder,
-  validator,
-  valid,
-  error,
-  type,
-  ...props
-}) {
+export default function InputField({children}) {
   return (
-    <InputWrapper className={(valid && "valid") || (error && "error")}>
-      <Field
-        id={name}
-        name={name}
-        placeholder={placeholder}
-        validate={validator}
-        required
-        type={type}
-        className="floating__input"
-        valid={valid}
-        error={error}
-        {...props}
-      />
-      <label htmlFor={name} className="floating__label" data-content={label}>
-        <span className="hidden--visually">{label}</span>
-      </label>
-      <ErrorMessage name={name}>{msg => <Error>{msg}</Error>}</ErrorMessage>
+    <InputWrapper>
+     {children}
     </InputWrapper>
   )
+  
 }
-
-export default InputField

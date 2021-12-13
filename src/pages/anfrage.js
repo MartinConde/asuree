@@ -1,52 +1,35 @@
-import React, { useState, useEffect } from "react"
-import axios from "axios"
-import "react-date-range/dist/styles.css" // main css file
-import "react-date-range/dist/theme/default.css" // theme css file
-
-import { useBreakpoint } from "gatsby-plugin-breakpoints"
-import ReactInputDateMask from "react-input-date-mask"
-
-import "react-dates/initialize"
-import styled from "styled-components"
-import { Link, graphql } from "gatsby"
-import Row from "../components/Blocks/row"
-import AcomCard from "../components/DetailPages/acomCard"
-import GymCard from "../components/gymCard"
-import Layout from "../components/layout"
-import SEO from "../components/seo"
-import ImageHeader from "../components/ImageHeader"
-import Select, { Option, ReactSelectProps, createFilter } from "react-select"
-import { useForm, Controller } from "react-hook-form"
 import { ErrorMessage } from "@hookform/error-message"
-
-import DateRangeField from "../components/Anfrage/dateRange"
-import "react-dates/lib/css/_datepicker.css"
-import InputFieldNew from "../components/Anfrage/inputNew"
-import BirthDay from "../components/Anfrage/bday"
-import { DateRangePicker, SingleDatePicker } from "react-dates"
+import axios from "axios"
+import { graphql } from "gatsby"
+import { useBreakpoint } from "gatsby-plugin-breakpoints"
 import moment from "moment"
 import "moment/locale/de"
-import countries from "../static/countries.json"
-
+import React, { useEffect, useState } from "react"
+import "react-date-range/dist/styles.css" // main css file
+import "react-date-range/dist/theme/default.css" // theme css file
+import { DateRangePicker } from "react-dates"
+import "react-dates/initialize"
+import "react-dates/lib/css/_datepicker.css"
+import { Controller, useForm } from "react-hook-form"
+import ReactInputDateMask from "react-input-date-mask"
+import Select, { createFilter } from "react-select"
+import styled from "styled-components"
+import InputField from "../components/Anfrage/InputField"
 import CalWrapper from "../components/Anfrage/StyleWrappers/CalWrapper"
-import "../components/Anfrage/StyleWrappers/BdayPicker.css"
 import {
-  SectionWrapper,
   SectionContent,
   SectionTitle,
+  SectionWrapper,
 } from "../components/Anfrage/StyleWrappers/SectionWrapper"
-import BdaySelect from "../components/Anfrage/StyleWrappers/BdaySelect"
-import Summary from "../components/Anfrage/summary"
 import { VisaCheck } from "../components/Anfrage/StyleWrappers/VisaWrapper"
-import SubmitButton from "../components/Blocks/submitButton"
-
-const Section = styled.div`
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  /* background: var(--secondary-trans); */
-  margin-bottom: 50px;
-`
+import Summary from "../components/Anfrage/summary"
+import ImageHeader from "../components/Blocks/ImageHeader"
+import Row from "../components/Blocks/row"
+import SubmitButton from "../components/Anfrage/submitButton"
+import GymCard from "../components/Cards/gymCard"
+import AcomCard from "../components/Cards/acomCard"
+import Layout from "../components/layout"
+import countries from "../static/countries.json"
 
 const AcomWrapper = styled.div`
   width: 100%;
@@ -570,7 +553,7 @@ const AnfrageFormularNeu = ({ data }) => {
 
                 <SectionContent>
                   <PersonalFieldsRow className="triple">
-                    <InputFieldNew>
+                    <InputField>
                       <input
                         id="name"
                         name="name"
@@ -592,9 +575,9 @@ const AnfrageFormularNeu = ({ data }) => {
                       <ErrorWrapper className="inputError">
                         <ErrorMessage as="span" errors={errors} name="Name" />
                       </ErrorWrapper>
-                    </InputFieldNew>
+                    </InputField>
 
-                    <InputFieldNew>
+                    <InputField>
                       <input
                         id="email"
                         name="email"
@@ -619,14 +602,14 @@ const AnfrageFormularNeu = ({ data }) => {
                       <ErrorWrapper className="inputError">
                         <ErrorMessage as="span" errors={errors} name="Email" />
                       </ErrorWrapper>
-                    </InputFieldNew>
+                    </InputField>
 
                     <Controller
                       control={control}
                       name="Birthday"
                       rules={{ required: "Jeburtstach brooch ick schon.." }}
                       render={({ field: { onChange, onBlur, ref } }) => (
-                        <InputFieldNew>
+                        <InputField>
                           {typeof window !== `undefined` && (
                             <ReactInputDateMask
                               onBlur={onBlur}
@@ -658,7 +641,7 @@ const AnfrageFormularNeu = ({ data }) => {
                               name="Birthday"
                             />
                           </ErrorWrapper>
-                        </InputFieldNew>
+                        </InputField>
                       )}
                     />
                   </PersonalFieldsRow>
@@ -698,7 +681,7 @@ const AnfrageFormularNeu = ({ data }) => {
                       )}
                     />
 
-                    <InputFieldNew>
+                    <InputField>
                       <input
                         id="plzort"
                         name="plzort"
@@ -717,7 +700,7 @@ const AnfrageFormularNeu = ({ data }) => {
                       <ErrorWrapper className="inputError">
                         <ErrorMessage as="span" errors={errors} name="PlzOrt" />
                       </ErrorWrapper>
-                    </InputFieldNew>
+                    </InputField>
                   </PersonalFieldsRow>
                 </SectionContent>
               </SectionWrapper>

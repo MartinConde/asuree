@@ -1,8 +1,8 @@
+import { useBreakpoint } from "gatsby-plugin-breakpoints"
+import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import React from "react"
 import styled from "styled-components"
-import { GatsbyImage, getImage } from "gatsby-plugin-image"
-import { useBreakpoint } from "gatsby-plugin-breakpoints"
-import IconBar from "./DetailPages/IconBar"
+import IconBar from "./IconBar"
 
 const Wrapper = styled.div`
   position: relative;

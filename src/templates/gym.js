@@ -1,22 +1,16 @@
-import React, { useState, useEffect } from "react"
-import styled from "styled-components"
-import parse from "html-react-parser"
 import FsLightbox from "fslightbox-react"
-
-import { Link, graphql } from "gatsby"
+import { graphql, Link } from "gatsby"
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
+import parse from "html-react-parser"
+import React, { useEffect, useState } from "react"
+import { Link as SmoothLink } from "react-scroll"
+import styled from "styled-components"
+import Button from "../components/Blocks/button"
+import ImageHeader from "../components/Blocks/ImageHeader"
+import AcomCard from "../components/Cards/acomCard"
+import GMap from "../components/DetailPages/gmap"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import GMap from "../components/DetailPages/gmap"
-import AcomCard from "../components/DetailPages/acomCard"
-import Button from "../components/Blocks/button"
-import {
-  Link as SmoothLink,
-  animateScroll as scroll,
-  scrollSpy,
-  scroller,
-} from "react-scroll"
-import ImageHeader from "../components/ImageHeader"
 
 const MainContentWrapper = styled.div`
   width: 100%;

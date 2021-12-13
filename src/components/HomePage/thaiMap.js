@@ -3,7 +3,6 @@ import styled from "styled-components"
 import parse from "html-react-parser"
 import { Splide, SplideSlide } from "@splidejs/react-splide"
 import "@splidejs/splide/dist/css/splide.min.css"
-import { URLHash } from "@splidejs/splide-extension-url-hash"
 import { useBreakpoint } from "gatsby-plugin-breakpoints"
 import {
   ComposableMap,
@@ -14,8 +13,8 @@ import {
   Annotation,
 } from "react-simple-maps"
 import { useStaticQuery, graphql } from "gatsby"
-import ThaiPro from "../static/thailand-provinces.json"
-import Button from "./Blocks/button"
+import ThaiPro from "../../static/thailand-provinces.json"
+import Button from "../Blocks/button"
 
 const Container = styled.div`
   width: 100%;

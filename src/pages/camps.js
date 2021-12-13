@@ -1,22 +1,22 @@
-import React from "react"
-import { myContext } from "../context/provider"
-import styled from "styled-components"
-import Layout from "../components/layout"
-import Row from "../components/Blocks/row"
-import ImageHeader from "../components/ImageHeader"
 import { graphql } from "gatsby"
-import SEO from "../components/seo"
-import Searchbar from "../components/Search/searchBar"
-import GymCard from "../components/gymCard"
-import LoadingIndicator from "../components/Search/loadingIndicator"
+import React from "react"
+import styled from "styled-components"
+import ImageHeader from "../components/Blocks/ImageHeader"
+import Row from "../components/Blocks/row"
+import GymCard from "../components/Cards/gymCard"
 import IntroText from "../components/HomePage/introText"
+import Layout from "../components/layout"
+import LoadingIndicator from "../components/Search/loadingIndicator"
+import Searchbar from "../components/Search/searchBar"
+import SEO from "../components/seo"
+import { myContext } from "../context/provider"
 
 const CardsWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
 
-  @media(min-width: 1200px) {
+  @media (min-width: 1200px) {
     margin-left: -8px;
     margin-right: -12px;
   }

@@ -1,20 +1,18 @@
-import React from "react"
-import { myContext } from "../context/provider"
-import styled from "styled-components"
-import Layout from "../components/layout"
-import Row from "../components/Blocks/row"
-import ImageHeader from "../components/ImageHeader"
-import LoadingIndicator from "../components/Search/loadingIndicator"
 import { graphql } from "gatsby"
-import SEO from "../components/seo"
-import DestCard from "../components/destCard"
+import React from "react"
+import styled from "styled-components"
+import ImageHeader from "../components/Blocks/ImageHeader"
+import Row from "../components/Blocks/row"
+import DestCard from "../components/Cards/destCard"
 import IntroText from "../components/HomePage/introText"
+import Layout from "../components/layout"
+import SEO from "../components/seo"
 
 const CardsWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
-  @media(min-width: 1200px) {
+  @media (min-width: 1200px) {
     margin-left: -8px;
     margin-right: -12px;
   }
@@ -32,7 +30,6 @@ export default function Destinations({ data }) {
     return e.ACF_Destinations.gyms
   })
 
-  
   return (
     <Layout light={data.wpPage.ACF_Global.lightHeader}>
       <SEO title="home" />
@@ -85,7 +82,7 @@ export const pageQuery = graphql`
         lightHeader
       }
     }
-    allWpDestination(sort: {order: ASC, fields: title}) {
+    allWpDestination(sort: { order: ASC, fields: title }) {
       edges {
         node {
           ...DestinationFragment

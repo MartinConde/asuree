@@ -1,20 +1,15 @@
-import React, { useState, useEffect } from "react"
-import styled from "styled-components"
-import parse from "html-react-parser"
 import FsLightbox from "fslightbox-react"
 import { graphql } from "gatsby"
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
+import parse from "html-react-parser"
+import React, { useState } from "react"
+import { Link as SmoothLink } from "react-scroll"
+import styled from "styled-components"
+import ImageHeader from "../components/Blocks/ImageHeader"
+import GymCard from "../components/Cards/gymCard"
+import GMap from "../components/DetailPages/gmap"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import GMap from "../components/DetailPages/gmap"
-import ImageHeader from "../components/ImageHeader"
-import GymCard from "../components/gymCard"
-import {
-  Link as SmoothLink,
-  animateScroll as scroll,
-  scrollSpy,
-  scroller,
-} from "react-scroll"
 
 const MainContentWrapper = styled.div`
   width: 100%;
@@ -78,7 +73,7 @@ const CardsWrapper = styled.div`
   flex-wrap: wrap;
   justify-content: flex-start;
 
-  @media(min-width: 1200px) {
+  @media (min-width: 1200px) {
     margin-left: -8px;
     margin-right: -8px;
   }
