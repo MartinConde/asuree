@@ -87,7 +87,7 @@ const InputWrapper = styled.div`
 `
 
 
-function InputField({children}) {
+function TextInput({children}) {
   return (
     <InputWrapper>
      {children}
@@ -96,4 +96,4 @@ function InputField({children}) {
   
 }
 
-export default InputField
+export default TextInput

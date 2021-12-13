@@ -1,12 +1,12 @@
+import React, { useEffect, useState } from "react"
 import { graphql } from "gatsby"
 import { ErrorMessage } from "@hookform/error-message"
 import axios from "axios"
 import { useBreakpoint } from "gatsby-plugin-breakpoints"
 import moment from "moment"
 import "moment/locale/de"
-import React, { useEffect, useState } from "react"
-import "react-date-range/dist/styles.css" // main css file
-import "react-date-range/dist/theme/default.css" // theme css file
+import "react-date-range/dist/styles.css"
+import "react-date-range/dist/theme/default.css"
 import { DateRangePicker } from "react-dates"
 import "react-dates/initialize"
 import "react-dates/lib/css/_datepicker.css"
@@ -14,12 +14,12 @@ import { Controller, useForm } from "react-hook-form"
 import ReactInputDateMask from "react-input-date-mask"
 import Select, { createFilter } from "react-select"
 import styled from "styled-components"
-import InputField from "../components/Anfrage/InputField"
+import TextInput from "../components/Anfrage/TextInput"
 import CalWrapper from "../components/Anfrage/StyleWrappers/CalWrapper"
 import {
   SectionContent,
   SectionTitle,
-  SectionWrapper
+  SectionWrapper,
 } from "../components/Anfrage/StyleWrappers/SectionWrapper"
 import { VisaCheck } from "../components/Anfrage/StyleWrappers/VisaWrapper"
 import SubmitButton from "../components/Anfrage/submitButton"
@@ -553,7 +553,7 @@ const AnfrageFormularNeu = ({ data }) => {
 
                 <SectionContent>
                   <PersonalFieldsRow className="triple">
-                    <InputField>
+                    <TextInput>
                       <input
                         id="name"
                         name="name"
@@ -575,9 +575,9 @@ const AnfrageFormularNeu = ({ data }) => {
                       <ErrorWrapper className="inputError">
                         <ErrorMessage as="span" errors={errors} name="Name" />
                       </ErrorWrapper>
-                    </InputField>
+                    </TextInput>
 
-                    <InputField>
+                    <TextInput>
                       <input
                         id="email"
                         name="email"
@@ -602,14 +602,14 @@ const AnfrageFormularNeu = ({ data }) => {
                       <ErrorWrapper className="inputError">
                         <ErrorMessage as="span" errors={errors} name="Email" />
                       </ErrorWrapper>
-                    </InputField>
+                    </TextInput>
 
                     <Controller
                       control={control}
                       name="Birthday"
                       rules={{ required: "Jeburtstach brooch ick schon.." }}
                       render={({ field: { onChange, onBlur, ref } }) => (
-                        <InputField>
+                        <TextInput>
                           {typeof window !== `undefined` && (
                             <ReactInputDateMask
                               onBlur={onBlur}
@@ -641,7 +641,7 @@ const AnfrageFormularNeu = ({ data }) => {
                               name="Birthday"
                             />
                           </ErrorWrapper>
-                        </InputField>
+                        </TextInput>
                       )}
                     />
                   </PersonalFieldsRow>
@@ -681,7 +681,7 @@ const AnfrageFormularNeu = ({ data }) => {
                       )}
                     />
 
-                    <InputField>
+                    <TextInput>
                       <input
                         id="plzort"
                         name="plzort"
@@ -700,7 +700,7 @@ const AnfrageFormularNeu = ({ data }) => {
                       <ErrorWrapper className="inputError">
                         <ErrorMessage as="span" errors={errors} name="PlzOrt" />
                       </ErrorWrapper>
-                    </InputField>
+                    </TextInput>
                   </PersonalFieldsRow>
                 </SectionContent>
               </SectionWrapper>
