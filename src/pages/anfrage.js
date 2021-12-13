@@ -1,6 +1,6 @@
+import { graphql } from "gatsby"
 import { ErrorMessage } from "@hookform/error-message"
 import axios from "axios"
-import { graphql } from "gatsby"
 import { useBreakpoint } from "gatsby-plugin-breakpoints"
 import moment from "moment"
 import "moment/locale/de"
