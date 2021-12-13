@@ -19,15 +19,15 @@ import CalWrapper from "../components/Anfrage/StyleWrappers/CalWrapper"
 import {
   SectionContent,
   SectionTitle,
-  SectionWrapper,
+  SectionWrapper
 } from "../components/Anfrage/StyleWrappers/SectionWrapper"
 import { VisaCheck } from "../components/Anfrage/StyleWrappers/VisaWrapper"
+import SubmitButton from "../components/Anfrage/submitButton"
 import Summary from "../components/Anfrage/summary"
 import ImageHeader from "../components/Blocks/ImageHeader"
 import Row from "../components/Blocks/row"
-import SubmitButton from "../components/Anfrage/submitButton"
-import GymCard from "../components/Cards/gymCard"
 import AcomCard from "../components/Cards/acomCard"
+import GymCard from "../components/Cards/gymCard"
 import Layout from "../components/layout"
 import countries from "../static/countries.json"
 
