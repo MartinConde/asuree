@@ -21,7 +21,11 @@ span {
 svg {
     height: 6px;
     display: block;
-    margin: 4px 0;
+    margin: 4px 0 4px 0;
+    margin-top: 4px;
+    margin-bottom: 4px;
+    margin-right: 0px;
+    margin-left: 0px;
 }
 
 svg path {
