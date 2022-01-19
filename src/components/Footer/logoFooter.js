@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 
 const LogoWrapper = styled.div`
-margin-right: 50px;
 svg {
     height: 65px;
 }
