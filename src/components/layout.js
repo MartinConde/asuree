@@ -9,7 +9,7 @@ import "./layout.css"
 
 const LazyFooter = React.lazy(() => import('./Footer/footer'))
 
-const Layout = ({ children, light }) => {
+const Layout = ({ children, light, btmSpace }) => {
   const [scroll, setScroll] = useState(false)
 
   useEffect(() => {
@@ -39,7 +39,7 @@ const Layout = ({ children, light }) => {
             
             <Suspense fallback={<div>Loading..</div>}>
               {scroll &&
-              <LazyFooter />
+              <LazyFooter btmSpace={btmSpace} />
             }
             </Suspense>
             

@@ -63,18 +63,7 @@ const InfoBlock = styled.div`
   align-items: flex-start;
 
   @media (min-width: 1200px) {
-    padding: 10px 20px 10px 40px;
-
-    &.reisedaten {
-      width: 45%;
-      padding: 10px 20px 10px 0;
-    }
-    &.gymdaten {
-      width: 45%;
-    }
-    &.preisdaten {
-      width: 10%;
-    }
+    padding: 10px 20px;
   }
 `
 
@@ -91,17 +80,17 @@ const InfoBlockIcon = styled.div`
 `
 
 const InfoBlockContent = styled.div`
-  display: flex;
-  flex: 1 0 auto;
-  width: 100%;
-  justify-content: space-between;
+
   div {
     margin-right: 20px;
   }
   span {
     text-transform: uppercase;
     color: var(--primary);
-    display: block;
+  }
+
+  .preisZsf {
+    font-size: 16px;
   }
 
   &.dualColBlock div {
@@ -116,6 +105,8 @@ export default function Summary({
   gym,
   unterkunft,
   preis,
+  preisGesamt,
+  preisAcomGym
 }) {
   const [open, setOpen] = useState(false)
   return (
@@ -134,7 +125,7 @@ export default function Summary({
               />
             </svg>
           </InfoBlockIcon>
-          <InfoBlockContent className="dualColBlock">
+          <InfoBlockContent>
             <div>
               <span>Anreise:</span> {startdatum && startdatum}
             </div>
@@ -144,7 +135,7 @@ export default function Summary({
           </InfoBlockContent>
         </InfoBlock>
 
-        {/* <InfoBlock className="gymdaten">
+        <InfoBlock className="gymdaten">
           <InfoBlockIcon>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1200">
               <path
@@ -153,7 +144,7 @@ export default function Summary({
               />
             </svg>
           </InfoBlockIcon>
-          <InfoBlockContent className="dualColBlock">
+          <InfoBlockContent>
             <div>
               <span>Gym:</span> {gym}
             </div>
@@ -161,7 +152,7 @@ export default function Summary({
               <span>Unterkunft:</span> {unterkunft}
             </div>
           </InfoBlockContent>
-        </InfoBlock> */}
+        </InfoBlock>
 
         <InfoBlock className="preisdaten">
           <InfoBlockIcon>
@@ -174,12 +165,15 @@ export default function Summary({
           </InfoBlockIcon>
           <InfoBlockContent>
             <div>
-              <span>Preis:</span> Einmaliger Administrativer Aufwand:{" "}
-              990
+              <span>Preis:</span>  {preisGesamt > 0 && 'ca. ' + new Intl.NumberFormat("ch-CH").format(Math.round(preisGesamt)) + ' CHF'} 
+              <div className="preisZsf">
+              Unterkunft & Gym {dauer > 0 && '( ' + dauer + ' Tage ) '}: {preisAcomGym > 0 && new Intl.NumberFormat("ch-CH").format(Math.round(preisAcomGym)) + ' CHF'}
+              <br/>
+              Einmaliger Administrativer Aufwand:{" "}990 CHF
               <br />
-              Hin -und Rückflug: ca. 600
-              <br />
-              Unterkunft & Gym (pro Woche): {preis && preis}
+              Hin -und Rückflug: ca. 600 CHF
+              </div>
+              
             </div>
           </InfoBlockContent>
         </InfoBlock>

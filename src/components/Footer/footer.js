@@ -9,6 +9,7 @@ const FooterWrapper = styled.footer`
   width: 100%;
   overflow: hidden;
   color: #fff;
+  margin-bottom: ${props => props.btmSpace ? "169px" : "0px"};
 `
 
 const FooterContent = styled.div`
@@ -143,7 +144,7 @@ const BgWrapper = styled.div`
   }
 `
 
-const Footer = () => {
+const Footer = ({btmSpace}) => {
   const provinces = useStaticQuery(graphql`
     query ProvinceQuery {
       allWpDestination(sort: { fields: title, order: ASC }) {
@@ -181,7 +182,7 @@ const Footer = () => {
   )
 
   return (
-    <FooterWrapper>
+    <FooterWrapper btmSpace={btmSpace}>
       <FooterContent>
         <LogoWrapper>
           <LogoFooter />

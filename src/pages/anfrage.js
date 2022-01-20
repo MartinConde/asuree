@@ -201,6 +201,7 @@ const FormWrapper = styled.form`
   margin: 15px;
 `
 
+
 const AnfrageFormularNeu = ({ data }) => {
   const [gymData, setGymData] = useState()
   const [dataLoaded, setDataLoaded] = useState(false)
@@ -363,6 +364,18 @@ const AnfrageFormularNeu = ({ data }) => {
 
   const tagedauer = Math.abs(startDate && startDate.diff(endDate, "days")) + 1
 
+  // const preisAcomGym = acomPreis && Number(acomPreis) + Number(gymData.ACF_Gyms.price)
+
+  const preisAcomWoche = acomPreis && Number(acomPreis * 7)
+
+  const preisGymWoche = Number(gymData && gymData.ACF_Gyms.price)
+
+  const preisAcomGym = preisAcomWoche + preisGymWoche
+
+  const preisKomplett = (tagedauer / 7) * (preisAcomGym) + 990 + 660
+
+  const preisAcomGymKomplett = (tagedauer / 7) * (preisAcomGym)
+
   const Difference_In_Time =
     formDaten &&
     new Date(formDaten.Abreise).getTime() -
@@ -371,7 +384,7 @@ const AnfrageFormularNeu = ({ data }) => {
   const Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24)
 
   return (
-    <Layout light={data.wpPage.ACF_Global.lightHeader}>
+    <Layout light={data.wpPage.ACF_Global.lightHeader} btmSpace>
       <ImageHeader
         image={data.wpPage.featuredImage.node.localFile}
         imagealt={data.wpPage.featuredImage.node.altText}
@@ -723,14 +736,15 @@ const AnfrageFormularNeu = ({ data }) => {
             <Summary
               startdatum={formDaten && formDaten.Ankunft}
               enddatum={formDaten && formDaten.Abreise}
-              dauer={JSON.stringify(
-                startDate && startDate.diff(endDate, "days")
-              )}
+              dauer={tagedauer}
+              preisGesamt={preisKomplett}
               gym={gymData.title}
               unterkunft={formUnterkunft}
+              preisAcomGym={preisAcomGymKomplett}
               preis={
                 acomPreis && Number(acomPreis) + Number(gymData.ACF_Gyms.price)
               }
+              // preisGesamt={dauer / 7}
             />
           </>
         ) : (
