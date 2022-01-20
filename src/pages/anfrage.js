@@ -24,6 +24,7 @@ import {
 import { VisaCheck } from "../components/Anfrage/StyleWrappers/VisaWrapper"
 import SubmitButton from "../components/Anfrage/submitButton"
 import Summary from "../components/Anfrage/summary"
+import Success from "../components/Anfrage/success"
 import ImageHeader from "../components/Blocks/ImageHeader"
 import Row from "../components/Blocks/row"
 import AcomCard from "../components/Cards/acomCard"
@@ -361,6 +362,8 @@ const AnfrageFormularNeu = ({ data }) => {
   const formLand = watch("Land")
   const formPlzort = watch("PlzOrt")
   const visaFeld = watch("Visahilfe")
+
+  console.log(gymData)
 
   const tagedauer = Math.abs(startDate && startDate.diff(endDate, "days")) + 1
 
@@ -752,7 +755,8 @@ const AnfrageFormularNeu = ({ data }) => {
             
           </>
         ) : (
-          <div>jesendet</div>
+          // <Success locationURL={} location={}/>
+          <Success/>
         )
       ) : (
         <Row>
