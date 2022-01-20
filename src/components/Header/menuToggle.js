@@ -21,11 +21,7 @@ span {
 svg {
     height: 6px;
     display: block;
-    margin: 4px 0 4px 0;
-    margin-top: 4px;
-    margin-bottom: 4px;
-    margin-right: 0px;
-    margin-left: 0px;
+    margin: 4px auto;
 }
 
 svg path {
@@ -51,13 +47,13 @@ svg path {
 .hamRight {
     width: 100%;
     height: 40px;
-    transform: translate(5px,-22px) rotate(-45deg);
+    transform: translate(7px,-21px) rotate(-45deg);
 }
 
 .hamLeft {
     width: 100%;
     height: 40px;
-    transform: translate(-10px,10px) rotate(45deg) scaleX(-1);
+    transform: translate(-8px,10px) rotate(45deg) scaleX(-1);
 }
 
 &.mob-nav-open .hamRight_band {
