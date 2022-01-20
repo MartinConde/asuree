@@ -3,12 +3,10 @@ import styled from "styled-components"
 
 const IconButton = styled.button`
   /* background: var(--secondary); */
-  background-image: linear-gradient(
-    to right,
-    var(--secondary) 30%,
-    var(--primary) 71%,
-    var(--secondary) 100%
-  );
+  background-image: ${props =>
+    props.lightBtn
+      ? "linear-gradient(to right,var(--primary) 30%,var(--secondary) 71%,var(--primary) 100%)"
+      : "linear-gradient(to right,var(--secondary) 30%,var(--primary) 71%,var(--secondary) 100%)"};
   background-size: 200% auto;
   box-shadow: 0 2px 10px var(--secondary);
   color: #fff;
@@ -58,11 +56,11 @@ const IconButton = styled.button`
   }
 `
 
-export default function SubmitButton({ text }) {
+export default function SubmitButton({ text, lightBtn }) {
   return (
-    <IconButton type="submit">
+    <IconButton type="submit" lightBtn={lightBtn}>
       <div>
-        <span>{text}</span>
+        <span className="btnText">{text}</span>
 
         <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 42 29">
           <g clipPath="url(#clip0)" fill="#fff">

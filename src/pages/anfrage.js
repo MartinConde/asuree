@@ -729,11 +729,9 @@ const AnfrageFormularNeu = ({ data }) => {
               </SectionWrapper>
 
               <SectionWrapper>
-                <SubmitButton text="Anfrage Abschicken" />
+                <SubmitButton text="Anfrage Abschicken"/>
               </SectionWrapper>
-            </FormWrapper>
-
-            <Summary
+              <Summary
               startdatum={formDaten && formDaten.Ankunft}
               enddatum={formDaten && formDaten.Abreise}
               dauer={tagedauer}
@@ -745,7 +743,13 @@ const AnfrageFormularNeu = ({ data }) => {
                 acomPreis && Number(acomPreis) + Number(gymData.ACF_Gyms.price)
               }
               // preisGesamt={dauer / 7}
-            />
+            >
+              <SubmitButton text="Anfrage Abschicken" lightBtn />
+              <p className="disclaimer">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce bibendum rhoncus nibh, in imperdiet eros congue in.</p>
+              </Summary>
+            </FormWrapper>
+
+            
           </>
         ) : (
           <div>jesendet</div>

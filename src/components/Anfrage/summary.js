@@ -18,7 +18,7 @@ const Wrapper = styled.div`
 
   @media (max-width: 1199px) {
     transition: 0.4s all ease-out;
-    transform: translateY(calc(100% - 120px));
+    transform: translateY(calc(100% - 150px));
     padding: 10px;
 
     &.open {
@@ -50,7 +50,21 @@ const WrapperContent = styled.div`
   margin: 0 auto;
 
   @media (max-width: 1199px) {
-    flex-direction: column-reverse;
+    .reisedaten {
+      order: 2;
+      width: 100%;
+      margin-bottom: 20px;
+    }
+    .preisdaten {
+      order: 1;
+      width: 100%;
+      margin-bottom: 20px;
+    }
+    .btnHinweise {
+      order: 3;
+      width: 100%;
+    }
+    /* flex-direction: column-reverse; */
   }
 `
 
@@ -64,6 +78,16 @@ const InfoBlock = styled.div`
 
   @media (min-width: 1200px) {
     padding: 10px 20px;
+
+    &.reisedaten {
+      width: 35%;
+    }
+    &.preisdaten {
+      width: 35%;
+    }
+    &.btnHinweise {
+      width: 30%;
+    }
   }
 `
 
@@ -84,17 +108,27 @@ const InfoBlockContent = styled.div`
   div {
     margin-right: 20px;
   }
-  span {
+  span:not(.btnText):not(.preisGesamt) {
     text-transform: uppercase;
     color: var(--primary);
   }
 
   .preisZsf {
     font-size: 16px;
+    margin-top: 10px;
   }
 
   &.dualColBlock div {
     width: 50%;
+  }
+
+  .disclaimer {
+    margin-top: 10px;
+    font-size: 15px;
+  }
+
+  .preisGesamt {
+    font-size: 24px;
   }
 `
 
@@ -106,7 +140,8 @@ export default function Summary({
   unterkunft,
   preis,
   preisGesamt,
-  preisAcomGym
+  preisAcomGym,
+  children
 }) {
   const [open, setOpen] = useState(false)
   return (
@@ -132,10 +167,16 @@ export default function Summary({
             <div>
               <span>Abreise:</span> {enddatum !== "Invalid date" && enddatum}
             </div>
+            <div>
+              <span>Gym:</span> {gym}
+            </div>
+            <div>
+              <span>Unterkunft:</span> {unterkunft}
+            </div>
           </InfoBlockContent>
         </InfoBlock>
 
-        <InfoBlock className="gymdaten">
+        {/* <InfoBlock className="gymdaten">
           <InfoBlockIcon>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1200">
               <path
@@ -152,7 +193,7 @@ export default function Summary({
               <span>Unterkunft:</span> {unterkunft}
             </div>
           </InfoBlockContent>
-        </InfoBlock>
+        </InfoBlock> */}
 
         <InfoBlock className="preisdaten">
           <InfoBlockIcon>
@@ -165,7 +206,7 @@ export default function Summary({
           </InfoBlockIcon>
           <InfoBlockContent>
             <div>
-              <span>Preis:</span>  {preisGesamt > 0 && 'ca. ' + new Intl.NumberFormat("ch-CH").format(Math.round(preisGesamt)) + ' CHF'} 
+              <span>Preis:</span>  <span className="preisGesamt">{preisGesamt > 0 && 'ca. ' + new Intl.NumberFormat("ch-CH").format(Math.round(preisGesamt)) + ' CHF'} </span>
               <div className="preisZsf">
               Unterkunft & Gym {dauer > 0 && '( ' + dauer + ' Tage ) '}: {preisAcomGym > 0 && new Intl.NumberFormat("ch-CH").format(Math.round(preisAcomGym)) + ' CHF'}
               <br/>
@@ -177,6 +218,13 @@ export default function Summary({
             </div>
           </InfoBlockContent>
         </InfoBlock>
+
+        <InfoBlock className="btnHinweise">
+          <InfoBlockContent>
+            {children}
+          </InfoBlockContent>
+        </InfoBlock>
+
       </WrapperContent>
     </Wrapper>
   )

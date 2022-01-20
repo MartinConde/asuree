@@ -9,7 +9,11 @@ const FooterWrapper = styled.footer`
   width: 100%;
   overflow: hidden;
   color: #fff;
-  margin-bottom: ${props => props.btmSpace ? "169px" : "0px"};
+  margin-bottom: ${props => props.btmSpace ? "140px" : props.btmSpaceSmall ? "47px" : "0px"};
+
+  @media(min-width: 1200px) {
+    margin-bottom: ${props => props.btmSpace ? "221px" : "0px"};
+  }
 `
 
 const FooterContent = styled.div`
@@ -141,10 +145,11 @@ const BgWrapper = styled.div`
 
   .gatsby-image-wrapper {
     width: 100vw !important;
+    height: 100%;
   }
 `
 
-const Footer = ({btmSpace}) => {
+const Footer = ({btmSpace, btmSpaceSmall}) => {
   const provinces = useStaticQuery(graphql`
     query ProvinceQuery {
       allWpDestination(sort: { fields: title, order: ASC }) {
@@ -182,7 +187,7 @@ const Footer = ({btmSpace}) => {
   )
 
   return (
-    <FooterWrapper btmSpace={btmSpace}>
+    <FooterWrapper btmSpace={btmSpace} btmSpaceSmall={btmSpaceSmall}>
       <FooterContent>
         <LogoWrapper>
           <LogoFooter />

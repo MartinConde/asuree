@@ -80,10 +80,14 @@ const Title = styled.span`
   line-height: 1;
 
   @media (min-width: 768px) {
-    font-size: 100px;
+    font-size: 80px;
   }
 
   @media (min-width: 1300px) {
+    font-size: 90px;
+  }
+
+  @media (min-width: 1800px) {
     font-size: 110px;
   }
 `

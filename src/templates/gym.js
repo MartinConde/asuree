@@ -246,7 +246,7 @@ export default function GymTemplate({ data }) {
   }, [data])
 
   return (
-    <Layout light={gym.ACF_Global.lightHeader}>
+    <Layout light={gym.ACF_Global.lightHeader} btmSpaceSmall>
       <SEO title="home" />
 
       <ImageHeader
@@ -359,15 +359,12 @@ export default function GymTemplate({ data }) {
             <SideBarTop>
               <h3>
                 Ab CHF{" "}
-                {Number(gym.ACF_Gyms.price) +
-                  Number(
-                    gym.ACF_Gyms.accommodations[0].ACF_Accommodations.preis
-                  )}{" "}
+                {Number(gym.ACF_Gyms.price) + (Number(gym.ACF_Gyms.accommodations[0].ACF_Accommodations.preis) * 7)}{" "}
                 <small>pro Woche *</small>
               </h3>
               <div className="priceDetails">
-                <p>Inklusive günstiger Unterkunft</p>
-                <p>Exklusive Administrationsaufwand von 990 CHF und Flügen</p>
+                <p>*Inklusive günstiger Unterkunft</p>
+                <p>*Exklusive Administrationsaufwand von 990 CHF und Flügen</p>
               </div>
             </SideBarTop>
             <Button url="/anfrage" text="Jetzt buchen" />
