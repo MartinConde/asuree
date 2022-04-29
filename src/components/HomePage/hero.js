@@ -16,25 +16,30 @@ const HeroWrapper = styled.div`
   margin-bottom: var(--row-mgbtm);
   overflow: hidden;
 
-  @media(min-height: 736px) and (max-width: 767px) {
+  @media (min-height: 736px) and (max-width: 767px) {
     height: 100vh;
   }
 
-  @media(min-width: 768px) {
+  @media (min-width: 768px) {
     height: 60vh;
     min-height: 60vh;
   }
 
-  @media(min-width: 1200px) {
+  @media (min-width: 992px) and (orientation: landscape) {
+    height: 70vh;
+    min-height: 70vh;
+  }
+
+  @media (min-width: 1200px) {
     overflow: visible;
     min-height: 90vh;
   }
 
-  @media(min-width: 1600px) {
+  @media (min-width: 1600px) {
     min-height: 80vh;
   }
 
-  @media(min-width: 2200px) {
+  @media (min-width: 2200px) {
     min-height: 60vh;
   }
 `
@@ -51,8 +56,22 @@ const HeroContent = styled.div`
   justify-content: center;
   flex-direction: column;
 
-  @media(min-width: 768px) {
-    flex-direction: row;
+  @media (min-width: 768px) {
+    flex-direction: row-reverse;
+    
+    .mainContent {
+      text-align: left;
+      margin-right: auto;
+      padding: 0 50px;
+    }
+  }
+
+  @media (min-width: 992px) and (orientation: landscape) {
+    .mainContent {
+      width: 50%;
+      max-width: 500px;
+      
+    }
   }
 
   @media (min-width: 1200px) {
@@ -60,8 +79,13 @@ const HeroContent = styled.div`
     text-align: left;
     height: auto;
 
-    > div:first-child {
+    /* > div:first-child {
       width: 65%;
+    } */
+
+    .mainContent {
+      width: 50%;
+      max-width: 700px;
     }
   }
 `
@@ -70,22 +94,21 @@ const HeroBg = styled.div`
   /* display: none; */
 
   display: block;
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -5;
-    opacity: .3;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -5;
+  opacity: 0.3;
 
-    .gatsby-image-wrapper {
-      height: 80vh;
-    }
+  .gatsby-image-wrapper {
+    height: 80vh;
+  }
 
-    .gatsby-image-wrapper img {
-      object-position: bottom;
-    }
-
+  .gatsby-image-wrapper img {
+    object-position: bottom;
+  }
 
   @media (min-width: 768px) {
     display: block;
@@ -107,21 +130,35 @@ const HeroBg = styled.div`
 `
 
 const FighterImg = styled.div`
-  // margin-bottom: -35px;
-  margin: 0 auto -35px auto;
+  margin: 0 auto -40px -50px;
   position: relative;
   z-index: -1;
   max-width: 50vw;
-  max-width: 200px;
+  max-width: 350px;
+
+  @media (min-width: 768px) {
+    margin: 0 auto -40px -50px;
+  }
+
+  @media (min-width: 992px) and (orientation: landscape) {
+    max-width: 450px;
+  }
 
   @media (min-width: 1200px) {
-    padding-left: 2vw;
-    max-width: 30vw;
+    padding-right: 2vw;
+    max-width: 40vw;
+    margin: 0 auto 0 0;
   }
 
   @media (min-width: 1600px) {
-    padding-left: 2vw;
-    max-width: 100%;
+    padding-right: 2vw;
+    max-width: 35vw;
+    margin: 0 auto 0 -150px;
+  }
+
+  @media (min-width: 2200px) {
+    padding-right: 2vw;
+    max-width: 30vw;
   }
 `
 
@@ -147,7 +184,7 @@ const IntroText = styled.div`
   font-size: 18px;
   font-family: "Oswald Bold";
   line-height: 1.5;
-  max-width: 500px;
+  /* max-width: 500px; */
   margin: 0 auto;
 
   br {
@@ -161,6 +198,36 @@ const IntroText = styled.div`
     br {
       display: block;
     }
+  }
+`
+
+const HashTag = styled.div`
+  display: none;
+
+  @media (min-width: 1200px) {
+    display: block;
+    position: absolute;
+    font-family: "FIGHTER BRUSH Regular", -apple-system, BlinkMacSystemFont,
+      Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans,
+      Helvetica Neue, sans-serif;
+    font-size: 12vw;
+    z-index: -1;
+    top: 50%;
+    left: 0;
+    transform: rotate(90deg) translate(-5%, 70%);
+    opacity: 0.3;
+    font-size: 15vmin;
+    top: 40%;
+  }
+
+  @media (min-width: 1600px) {
+    font-size: 18vmin;
+    top: 50%;
+  }
+
+  @media (min-width: 2200px) {
+    font-size: 16vmin;
+    top: 60%;
   }
 `
 
@@ -196,7 +263,7 @@ const Hero = () => {
   return (
     <HeroWrapper>
       <HeroContent>
-        <div>
+        <div className="mainContent">
           <MainTitle>
             <small>{herodata.wpPage.ACF_Home.heroH1Small}</small>{" "}
             {herodata.wpPage.ACF_Home.heroH1Large}
@@ -209,6 +276,9 @@ const Hero = () => {
             alt="dsdfsfd"
           />
         </FighterImg>
+        <HashTag>
+          <span>#TRAINREAL</span>
+        </HashTag>
       </HeroContent>
       <SearchBar withButton />
 

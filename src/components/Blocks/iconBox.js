@@ -1,5 +1,6 @@
 import React from "react"
 import styled from "styled-components"
+import parse from "html-react-parser"
 
 const IconBoxWrapper = styled.div`
   text-align: center;
@@ -8,8 +9,18 @@ const IconBoxWrapper = styled.div`
   padding: 10px;
 
   @media(min-width:1200px) {
-    width: 25%;
+    width: 50%;
+    padding: 20px 40px;
+    display: flex;
+    text-align: left;
+    align-items: flex-start;
+
+    .iconTitle {
+      margin-left: 25px;
+    }
   }
+
+  
 `
 
 const IconBoxIcon = styled.div`
@@ -53,9 +64,10 @@ margin-bottom: 10px;
 
 const IconBoxContent = styled.div``
 
-export default function IconBox({ title, content, children }) {
+export default function IconBox({ title, content, icon }) {
   return (
     <IconBoxWrapper>
+      
       <IconBoxIcon>
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -69,10 +81,13 @@ export default function IconBox({ title, content, children }) {
             clipRule="evenodd"
           ></path>
         </svg>
-        <Icon>{children}</Icon>
+        <Icon>{parse(icon)}</Icon>
       </IconBoxIcon>
+      <div className="iconTitle">
       <IconBoxTitle>{title}</IconBoxTitle>
-      <IconBoxContent>{content}</IconBoxContent>
+      
+      <IconBoxContent>{parse(content)}</IconBoxContent>
+      </div>
     </IconBoxWrapper>
   )
 }

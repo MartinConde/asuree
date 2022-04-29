@@ -1,19 +1,33 @@
-@import '../static/fonts/fonts.css';
+@import "../static/fonts/fonts.css";
 
 :root {
-  --primary: #0CB2F7;
+  --primary: #0cb2f7;
   --secondary: #000033;
   --secondary-trans: rgba(0, 0, 51, 0.4);
   --light-text: gray;
   --tertiary: yellow;
   --row-mgbtm: 40px;
-  --row-pd: 100px;
+  --row-pd: 40px;
+}
+
+@media all and (min-width: 768px) {
+  :root {
+    --row-mgbtm: 60px;
+    --row-pd: 60px;
+  }
 }
 
 @media all and (min-width: 1200px) {
   :root {
+    --row-mgbtm: 70px;
+    --row-pd: 70px;
+  }
+}
+
+@media all and (min-width: 1920px) {
+  :root {
     --row-mgbtm: 100px;
-    --row-pd: 200px;
+    --row-pd: 100px;
   }
 }
 
@@ -26,17 +40,18 @@ html {
   overflow-x: hidden;
 }
 
-*, *:before, *:after {
+*,
+*:before,
+*:after {
   box-sizing: inherit;
 }
-
 
 body {
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: hsla(0, 0%, 0%, 0.8);
-  font-family: 'Oswald', georgia, serif;
+  font-family: "Oswald", georgia, serif;
   font-weight: normal;
   word-wrap: break-word;
   font-kerning: normal;
@@ -81,7 +96,7 @@ a {
   background-color: transparent;
   -webkit-text-decoration-skip: objects;
   text-decoration: none;
-  transition: .25s all ease-out;
+  transition: 0.25s all ease-out;
 }
 a:active,
 a:hover {
@@ -111,8 +126,9 @@ h1 {
   padding-top: 0;
   margin-bottom: 1.45rem;
   color: inherit;
-  font-family: 'FIGHTER BRUSH Regular', -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: "FIGHTER BRUSH Regular", -apple-system, BlinkMacSystemFont,
+    Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans,
+    Helvetica Neue, sans-serif;
   font-weight: normal;
   text-rendering: optimizeLegibility;
   font-size: 2.25rem;
@@ -291,8 +307,9 @@ h2 {
   padding-top: 0;
   margin-bottom: 1.45rem;
   color: inherit;
-  font-family: 'Oswald Bold', -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: "Oswald Bold", -apple-system, BlinkMacSystemFont, Segoe UI,
+    Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
+    sans-serif;
   font-weight: bold;
   text-rendering: optimizeLegibility;
   font-size: 1.62671rem;
@@ -308,8 +325,9 @@ h3 {
   padding-top: 0;
   margin-bottom: 1.45rem;
   color: inherit;
-  font-family: 'Oswald Bold', -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: "Oswald Bold", -apple-system, BlinkMacSystemFont, Segoe UI,
+    Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
+    sans-serif;
   font-weight: bold;
   text-rendering: optimizeLegibility;
   font-size: 1.38316rem;

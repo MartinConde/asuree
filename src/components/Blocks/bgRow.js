@@ -43,7 +43,7 @@ const BgRowBg = styled.div`
 `
 
 const BgRowContent = styled.div`
-  max-width: ${props => (props.fullWidth ? "1920px" : "1200px")};
+  max-width: ${props => (props.fullWidth ? "1920px" : props.wide ? "1600px" : "1200px")};
   margin: 0 auto;
   padding-top: ${props => (props.withPadding ? "0" : " var(--row-pd)")};
   padding-bottom: ${props => (props.withPadding ? "0" : " var(--row-pd)")};
@@ -70,6 +70,7 @@ const BgSepBtm = styled.div`
 export default function BgRow({
   children,
   fullWidth,
+  wide,
   withPadding,
   overShoot,
   bgImage,
@@ -87,7 +88,7 @@ export default function BgRow({
         />
       </BgSepTop>
 
-      <BgRowContent fullWidth={fullWidth} withPadding={withPadding}>
+      <BgRowContent fullWidth={fullWidth} wide={wide} withPadding={withPadding}>
         {children}
       </BgRowContent>
       <BgRowBg overlay={overlay} hideMob={hideMob}>

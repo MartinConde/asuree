@@ -15,6 +15,7 @@ const IntroWrapper = styled.div`
 
   @media(min-width: 1200px) {
     padding: 0;
+    margin-bottom: ${props => props.mBtm ? "40px" : "20px"};
   }
 `
 
@@ -22,9 +23,9 @@ const IntroTitle = styled.h2``
 
 const IntroContent = styled.div``
 
-export default function IntroText({title, content}) {
+export default function IntroText({title, content, mBtm}) {
   return (
-    <IntroWrapper>
+    <IntroWrapper mBtm={mBtm}>
       <IntroTitle>{title}</IntroTitle>
       <IntroContent>{parse(content)}</IntroContent>
     </IntroWrapper>

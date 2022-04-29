@@ -206,6 +206,26 @@ const HashWrapper = styled.div`
   }
 `
 
+const HashWrapperMap = styled.div`
+  display: none;
+
+  @media (min-width: 1200px) {
+    background: var(--secondary);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    a {
+      width: calc(50% - 10px);
+      text-align: center;
+    }
+
+    a:last-child {
+      width: 100%;
+    }
+  }
+`
+
 const StyledHashLink = styled(SmoothLink)`
   padding: 5px 10px;
   margin: 2px 5px;
@@ -221,6 +241,10 @@ const StyledHashLink = styled(SmoothLink)`
 
   @media (min-width: 1200px) {
     font-size: 22px;
+
+    &.small {
+      font-size: 18px;
+    }
   }
 `
 
@@ -294,7 +318,7 @@ export default function GymTemplate({ data }) {
           offset={-175}
           duration={500}
         >
-          unterkuenfte
+          unterkünfte
         </StyledHashLink>
       </HashWrapper>
 
@@ -359,7 +383,11 @@ export default function GymTemplate({ data }) {
             <SideBarTop>
               <h3>
                 Ab CHF{" "}
-                {Number(gym.ACF_Gyms.price) + (Number(gym.ACF_Gyms.accommodations[0].ACF_Accommodations.preis) * 7)}{" "}
+                {Number(gym.ACF_Gyms.price) +
+                  Number(
+                    gym.ACF_Gyms.accommodations[0].ACF_Accommodations.preis
+                  ) *
+                    7}{" "}
                 <small>pro Woche *</small>
               </h3>
               <div className="priceDetails">
@@ -378,6 +406,41 @@ export default function GymTemplate({ data }) {
                 uioptions={{ disableDefaultUI: true }}
               />
             </div>
+            <HashWrapperMap>
+              <StyledHashLink
+                className="small"
+                activeClass="active"
+                to="info"
+                spy={true}
+                smooth={true}
+                offset={-200}
+                duration={500}
+              >
+                Info
+              </StyledHashLink>
+              <StyledHashLink
+                className="small"
+                activeClass="active"
+                to="location"
+                spy={true}
+                smooth={true}
+                offset={-150}
+                duration={500}
+              >
+                location
+              </StyledHashLink>
+              <StyledHashLink
+                className="small"
+                activeClass="active"
+                to="unterkuenfte"
+                spy={true}
+                smooth={true}
+                offset={-175}
+                duration={500}
+              >
+                unterkünfte
+              </StyledHashLink>
+            </HashWrapperMap>
           </SideBarContent>
         </SideBar>
       </MainContentWrapper>
