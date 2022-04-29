@@ -139,7 +139,7 @@ export const pageQuery = graphql`
         lightHeader
       }
     }
-    allWpDestination {
+    allWpDestination(filter: {status: {eq: "publish"}}) {
       edges {
         node {
           title

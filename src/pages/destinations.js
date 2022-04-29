@@ -30,6 +30,8 @@ export default function Destinations({ data }) {
     return e.ACF_Destinations.gyms
   })
 
+  console.log(bigCities)
+
   return (
     <Layout light={data.wpPage.ACF_Global.lightHeader}>
       <SEO title="home" />
@@ -82,7 +84,7 @@ export const pageQuery = graphql`
         lightHeader
       }
     }
-    allWpDestination(sort: { order: ASC, fields: title }) {
+    allWpDestination(filter: {status: {eq: "publish"}}, sort: { order: ASC, fields: title }) {
       edges {
         node {
           ...DestinationFragment
