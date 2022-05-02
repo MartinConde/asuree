@@ -133,7 +133,7 @@ export const pageQuery = graphql`
               gatsbyImageData(layout: FULL_WIDTH)
             }
           }
-        }
+        } 
       }
       ACF_Global {
         lightHeader

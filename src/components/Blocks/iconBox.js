@@ -4,16 +4,24 @@ import parse from "html-react-parser"
 
 const IconBoxWrapper = styled.div`
   text-align: center;
-  width: 50%;
+  width: 100%;
   color: #fff;
   padding: 10px;
 
-  @media(min-width:1200px) {
+  @media(min-width:768px) {
     width: 50%;
     padding: 20px 40px;
     display: flex;
     text-align: left;
     align-items: flex-start;
+
+    .iconTitle {
+      margin-left: 15px;
+    }
+  }
+
+  @media(min-width:1200px) {
+    padding: 20px;
 
     .iconTitle {
       margin-left: 25px;

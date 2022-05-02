@@ -13,7 +13,7 @@ const CardsWrapper = styled.div`
 
 export default function FaveGyms({ faves }) {
 
-
+console.log(faves)
     return (
         <CardsWrapper>
             {faves.allWpGym.edges.map(({ node }) => (
