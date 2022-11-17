@@ -33,7 +33,7 @@ module.exports = {
     {
       resolve: `gatsby-source-wordpress`,
       options: {
-        url: `https://wordpress-332056-1932566.cloudwaysapps.com/graphql`,
+        url: `https://wordpress-796114-2722983.cloudwaysapps.com/graphql`,
       },
     },
     {

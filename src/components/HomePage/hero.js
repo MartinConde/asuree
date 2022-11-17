@@ -242,14 +242,14 @@ const Hero = () => {
           heroBackground {
             localFile {
               childImageSharp {
-                gatsbyImageData(layout: FULL_WIDTH)
+                gatsbyImageData(layout: FULL_WIDTH, placeholder: BLURRED)
               }
             }
           }
           heroFighter {
             localFile {
               childImageSharp {
-                gatsbyImageData(layout: CONSTRAINED)
+                gatsbyImageData(layout: CONSTRAINED, placeholder: BLURRED)
               }
             }
           }
