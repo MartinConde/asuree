@@ -76,11 +76,6 @@ const GymCount = styled.div`
   justify-content: center;
 `
 
-const Info = styled.p`
-  margin-bottom: 0;
-  font-weight: bold;
-`
-
 const Excerpt = styled.p`
   margin-top: 15px;
 `

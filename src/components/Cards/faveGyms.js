@@ -1,5 +1,4 @@
 import React from "react"
-import { Link, graphql } from "gatsby"
 import styled from "styled-components"
 import GymCard from './gymCard'
 
@@ -13,7 +12,7 @@ const CardsWrapper = styled.div`
 
 export default function FaveGyms({ faves }) {
 
-console.log(faves)
+// console.log(faves)
     return (
         <CardsWrapper>
             {faves.allWpGym.edges.map(({ node }) => (

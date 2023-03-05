@@ -54,12 +54,6 @@ const CardsWrapper = styled.div`
   justify-content: flex-start;
 `
 
-const PersonalFields = styled.div`
-  width: 100%;
-  max-width: 600px;
-  margin: 0 auto;
-`
-
 const PersonalFieldsRow = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -363,7 +357,7 @@ const AnfrageFormularNeu = ({ data }) => {
   const formPlzort = watch("PlzOrt")
   const visaFeld = watch("Visahilfe")
 
-  console.log(gymData)
+  // console.log(gymData)
 
   const tagedauer = Math.abs(startDate && startDate.diff(endDate, "days")) + 1
 

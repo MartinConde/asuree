@@ -14,7 +14,7 @@ const LogoWrapper = styled.div`
   }
 `
 
-function Logo({}) {
+function Logo() {
   return (
     <LogoWrapper>
       <svg

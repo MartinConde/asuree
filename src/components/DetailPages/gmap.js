@@ -252,7 +252,7 @@ function GMap({
   return isLoaded ? (
     <GoogleMap
       mapContainerStyle={{ width: "100%", height: height }}
-      options={{ styles: test }}
+      // options={{ styles: test }}
       center={{ lat: latitude, lng: longitude }}
       zoom={zoom ? zoom : 18}
       //   onLoad={onLoad}

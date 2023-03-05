@@ -105,10 +105,10 @@ export default function ImageHeader({
   showIcons,
   showGalBtn,
 }) {
-  const breakpoints = useBreakpoint()
+  // const breakpoints = useBreakpoint()
   return (
     <Wrapper noTitle={noTitle}>
-      <GatsbyImage image={getImage(image)} alt={imageAlt} />
+      <GatsbyImage image={getImage(image)} alt={imageAlt ? imageAlt : title} />
       {!noTitle && <Title light={light}>{title}</Title>}
       <Content>
         <IconBar

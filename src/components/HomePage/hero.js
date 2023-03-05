@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react"
+import React from "react"
 import SearchBar from "../Search/searchBar"
 import styled from "styled-components"
 import { graphql, useStaticQuery } from "gatsby"
-import { StaticImage, GatsbyImage, getImage } from "gatsby-plugin-image"
+import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import { useBreakpoint } from "gatsby-plugin-breakpoints"
 import parse from "html-react-parser"
 

@@ -182,9 +182,9 @@ const Footer = ({btmSpace, btmSpaceSmall}) => {
     provinces.wp.seitenweiteDaten.globalOptions.footerBackground.localFile
   )
 
-  console.log(
-    provinces.wp.seitenweiteDaten.globalOptions.footerBackground.localFile
-  )
+  // console.log(
+  //   provinces.wp.seitenweiteDaten.globalOptions.footerBackground.localFile
+  // )
 
   return (
     <FooterWrapper btmSpace={btmSpace} btmSpaceSmall={btmSpaceSmall}>

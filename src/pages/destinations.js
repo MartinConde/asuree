@@ -30,7 +30,7 @@ export default function Destinations({ data }) {
     return e.ACF_Destinations.gyms
   })
 
-  console.log(bigCities)
+  // console.log(bigCities)
 
   return (
     <Layout light={data.wpPage.ACF_Global.lightHeader}>

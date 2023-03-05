@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React from "react"
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import parse from "html-react-parser"
 import styled from "styled-components"
