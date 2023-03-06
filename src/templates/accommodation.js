@@ -13,7 +13,7 @@ export default function AccommodationTemplate({ data }) {
     </Layout>
   )
 }
-export const query = graphql`
+export const pageQuery = graphql`
   query($slug: String!) {
     allWpAccommodation(filter: { slug: { eq: $slug } }) {
       edges {

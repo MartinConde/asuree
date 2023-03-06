@@ -62,7 +62,7 @@ export default function Destinations({ data }) {
 
 export const pageQuery = graphql`
   query {
-    wpPage(slug: { eq: "destinations" }) {
+    wpPage(slug: {eq: "destinations"}) {
       id
       title
       featuredImage {
@@ -84,7 +84,7 @@ export const pageQuery = graphql`
         lightHeader
       }
     }
-    allWpDestination(filter: {status: {eq: "publish"}}, sort: { order: ASC, fields: title }) {
+    allWpDestination(filter: {status: {eq: "publish"}}, sort: {title: ASC}) {
       edges {
         node {
           ...DestinationFragment

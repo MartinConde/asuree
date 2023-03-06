@@ -247,7 +247,7 @@ const ThaiMap = () => {
     }
   `)
 
-  const [location, setLocation] = useState("Bangkok")
+  const [location, setLocation] = useState("Krabi")
 
   const destins = mapsdata.allWpDestination.edges.map(({ node }) => node)
 
